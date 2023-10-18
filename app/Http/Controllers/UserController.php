@@ -9,11 +9,10 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Flight;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Password;
-use Mail;
+use Illuminate\Support\Facades\Mail;
 use App\Mail\MailPass;
 use Illuminate\Support\Str;
-use Carbon\Carbon; 
+
 
 class UserController extends Controller
 {
@@ -39,12 +38,13 @@ class UserController extends Controller
     public function Login(){
         return view('login');
     }
+    // phan quyen
     public function fromLogin(Request $request){
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
             if (User::where('email', $credentials['email'])->first()->user_type === 'user') {
-                return redirect()->route(route:'index');
+                return redirect();
             }else {
                 return redirect()->route(route:'Admin');
             }
@@ -63,22 +63,22 @@ class UserController extends Controller
     return redirect('/');
     }
 
-    public function index()
-    {
-        $users=User::query();
+    // public function index()
+    // {
+    //     $users=User::query();
         // $user = DB::table('users')->get();
         // return view('shows',['users' => $user]);
         // $users = User::all();
         // dd(Auth::User()->role === 'user');
-        if(Auth::User()->user_type === 'user'){
-            $users=$users->where('user_type','=','user');
-        }
-        $users = $users->get();
-        return view('shows', ['users' => $users])   ;
-    }
+    //     if(Auth::User()->user_type === 'user'){
+    //         $users=$users->where('user_type','=','user');
+    //     }
+    //     $users = $users->get();
+    //     return view('shows', ['users' => $users]);
+    // }
     public function Update($id){
     $user = User::find($id);
-    return view('update', compact('user'));
+    return view('adduser/fix-usre', compact('user'));
     }
 
     public function fromUpdate(Request $request, $id)
@@ -97,11 +97,26 @@ class UserController extends Controller
         $user->save();
     }
     public function Admin(){
-        $users = User::all();
+        $users=User::all();
+        if(Auth::User()->user_type === 'admin'){
+            $users=$users->where('user_type','=','admin');
+        }
+        // $users = $users->get();
+        // $users = User::query();
         return view('admin', ['users' => $users]);
+    }
+    // hien thi tk user
+    public function User(){
+        $users=User::query();
+        if(Auth::User()->user_type === 'admin'){
+            $users=$users->where('user_type','=','user');
+        }
+        $users = $users->get();
+        return view('user', ['users' => $users]);
     }
     public function delete($id){
         $user = User::where('id', '=', $id)->delete();
+        return redirect()->route(route:'Admin');
     }
     public function store( Request $request){
         // $email = $request->input('email');
@@ -117,6 +132,7 @@ class UserController extends Controller
                 'password' => Hash::make($request->password),
             ]);
             
+        return redirect()->route(route:'Admin');
            
         // }
         // return redirect()->back()->withErrors(['Email' => 'Tên email đã tồn tại']);

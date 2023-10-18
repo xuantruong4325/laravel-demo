@@ -10,12 +10,13 @@ class Content extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title',
-        'category',
+        'product_type',
+        'discount',
         'file',
         'content',
-        'author',
-        'status',
+        'old_price',
+        'price_after_discount',
+        'status'
 
     ];
 

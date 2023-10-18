@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
     <meta charset='utf-8'>
@@ -29,11 +29,11 @@
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->user_type }}</td>
-                    <td><button type="submit" name="sub"><a href="{{ route('Update', ['id' => $user->id]) }}">Sửa</a></button></td>
+                    <td><button type="submit" name="sub"><a href="">Sửa</a></button></td>
                 </tr>
         @endforeach
         </tbody>
     </table>
 </div>
 </body>
-</html>
+</html> -->

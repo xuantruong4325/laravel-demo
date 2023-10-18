@@ -27,7 +27,7 @@
                     <hr>
                 </div>
                 <div class="row">
-                    <label>Nội dung: {{  $pro->content  }}</label>
+                    <label>Nội dung: {!!  $pro->content  !!}</label>
                     <hr>
                 </div>
                 <div class="row">
@@ -61,5 +61,5 @@
             </form>
         </div>
     </div>
-</body>S
+</body>
 </html>

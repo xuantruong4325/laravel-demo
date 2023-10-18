@@ -8,12 +8,14 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use App\Models\Comment;
+use Illuminate\Support\Facades\Storage;
 
 class NdController extends Controller
 {
-    public function nd(){
-        return view('nd');
+    public function form_basic(){
+        return view('form-basic');
     }
+  
     public function ndstore(Request $request)
     {
         
@@ -23,7 +25,7 @@ class NdController extends Controller
             $file -> move(base_path('public/image'),$file_name);
 
         }
-        $content = Content::create([
+        $conten = Content::create([
             'title' => $request->title,
             'category' => $request->category,
             'file' => $file_name,
@@ -31,7 +33,7 @@ class NdController extends Controller
             'author' => $request->author,
             'status' => $request->status
         ]);
-    
+        return redirect()->route(route:'ndindex');
     }
     
 
@@ -41,7 +43,16 @@ class NdController extends Controller
     }
 
     public function nddelete($id){
-        $content = Content::where('id', '=', $id)->delete();
+        // $content = Content::where('id', '=', $id)->first();
+        $content = Content::find($id);
+        // if($content){
+            // $fileDelete = $content->file;
+            $path = public_path('image/' . $content->file);
+            if(unlink($path)){
+                $content->delete();
+            }
+        // }
+        return redirect()->route(route:'ndindex');
     }
 
     public function ndUpdate($id){
@@ -50,6 +61,8 @@ class NdController extends Controller
     }
     public function ndfromUpdate(Request $request, $id){
         $content = Content::find($id);
+        $path = public_path('image/' . $content->file);
+        unlink($path);
         if($request->has('file')){
             $file = $request->file('file');
             $contents = time()."_".$file-> getClientOriginalName();
@@ -63,8 +76,8 @@ class NdController extends Controller
             $content->author = $request->input('author');
             $content->status = $request->input('status');
             $content->save();
+            return redirect()->route(route:'ndindex');
     }
-
     public function ndSee($id){
         $content = Content::find($id);
         return view('form-see');
@@ -82,6 +95,14 @@ class NdController extends Controller
         ]);
         return redirect()->back();
     }
-   
+
+    // public function test(Request $request){
+    //     $URL_EDIT_KEY = route('ndUpdate', ['title' => $request->id]);
+    //     $token =  Content::where('id', $request->id)->first();
+    //     return response()->json([
+    //         "url" => $URL_EDIT_KEY,
+    //         "unit_name" => $token->title,
+    //     ]);
+    // }
 
 }

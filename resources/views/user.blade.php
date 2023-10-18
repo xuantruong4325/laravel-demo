@@ -45,9 +45,7 @@
                                                                 </div>
                                                                 <form action="{{ route('store') }}" method="POST">
                                                                     @csrf
-                                                                    
-                                                                    <div class="input-group custom d-block">
-                                                                    
+                                                                    <div class="input-group custom">
                                                                         <input
                                                                             type="text"
                                                                             name="name"
