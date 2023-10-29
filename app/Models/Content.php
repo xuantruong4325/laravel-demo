@@ -11,13 +11,14 @@ class Content extends Model
 
     protected $fillable = [
         'product_type',
+        'manufacturer',
         'discount',
         'file',
         'content',
         'old_price',
         'price_after_discount',
         'status'
-
+        
     ];
 
     public function comments()

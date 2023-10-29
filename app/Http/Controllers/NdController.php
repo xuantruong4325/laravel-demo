@@ -18,19 +18,28 @@ class NdController extends Controller
   
     public function ndstore(Request $request)
     {
-        
+        $file_name=null;
         if($request->has('file')){
             $file = $request->file;
             $file_name= $file -> getClientOriginalName();
             $file -> move(base_path('public/image'),$file_name);
 
         }
+        $gia=null;
+        if($request->discount != null && $request->old_price != null){
+            $discount = floatval($request->discount);
+
+        $test = 1 - ($discount / 100);
+        $gia = round($request->old_price * $test);
+        }
+        
         $conten = Content::create([
-            'title' => $request->title,
-            'category' => $request->category,
+            'product_type' => $request->product_type,
+            'discount' => $request->discount,
             'file' => $file_name,
             'content' => $request->content,
-            'author' => $request->author,
+            'old_price' => $request->old_price,
+            'price_after_discount' => $gia,
             'status' => $request->status
         ]);
         return redirect()->route(route:'ndindex');
@@ -63,17 +72,27 @@ class NdController extends Controller
         $content = Content::find($id);
         $path = public_path('image/' . $content->file);
         unlink($path);
+        $contents=null;
         if($request->has('file')){
             $file = $request->file('file');
             $contents = time()."_".$file-> getClientOriginalName();
             $file -> move(base_path('public/image'),$contents);
             $request['file']=$contents;          
         }
-            $content->title = $request->input('title');
-            $content->category = $request->input('category');
+        $gia=null;
+        if($request->discount != null && $request->old_price != null){
+            $discount = floatval($request->discount);
+
+        $test = 1 - ($discount / 100);
+        $gia = round($request->old_price * $test);
+        }
+
+            $content->product_type = $request->input('product_type');
+            $content->discount = $request->input('discount');
             $content->file = $contents;
             $content->content = $request->input('content');
-            $content->author = $request->input('author');
+            $content->old_price = $request->input('old_price');
+            $content->price_after_discount = $gia;
             $content->status = $request->input('status');
             $content->save();
             return redirect()->route(route:'ndindex');
@@ -104,5 +123,7 @@ class NdController extends Controller
     //         "unit_name" => $token->title,
     //     ]);
     // }
+
+
 
 }

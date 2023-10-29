@@ -36,12 +36,12 @@
 								<thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Loại sản phẩm</th>
+                                    <th>Vị trí</th>
                                     <th>Chiết khấu</th>
                                     <th>Hình ảnh</th>
                                     <th>Nội dung</th>
-                                    <th>Giá cũ</th>
-                                    <th>Giá sau khi chiết khấu</th>
+                                    <th>Giá</th>
+                                    <th>Giá mới</th>
                                     <th>Tình trạng</th>
                                     <th class="datatable-nosort">Hành động</th>
                                 </tr>
@@ -52,13 +52,22 @@
                                     
                                         <tr>
                                             <td>{{ $keg +1 }}</td>
-                                            <td>{{ $conten->title }}</td>
-                                            <td>{{ $conten->category }}</td>
+                                            <td>
+                                                @if($conten->product_type == 'Sp')
+                                                    Sản phẩm
+                                                @elseif($conten->product_type == 'Spm')
+                                                    Sản phẩm mới
+                                                @else 
+                                                    Sản phẩm bán chạy
+                                                @endif
+                                            </td>
+                                            <td>{{ $conten->discount }}</td>
                                             <td>
                                                 <img src="/image/{{ $conten->file }}" alt="" width="50" header="50">
                                             </td>
                                             <td>{!! $conten->content !!}</td>
-                                            <td>{{ $conten->author }}</td>
+                                            <td>{{ $conten->old_price }}</td>
+                                            <td>{{ $conten->price_after_discount }}</td>
                                             <td>
                                                 @if($conten->status == 'Publish')
                                                     Còn hàng

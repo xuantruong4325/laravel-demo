@@ -11,22 +11,24 @@
 						</div>
 						<form action="{{ route('ndUpdate', ['id' => $content->id]) }}" method="post" role="form" enctype="multipart/form-data">
 						@csrf
-                            <div class="form-group">
-                                <h5 class="mb-1">Tiêu đề</h5>
-                                <input
-                                    type="text"
-                                    name="title"
-                                    class="form-control form-control-lg"
-                                    value="{{$content->title}}"
-                                />
+                        <div class="form-group">
+                            <h5 class="mb-1">Vị trí</h5>
+                                <select name="product_type" class="form-control form-control-lg">
+                                    <option value="Product_type">---Vị trí---</option>
+                                    <option value="Sp" {{ $content->product_type === 'Sp' ? 'selected' : '' }}>Sản phẩm</option>
+                                    <option value="Spm" {{ $content->product_type === 'Spm' ? 'selected' : '' }}>Sản phẩm mới</option>
+                                    <option value="Spbc" {{ $content->product_type === 'Spbc' ? 'selected' : '' }}>Sản phẩm bán chạy</option>
+                                </select>
                             </div>
                             <div class="form-group">
-                                <h5 class="mb-1">Thể loại</h5>
+                                <h5 class="mb-1">Chiết khấu</h5>
                                 <input
                                     type="text"
                                     name="category"
                                     class="form-control form-control-lg"
-                                    value="{{$content->category}}"
+                                    value="{{$content->discount}}"
+                                    oninput="new_price()"
+                                    id="discount"
                                 />
                             </div>
                             <div class="form-group">
@@ -46,21 +48,27 @@
 								>{{$content->content}}</textarea>
 							</div>
                             <div class="form-group">
-                                <h5 class="mb-1">Tác giả</h5>
+                                <h5 class="mb-1">Giá</h5>
                                 <input
                                     type="text"
-                                    name="author"
+                                    name="old_price"
                                     class="form-control form-control-lg"
-                                    value="{{$content->author}}"
+                                    value="{{$content->old_price}}"
+                                    oninput="new_price()"
+                                    id="old_price"
                                 />
+                            </div>
+                            <div class="form-group">
+                                <h5 class="mb-1">Giá sau khi giảm</h5>
+                                <span id="result" class="form-control form-control-lg">{{$content->price_after_discount}}</span>
                             </div>
                             <div class="form-group">
                                 <h5 class="mb-1">Trạng thái</h5>
                                 <select name="status" class="form-control form-control-lg" >
                                     <option value="Status">Mời chọn trạng thái</option>
-                                    <option value="Publish" {{ $content->status === 'Publish' ? 'selected' : '' }}>Xuất bản</option>
-                                    <option value="Draft" {{ $content->status === 'Draft' ? 'selected' : '' }}>Nháp</option>
-                                    <option value="Browsing" {{ $content->status === 'Browsing' ? 'selected' : '' }}>Đang duyệt</option>
+                                    <option value="Publish" {{ $content->status === 'Publish' ? 'selected' : '' }}>Còn hàng</option>
+                                    <option value="Draft" {{ $content->status === 'Draft' ? 'selected' : '' }}>Hết hàng</option>
+                                    <option value="Browsing" {{ $content->status === 'Browsing' ? 'selected' : '' }}>Chờ</option>
                                 </select>
                             </div>
                             <button type="submit" class="btn btn-primary btn-lg btn-block" onclick="addConten()">Xác nhận</button>
@@ -90,6 +98,19 @@
     // }
         function addConten(){
             Swal.fire('Sửa nội dung mới thành công', '', 'success')
+        }
+        function new_price() {
+            let x = parseFloat(document.getElementById('discount').value);
+            let y = parseFloat(document.getElementById('old_price').value);
+
+            if (!isNaN(x) && !isNaN(y)) {
+                let test = (100 - x) / 100;
+                let gia = y * test;
+                gia = Math.round(gia);
+                document.getElementById('result').textContent = gia;
+            } else {
+                document.getElementById('result').textContent = '';
             }
+        }
     </script>
 @endsection

@@ -256,8 +256,7 @@
                         </a>
                         <ul class="submenu">
 								<li><a href="{{  route('ndindex')  }}">Sản phẩm</a></li>
-                                <li><a href="#">Footer</a></li>
-                                <li><a href="#">Banner</a></li>
+                                <li><a href="{{  route('ndbanner')  }}">Footer và Banner</a></li>
                                 <li><a href="#">Header</a></li>
 						</ul>
                     </li>

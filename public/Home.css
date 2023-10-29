@@ -411,7 +411,12 @@ h1{
 }
 .info div #span{
     color: #1afe0a;
-    padding: 18px 0px 0px 15px;
+    padding: 12px 0px 0px 15px;
+    font-size: 15px;
+}
+.info div #span2{
+    color: #00cee9;
+    padding: 0px 0px 0px 0px;
     font-size: 15px;
 }.tick{
     content: "";

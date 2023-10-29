@@ -250,32 +250,50 @@
                             <h1>Sản Phẩm</h1>
                         </div>
                         <div class="gfgfgf">
-                        @foreach ($contents as $conten) 
-                            <div class="product">
-                                <div class="discount">
-                                    <span id="discount">-4%</span>
-                                </div>
-                                <div class="info">
-                                    <a class="img_product" href="">
-                                        <img src="/image/{{ $conten->file }}" alt="">
-                                    </a>
-                                    <div>
-                                        <h3>
-                                            <a href="">Nguồn Corsair HX1500i Platinum 80 Plus Platinum - Full Modul</a>
-                                        </h3>
-                                        <div class="a">
-                                            9.190.000 đ <span class="span">9.600.00 đ</span>
-                                            <br>
-                                            <span id="span">
-                                                Còn hàng
-                                                <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
-                                                <div class="tick"></div>
-                                            </span>
+                         @foreach ($contents as $conten) 
+                            @if($conten->product_type == 'Sp')
+                                @if($conten->status == 'Publish' || $conten->status == 'Draft')
+                                    <div class="product">
+                                        @if($conten->discount != null)
+                                        <div class="discount">
+                                            <span id="discount">{{ $conten->discount }}</span>
+                                        </div>
+                                        @endif
+                                        <div class="info">
+                                            <a class="img_product" href="">
+                                                <img src="/image/{{ $conten->file }}" alt="">
+                                            </a>
+                                            <div>
+                                                <h3>
+                                                    <a href="">{{ $conten->content }}</a>
+                                                </h3>
+                                                <div class="a">
+                                                @if($conten->price_after_discount != null)
+                                                {{ number_format($conten->price_after_discount, 0, '.', '.') }} đ 
+                                                <span class="span">{{ number_format($conten->old_price, 0, '.', '.') }} đ</span>
+                                                @else
+                                                {{ number_format($conten->old_price, 0, '.', '.') }} đ 
+                                                @endif
+                                                    <br>
+                                                    @if($conten->status == 'Publish')
+                                                    <span id="span">
+                                                        Còn hàng
+                                                        <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
+                                                        <div class="tick"></div>
+                                                    </span>
+                                                    @elseif($conten->status == 'Draft')
+                                                    <span id="span2">
+                                                        Đặt trước
+                                                        <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
+                                                    </span>
+                                                    @endif
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        @endforeach
+                                @endif
+                            @endif
+                         @endforeach
                         </div>
                         <button id="but" type="button">Xem Thêm</button>
                     </div>
@@ -286,249 +304,50 @@
                             <h1>Sản Phẩm Mới</h1>
                         </div>
                         <div class="gfgfgf">
-                            <div class="product">
-                                <div class="discount">
-                                    <span id="discount">-24%</span>
-                                </div>
-                                <div class="info">
-                                    <a class="img_product" href="">
-                                        <img src="./images/spm1.jpg">
-                                    </a>
-                                    <div>
-                                        <h3>
-                                            <a href=""> CPU AMD Ryzen 5 4600G (3.7 GHz turbo upto 4.2GHz / 11MB / 6
-                                                Cores, 12 Threads / 65W / Socket AM4) </a>
-                                        </h3>
-                                        <div class="a">
-                                            3.099.000 đ <span class="span">4.099.00 đ</span>
-                                            <br>
-                                            <span id="span">
-                                                Còn hàng
-                                                <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
-                                                <div class="tick"></div>
-                                            </span>
+                        @foreach ($contents as $conten) 
+                            @if($conten->product_type == 'Spm')
+                                @if($conten->status == 'Publish' || $conten->status == 'Draft')
+                                    <div class="product">
+                                        @if($conten->discount != null)
+                                        <div class="discount">
+                                            <span id="discount">{{ $conten->discount }}</span>
+                                        </div>
+                                        @endif
+                                        <div class="info">
+                                            <a class="img_product" href="">
+                                                <img src="/image/{{ $conten->file }}" alt="">
+                                            </a>
+                                            <div>
+                                                <h3>
+                                                    <a href="">{{ $conten->content }}</a>
+                                                </h3>
+                                                <div class="a">
+                                                @if($conten->price_after_discount != null)
+                                                {{ number_format($conten->price_after_discount, 0, '.', '.') }} đ 
+                                                <span class="span">{{ number_format($conten->old_price, 0, '.', '.') }} đ</span>
+                                                @else
+                                                {{ number_format($conten->old_price, 0, '.', '.') }} đ 
+                                                @endif
+                                                    <br>
+                                                    @if($conten->status == 'Publish')
+                                                    <span id="span">
+                                                        Còn hàng
+                                                        <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
+                                                        <div class="tick"></div>
+                                                    </span>
+                                                    @elseif($conten->status == 'Draft')
+                                                    <span id="span2">
+                                                        Đặt trước
+                                                        <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
+                                                    </span>
+                                                    @endif
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="product">
-                                <div class="discount">
-                                    <span id="discount">-6%</span>
-                                </div>
-                                <div class="info">
-                                    <a class="img_product" href="">
-                                        <img src="./images/spm2.jpg">
-                                    </a>
-                                    <div>
-                                        <h3>
-                                            <a href="">PC Gaming - ASUS ROG Hyperion 101</a>
-                                        </h3>
-                                        <div class="a">
-                                            119.190.000 đ <span class="span">127.469.000 đ</span>
-                                            <br>
-                                            <span id="span">
-                                                Còn hàng
-                                                <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
-                                                <div class="tick"></div>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product">
-                                <div class="discount">
-                                    <span id="discount">-10%</span>
-                                </div>
-                                <div class="info">
-                                    <a class="img_product" href="">
-                                        <img src="./images/spm3.jpg">
-                                    </a>
-                                    <div>
-                                        <h3>
-                                            <a href="">PC Gaming - Glacier I2060 - BL</a>
-                                        </h3>
-                                        <div class="a">
-                                            14.990.000 đ <span class="span">16.601.000 đ</span>
-                                            <br>
-                                            <span id="span">
-                                                Còn hàng
-                                                <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
-                                                <div class="tick"></div>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product">
-                                <div class="discount">
-                                    <span id="discount">-28%</span>
-                                </div>
-                                <div class="info">
-                                    <a class="img_product" href="">
-                                        <img src="./images/spm4.jpg">
-                                    </a>
-                                    <div>
-                                        <h3>
-                                            <a href="">Màn hình Samsung LC24RG50FZEXXV 23.5inch/ VA / FHD/ 144Hz
-                                                Cong</a>
-                                        </h3>
-                                        <div class="a">
-                                            3.590.000 đ <span class="span">4.990.000 đ</span>
-                                            <br>
-                                            <span id="span">
-                                                Còn hàng
-                                                <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
-                                                <div class="tick"></div>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product">
-                                <div class="discount">
-                                    <span id="discount">-20%</span>
-                                </div>
-                                <div class="info">
-                                    <a class="img_product" href="">
-                                        <img src="./images/spm5.jpg">
-                                    </a>
-                                    <div>
-                                        <h3>
-                                            <a href="">Laptop Asus VivoBook Pro 15X A1503ZA-L1422W / L1421W Intel…</a>
-                                        </h3>
-                                        <div class="a">
-                                            16.690.000 đ <span class="span">20.990.00 đ</span>
-                                            <br>
-                                            <span id="span">
-                                                Còn hàng
-                                                <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
-                                                <div class="tick"></div>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product">
-                                <div class="discount">
-                                    <span id="discount">-20%</span>
-                                </div>
-                                <div class="info">
-                                    <a class="img_product" href="">
-                                        <img src="./images/spm6.jpg">
-                                    </a>
-                                    <div>
-                                        <h3>
-                                            <a href="">Laptop Gaming Acer Aspire 7 A715-43G-R8GA RTX 3050 4GB…</a>
-                                        </h3>
-                                        <div class="a">
-                                            17.490.000 đ <span class="span">21.990.000 đ</span>
-                                            <br>
-                                            <span id="span">
-                                                Còn hàng
-                                                <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
-                                                <div class="tick"></div>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product">
-                                <div class="discount">
-                                    <span id="discount">-23%</span>
-                                </div>
-                                <div class="info">
-                                    <a class="img_product" href="">
-                                        <img src="./images/spm7.png">
-                                    </a>
-                                    <div>
-                                        <h3>
-                                            <a href="">Bộ 02 màn hình mở rộng cho laptop 11 inch E-Tech S11 - Full HD -
-                                                Màu đen</a>
-                                        </h3>
-                                        <div class="a">
-                                            6.999.000 đ <span class="span">9.099.000 đ</span>
-                                            <br>
-                                            <span id="span">
-                                                Còn hàng
-                                                <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
-                                                <div class="tick"></div>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product">
-                                <div class="discount">
-                                    <span id="discount">-25%</span>
-                                </div>
-                                <div class="info">
-                                    <a class="img_product" href="">
-                                        <img src="./images/spm8.jpg">
-                                    </a>
-                                    <div>
-                                        <h3>
-                                            <a href="">NCPC (i7-13700K/ Z690/ 16GB RAM/ 512GB SSD/ RTX 3060)</a>
-                                        </h3>
-                                        <div class="a">
-                                            66.690.000 đ <span class="span">89.000.000 đ</span>
-                                            <br>
-                                            <span id="span">
-                                                Còn hàng
-                                                <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
-                                                <div class="tick"></div>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product">
-                                <div class="discount">
-                                    <span id="discount">-45%</span>
-                                </div>
-                                <div class="info">
-                                    <a class="img_product" href="">
-                                        <img src="./images/spm9.jpg">
-                                    </a>
-                                    <div>
-                                        <h3>
-                                            <a href="">Bộ phát wifi ASUS RT-AX53U, Chuẩn AX1800</a>
-                                        </h3>
-                                        <div class="a">
-                                            1.099.000 đ <span class="span">1.999.000 đ</span>
-                                            <br>
-                                            <span id="span">
-                                                Còn hàng
-                                                <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
-                                                <div class="tick"></div>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product">
-                                <div class="discount">
-                                    <span id="discount">-17%</span>
-                                </div>
-                                <div class="info">
-                                    <a class="img_product" href="">
-                                        <img src="./images/spm10.png">
-                                    </a>
-                                    <div>
-                                        <h3>
-                                            <a href="">Bàn nâng hạ E-DRA ELT1675 - Gaming Master</a>
-                                        </h3>
-                                        <div class="a">
-                                            5.790.000 đ <span class="span">6.990.000 đ</span>
-                                            <br>
-                                            <span id="span">
-                                                Còn hàng
-                                                <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
-                                                <div class="tick"></div>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                @endif
+                            @endif
+                         @endforeach
                         </div>
                         <button id="but" type="button">Xem Thêm</button>
                     </div>
@@ -539,251 +358,51 @@
                             <h1>Sản Phẩm Bán chạy</h1>
                         </div>
                         <div class="gfgfgf">
-                            <div class="product">
-                                <div class="discount">
-                                    <span id="discount">-23%</span>
-                                </div>
-                                <div class="info">
-                                    <a class="img_product" href="">
-                                        <img src="./images/spbc1.jpg">
-                                    </a>
-                                    <div>
-                                        <h3>
-                                            <a href="">Bộ phát wifi 6 Asus GT-AX6000 ROG Rapture Gaming AX6000Mbps</a>
-                                        </h3>
-                                        <div class="a">
-                                            10.749.000 đ <span class="span">13.999.00 đ</span>
-                                            <br>
-                                            <span id="span">
-                                                Còn hàng
-                                                <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
-                                                <div class="tick"></div>
-                                            </span>
+                        @foreach ($contents as $conten) 
+                            @if($conten->product_type == 'Spbc')
+                                @if($conten->status == 'Publish' || $conten->status == 'Draft')
+                                    <div class="product">
+                                        @if($conten->discount != null)
+                                        <div class="discount">
+                                            <span id="discount">{{ $conten->discount }}</span>
+                                        </div>
+                                        @endif
+                                        <div class="info">
+                                            <a class="img_product" href="">
+                                                <img src="/image/{{ $conten->file }}" alt="">
+                                            </a>
+                                            <div>
+                                                <h3>
+                                                    <a href="">{{ $conten->content }}</a>
+                                                </h3>
+                                                <div class="a">
+                                                @if($conten->price_after_discount != null)
+                                                {{ number_format($conten->price_after_discount, 0, '.', '.') }} đ 
+                                                <span class="span">{{ number_format($conten->old_price, 0, '.', '.') }} đ</span>
+                                                @else
+                                                {{ number_format($conten->old_price, 0, '.', '.') }} đ 
+                                                @endif
+                                                    <br>
+                                                    @if($conten->status == 'Publish')
+                                                    <span id="span">
+                                                        Còn hàng
+                                                        <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
+                                                        <div class="tick"></div>
+                                                    </span>
+                                                    @elseif($conten->status == 'Draft')
+                                                    <span id="span2">
+                                                        Đặt trước
+                                                        <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
+                                                    </span>
+                                                    @endif
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="product">
-                                <div class="discount">
-                                    <span id="discount">-6%</span>
-                                </div>
-                                <div class="info">
-                                    <a class="img_product" href="">
-                                        <img src="./images/spbc2.jpg">
-                                    </a>
-                                    <div>
-                                        <h3>
-                                            <a href="">Nguồn DeepCool PF450D 450W 80 Plus</a>
-                                        </h3>
-                                        <div class="a">
-                                            849.000 đ <span class="span">899.000 đ</span>
-                                            <br>
-                                            <span id="span">
-                                                Còn hàng
-                                                <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
-                                                <div class="tick"></div>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product">
-                                <div class="discount">
-                                    <span id="discount">-63%</span>
-                                </div>
-                                <div class="info">
-                                    <a class="img_product" href="">
-                                        <img src="./images/spbc3.jpg">
-                                    </a>
-                                    <div>
-                                        <h3>
-                                            <a href="">Ổ Quang DVD Rewrite Asus ReWriter-08D2S-U LITE - cắm ngoài cổng
-                                                USB</a>
-                                        </h3>
-                                        <div class="a">
-                                            299.000 đ <span class="span">799.000 đ</span>
-                                            <br>
-                                            <span id="span">
-                                                Còn hàng
-                                                <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
-                                                <div class="tick"></div>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product">
-                                <div class="discount">
-                                    <span id="discount">-10%</span>
-                                </div>
-                                <div class="info">
-                                    <a class="img_product" href="">
-                                        <img src="./images/spbc4.jpg">
-                                    </a>
-                                    <div>
-                                        <h3>
-                                            <a href="">Vỏ Case Montech SKY TWO Black</a>
-                                        </h3>
-                                        <div class="a">
-                                            1.790.000 đ <span class="span">1.990.000 đ</span>
-                                            <br>
-                                            <span id="span">
-                                                Còn hàng
-                                                <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
-                                                <div class="tick"></div>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product">
-                                <div class="discount">
-                                    <span id="discount">-38%</span>
-                                </div>
-                                <div class="info">
-                                    <a class="img_product" href="">
-                                        <img src="./images/spbc5.png">
-                                    </a>
-                                    <div>
-                                        <h3>
-                                            <a href="">Laptop Acer Aspire 3 A315-58-35AG i3-1115G4/ 4GB RAM/ 256GB SSD/
-                                                15.6inch FHD/ Win 11</a>
-                                        </h3>
-                                        <div class="a">
-                                            7.990.000 đ <span class="span">12.899.00 đ</span>
-                                            <br>
-                                            <span id="span">
-                                                Còn hàng
-                                                <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
-                                                <div class="tick"></div>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product">
-                                <div class="discount">
-                                    <span id="discount">-6%</span>
-                                </div>
-                                <div class="info">
-                                    <a class="img_product" href="">
-                                        <img src="./images/spbc6.jpg">
-                                    </a>
-                                    <div>
-                                        <h3>
-                                            <a href="">Card Màn Hình OCPC GTX 1660 Super 6GB GDDR6</a>
-                                        </h3>
-                                        <div class="a">
-                                            4.690.000 đ <span class="span">4.990.000 đ</span>
-                                            <br>
-                                            <span id="span">
-                                                Còn hàng
-                                                <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
-                                                <div class="tick"></div>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product" >
-                                <div class="discount">
-                                    <span id="discount">-49%</span>
-                                </div>
-                                <div class="info">
-                                    <a class="img_product" href="">
-                                        <img src="./images/spbc7.jpg">
-                                    </a>
-                                    <div>
-                                        <h3>
-                                            <a href="">Ổ cứng SSD Samsung 980 PRO 2TB PCIe NVMe 4.0x4 (Đọc 7000MB/s -
-                                                Ghi 5100MB/s) - (MZ-V8P2T0BW)</a>
-                                        </h3>
-                                        <div class="a">
-                                            6.599.000 đ <span class="span">12.999.000 đ</span>
-                                            <br>
-                                            <span id="span">
-                                                Còn hàng
-                                                <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
-                                                <div class="tick"></div>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product">
-                                <div class="discount">
-                                    <span id="discount">-24%</span>
-                                </div>
-                                <div class="info">
-                                    <a class="img_product" href="">
-                                        <img src="./images/spbc8.png">
-                                    </a>
-                                    <div>
-                                        <h3>
-                                            <a href=""> PC Gigabyte Aorus Model X (i9-12900K/Z690/32GB RAM/2TB
-                                                SSD/RTX3080/WL+BT/No OS) (GB-AMXI9N8A-2171) </a>
-                                        </h3>
-                                        <div class="a">
-                                            66.990.000 đ <span class="span">87.999.000 đ</span>
-                                            <br>
-                                            <span id="span">
-                                                Còn hàng
-                                                <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
-                                                <div class="tick"></div>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product">
-                                <div class="discount">
-                                    <span id="discount">-21%</span>
-                                </div>
-                                <div class="info">
-                                    <a class="img_product" href="">
-                                        <img src="./images/spbc9.jpg">
-                                    </a>
-                                    <div>
-                                        <h3>
-                                            <a href=""> Laptop Asus Gaming ROG Strix G513IM-HN008W (R7 4800H/16GB
-                                                RAM/512GB SSD/15.6 FHD 144hz/RTX 3060 6GB/Win11/Xám) </a>
-                                        </h3>
-                                        <div class="a">
-                                            26.999.000 đ <span class="span">33.999.000 đ</span>
-                                            <br>
-                                            <span id="span">
-                                                Còn hàng
-                                                <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
-                                                <div class="tick"></div>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product">
-                                <div class="discount">
-                                    <span id="discount">-23%</span>
-                                </div>
-                                <div class="info">
-                                    <a class="img_product" href="">
-                                        <img src="./images/spbc10.jpg">
-                                    </a>
-                                    <div>
-                                        <h3>
-                                            <a href="">Bàn nâng hạ E-DRA ELT1675 - Gaming Master</a>
-                                        </h3>
-                                        <div class="a">
-                                            10.999.000 đ <span class="span">14.199.000 đ</span>
-                                            <br>
-                                            <span id="span">
-                                                Còn hàng
-                                                <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
-                                                <div class="tick"></div>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                @endif
+                            @endif
+                         @endforeach
+                            
                         </div>
                         <button id="but" type="button">Xem Thêm</button>
                     </div>

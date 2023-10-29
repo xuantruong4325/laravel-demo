@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\NdController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\EditfooterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +47,10 @@ Route::post('Content/Update/{id}', [NdController::class, 'ndfromUpdate'])->name(
 Route::get('Content/{id}', [NdController::class, 'ndSee']);
 Route::get('Content/{id}', [NdController::class, 'ndfromSee'])->name('ndSee');
 Route::post('Content/comment', [NdController::class, 'blfromSee'])->name('blSee');
+
+Route::get('BannerFooter/edit', [EditfooterController::class, 'form_edit'])->name(name:'from_footer');
+Route::get('BannerFooter', [EditfooterController::class, 'ndbanner'])->name(name:'ndbanner');
+
 
 // Route::get('Content/id', [NdController::class, 'test'])->name('test');
 

@@ -12,13 +12,19 @@
     <div class="form_dang_ky">
         <h1>Xem nội dung</h1>
                 <div class="row">
-                    <label >
-                        Tiêu đề: {{  $pro->title  }}
+                <label>Vị trí: 
+                        @if($pro->product_type == 'Sp')
+                            Sản phẩm
+                        @elseif($pro->product_type == 'Spm')
+                            Sản phẩm mới
+                        @else 
+                            Sản phẩm bán chạy
+                        @endif
                     </label>
                     <hr>
                 </div>
                 <div class="row">
-                    <label>Thể loại: {{  $pro->category  }}</label>
+                    <label>Chiết khấu: {{  $pro->discount  }}</label>
                     <hr>
                 </div>
                 <div class="row">
@@ -31,7 +37,11 @@
                     <hr>
                 </div>
                 <div class="row">
-                    <label>Tác giả: {{  $pro->author  }}</label>
+                    <label>Giá: {{  $pro->old_price  }}</label>
+                    <hr>
+                </div>
+                <div class="row">
+                    <label>Giá sau khi giảm: {{  $pro->price_after_discount  }}</label>
                     <hr>
                 </div>
                 <div class="row">
