@@ -23,7 +23,6 @@ class NdController extends Controller
             $file = $request->file;
             $file_name= $file -> getClientOriginalName();
             $file -> move(base_path('public/image'),$file_name);
-
         }
         $gia=null;
         if($request->discount != null && $request->old_price != null){

@@ -3,30 +3,6 @@
     <div class="main-container">
 			<div class="pd-ltr-20 xs-pd-20-10">
 				<div class="min-height-200px">
-					<div class="page-header">
-						<div class="row">
-							<div class="col-md-6 col-sm-12">
-							</div>
-							<div class="col-md-6 col-sm-12 text-right">
-								<div class="dropdown">
-                                    <div class="row clearfix">
-                                        <div class="col-md-4 col-sm-12 mb-30">
-                                            <div class="">
-                                                <a
-                                                    href="{{ route('from') }}"
-                                                    class="btn btn-primary"
-                                                    type="button"
-                                                    style=" margin:20px -330px 0 0;"
-                                                >
-                                                Thêm nội dung
-                                                </a>
-                                            </div>
-                                        </div>
-					                </div>
-								</div>
-							</div>
-						</div>
-					</div>
 					<div class="card-box mb-30">
 						<div class="pd-20">
 							<h4 class="text-blue h4">Nội dung</h4>
@@ -36,28 +12,60 @@
 								<thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Ảnh Banner</th>
+                                    <th>Ảnh Banner 1</th>
+                                    <th>Ảnh Banner 2</th>
+                                    <th>Ảnh Banner 3</th>
+                                    <th>Ảnh Banner 4</th>
                                     <th>Ảnh Footer_left</th>
                                     <th>Ảnh Footer_right</th>
                                     <th class="datatable-nosort">Hành động</th>
                                 </tr>
 								</thead>
 								<tbody>
-                                <tr>
-                                    <th>#</th>
-                                    <td>
-                                        <img src="" alt="" width="50" header="50">
-                                    </td>
-                                    <td>
-                                        <img src="" alt="" width="50" header="50">
-                                    </td>
-                                    <td>
-                                        <img src="" alt="" width="50" header="50">
-                                    </td>
-                                    <th class="datatable-nosort">Hành động</th>
-                                </tr>
-                                    
-                               
+                                    @foreach ($editfooter as $editfooters) 
+                                        <tr>
+                                            <th>#</th>
+                                            <td>
+                                                <img src="/FileImage/Layout/{{ $editfooters->file_banner1 }}" alt="" width="50" header="50">
+                                            </td>
+                                            <td>
+                                                <img src="/FileImage/Layout/{{ $editfooters->file_banner2 }}" alt="" width="50" header="50">
+                                            </td>
+                                            <td>
+                                                <img src="/FileImage/Layout/{{ $editfooters->file_banner3 }}" alt="" width="50" header="50">
+                                            </td>
+                                            <td>
+                                                <img src="/FileImage/Layout/{{ $editfooters->file_banner4 }}" alt="" width="50" header="50">
+                                            </td>
+                                            <td>
+                                                <img src="/FileImage/Layout/{{ $editfooters->file_footer_left }}" alt="" width="50" header="50">
+                                            </td>
+                                            <td>
+                                                <img src="/FileImage/Layout/{{ $editfooters->file_footer_right }}" alt="" width="50" header="50">
+                                            </td>
+                                            <td>
+                                            <div class="dropdown">
+												<a
+													class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
+													href="#"
+													role="button"
+													data-toggle="dropdown"
+												>
+													<i class="dw dw-more"></i>
+												</a>
+												<div
+													class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"
+												>
+													<a class="dropdown-item" href="{{ route('from_footer', ['id' => $editfooters->id]) }}"
+                                                    onclick="take_url_edit_key('{{$editfooters->id}}')"
+														><i class="dw dw-edit2"></i> Sửa</a
+													>
+												</div>
+											</div>
+                                            </td>
+                                        </tr>
+                                    @endforeach    
+                                
                             </tbody>
 						</table>
 					</div>

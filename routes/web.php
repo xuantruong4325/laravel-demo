@@ -48,7 +48,8 @@ Route::get('Content/{id}', [NdController::class, 'ndSee']);
 Route::get('Content/{id}', [NdController::class, 'ndfromSee'])->name('ndSee');
 Route::post('Content/comment', [NdController::class, 'blfromSee'])->name('blSee');
 
-Route::get('BannerFooter/edit', [EditfooterController::class, 'form_edit'])->name(name:'from_footer');
+Route::get('BannerFooter/edit/{id}', [EditfooterController::class, 'form_edit'])->name(name:'from_footer');
+Route::post('BannerFooter/edit/save/{id}', [EditfooterController::class, 'form_edit_save'])->name(name:'from_footer_save');
 Route::get('BannerFooter', [EditfooterController::class, 'ndbanner'])->name(name:'ndbanner');
 
 
