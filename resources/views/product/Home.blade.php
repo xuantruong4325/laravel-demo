@@ -221,34 +221,36 @@
         </div>
     </nav>
     <main>
+    @foreach ($editfooters as $editfooter)
         <div class="sile">
             <div class="left">
                 <a href="">
-                    <img src="images/left.png">
+                    <img src="/FileImage/Layout/{{ $editfooter->file_footer_left }}">
                 </a>
             </div>
             <div class="between">
                 <div class="slider_left">
                     <div class="slider_1">
-                        <img src="images/1.png" width="100%">
+                        <img src="/FileImage/Layout/{{ $editfooter->file_banner1 }}" width="100%">
                     </div>
                     <div class="slider_2">
-                        <img src="images/2.png" width="100%">
+                        <img src="/FileImage/Layout/{{ $editfooter->file_banner2 }}" width="100%">
                     </div>
                     <div class="slider_3">
-                        <img src="images/3.png" width="100%">
+                        <img src="/FileImage/Layout/{{ $editfooter->file_banner3 }}" width="100%">
                     </div>
                     <div class="slider_4">
-                        <img src="images/5.png" width="100%">
+                        <img src="/FileImage/Layout/{{ $editfooter->file_banner4 }}" width="100%">
                     </div>
                 </div>
                 <div class="container1">
                     <div class="sp">
-                        <div>
-                            <hr class="hr_left">
-                            <hr class="hr_right">
-                            <h1>Sản Phẩm</h1>
-                        </div>
+                            <div>
+                                <hr class="hr_left">
+                                <hr class="hr_right">
+                                <h1>Sản Phẩm</h1>
+                            </div>
+                        
                         <div class="gfgfgf">
                          @foreach ($contents as $conten) 
                             @if($conten->product_type == 'Sp')
@@ -410,12 +412,13 @@
             </div>
             <div class="right">
                 <a href="">
-                    <img src="images/right.png">
+                    <img src="/FileImage/Layout/{{ $editfooter->file_footer_right }}">
                 </a>
 
             </div>
 
         </div>
+        @endforeach
     </main>
     <footer>
         <div class="container">

@@ -25,4 +25,9 @@ class Content extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
+    public function tskt()
+    {
+        return $this->hasMany(tskt::class);
+    }
 }

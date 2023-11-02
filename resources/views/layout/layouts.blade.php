@@ -260,6 +260,11 @@
                                 <li><a href="#">Header</a></li>
 						</ul>
                     </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" href="{{  route('technicaInformation')  }}">
+                            <span class="mtext">Các thông số</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
             

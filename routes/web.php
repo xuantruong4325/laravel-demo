@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\NdController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\EditfooterController;
+use App\Http\Controllers\TechnicaInformationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,6 +55,14 @@ Route::get('BannerFooter', [EditfooterController::class, 'ndbanner'])->name(name
 
 
 // Route::get('Content/id', [NdController::class, 'test'])->name('test');
+Route::prefix('Admin')->group(function () {
+    Route::get('/technicaInformation', [TechnicaInformationController::class, 'technicaInformation'])->name('technicaInformation');
+    Route::get('/add_technicaInformation', [TechnicaInformationController::class, 'add_information'])->name(name:'add_information');
+    Route::post('/add_technicaInformation', [TechnicaInformationController::class, 'add_information_save'])->name(name:'add_information_save');
+    Route::get('/edit_technicaInformation/{id}', [TechnicaInformationController::class, 'edit_information'])->name(name:'edit_information');
+    Route::post('/edit_technicaInformation/{id}', [TechnicaInformationController::class, 'edit_information_save'])->name(name:'edit_information_save');
+    Route::get('/delete_technicaInformation/{id}', [TechnicaInformationController::class, 'delete_information'])->name(name:'delete_information');
+});
 
 
 Route::prefix('Home')->group(function () {
