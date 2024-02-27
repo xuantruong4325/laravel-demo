@@ -38,15 +38,26 @@ class UserController extends Controller
     public function Login(){
         return view('login');
     }
+
+    public function Error(){
+        return view('Error/error');
+    }
     // phan quyen
+
+    // public function __construct()
+    // {
+    //     $this->middleware('guest')->except('logout');
+    // }
+
+
     public function fromLogin(Request $request){
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            if (User::where('email', $credentials['email'])->first()->user_type === 'user') {
-                return redirect();
-            }else {
+            if (User::where('email', $credentials['email'])->first()->user_type === 'admin') {
                 return redirect()->route(route:'Admin');
+            }else {
+                return redirect();
             }
         }else {
             return redirect()->back()->withErrors(['email'=>'Tài khoản hoặc mật khẩu không chính xác']);

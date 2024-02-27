@@ -24,7 +24,7 @@
                                 <h5 class="mb-1">Chiết khấu</h5>
                                 <input
                                     type="text"
-                                    name="category"
+                                    name="discount"
                                     class="form-control form-control-lg"
                                     value="{{$content->discount}}"
                                     oninput="new_price()"

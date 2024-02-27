@@ -27,7 +27,7 @@ class NdController extends Controller
         $gia=null;
         if($request->discount != null && $request->old_price != null){
             $discount = floatval($request->discount);
-
+            
         $test = 1 - ($discount / 100);
         $gia = round($request->old_price * $test);
         }
@@ -41,6 +41,7 @@ class NdController extends Controller
             'price_after_discount' => $gia,
             'status' => $request->status
         ]);
+       
         return redirect()->route(route:'ndindex');
     }
     
@@ -69,15 +70,20 @@ class NdController extends Controller
     }
     public function ndfromUpdate(Request $request, $id){
         $content = Content::find($id);
-        $path = public_path('image/' . $content->file);
-        unlink($path);
-        $contents=null;
+        $contents = null;
+        
         if($request->has('file')){
+            $path = public_path('image/' . $content->file);
+            unlink($path);
             $file = $request->file('file');
             $contents = time()."_".$file-> getClientOriginalName();
             $file -> move(base_path('public/image'),$contents);
-            $request['file']=$contents;          
+            $request['file']=$contents;         
         }
+        if($contents == null){
+            $contents = $content->file;
+        }
+
         $gia=null;
         if($request->discount != null && $request->old_price != null){
             $discount = floatval($request->discount);
