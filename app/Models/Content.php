@@ -11,13 +11,16 @@ class Content extends Model
 
     protected $fillable = [
         'product_type',
-        'manufacturer',
         'discount',
         'file',
         'content',
         'old_price',
         'price_after_discount',
-        'status'
+        'status',
+        'product_specifications',
+        'category_id',
+        'company_id',
+        'quantity',
         
     ];
 
@@ -26,8 +29,24 @@ class Content extends Model
         return $this->hasMany(Comment::class);
     }
 
-    public function tskt()
+    public function ndTechnique()
     {
-        return $this->hasMany(tskt::class);
+        return $this->hasMany(NdTechnique::class);
     }
+
+    public function imgaeProduct()
+    {
+        return $this->hasMany(ImageProduct::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
+
 }

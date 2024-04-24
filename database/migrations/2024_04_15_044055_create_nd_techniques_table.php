@@ -11,14 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tskts', function (Blueprint $table) {
+        Schema::create('nd_techniques', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('technicaInformation_id');
-            $table->unsignedBigInteger('content_id');
-            $table->string('information');
+            $table->string('nameTechnique')->nullable();
+            $table->unsignedBigInteger("content_id");
+            $table->unsignedBigInteger("technique_id");
             $table->timestamps();
 
             $table->foreign('content_id')->references('id')->on('contents')->onDelete('cascade');
+            $table->foreign('technique_id')->references('id')->on('technique')->onDelete('no action');
         });
     }
 
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tskts');
+        Schema::dropIfExists('nd_techniques');
     }
 };

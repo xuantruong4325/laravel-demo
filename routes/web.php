@@ -2,7 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Categorise\CategoriController;
+use App\Http\Controllers\Categorise\CompanyController;
 use App\Http\Controllers\NdController;
+use App\Http\Controllers\TechniqueControlle;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\EditfooterController;
 use App\Http\Controllers\TechnicaInformationController;
@@ -34,6 +37,36 @@ Route::get('Error', [UserController::class, 'Error'])->name('error');
 
 
 Route::group(['prefix' => 'Admin', 'middleware' => ['auth', 'is_admin']], function () {
+<<<<<<< HEAD
+=======
+    //category
+    Route::get('Cartegory', [CategoriController::class, 'ListCategory'])->name('listCategory');
+    Route::get('Cartegory-add', [CategoriController::class, 'AddCategory'])->name('addCategory');
+    Route::post('Cartegory-add-save', [CategoriController::class, 'AddCategorySave'])->name('addCategorySave');
+    Route::get('Cartegory-edit/{id}', [CategoriController::class, 'EditCategory'])->name('editCategory');
+    Route::post('Cartegory-edit-save/{id}', [CategoriController::class, 'EditCategorySave'])->name('editCategorySave');
+    Route::get('Cartegory-delete/{id}', [CategoriController::class, 'DeleteCategory'])->name('deleteCategory');
+
+    //company
+    Route::get('Company', [CompanyController::class, 'CompanyList'])->name('listCompany');
+    Route::get('Company-add', [CompanyController::class, 'CompanyAdd'])->name('addCompany');
+    Route::post('Company-add-save', [CompanyController::class, 'CompanyAddSave'])->name('addCompanySave');
+    Route::get('Company-edit/{id}', [CompanyController::class, 'CompanyEdit'])->name('editCompany');
+    Route::post('Company-edit-save/{id}', [CompanyController::class, 'CompanyEditSave'])->name('editCompanySave');
+    Route::get('Company-delete/{id}', [CompanyController::class, 'CompanyDelete'])->name('deleteCompany');
+
+    //Technique
+    Route::get('Technique', [TechniqueControlle::class, 'techniqueList'])->name('listTechnique');
+    Route::get('Technique-add', [TechniqueControlle::class, 'techniqueAdd'])->name('addTechnique');
+    Route::post('Technique-add-save', [TechniqueControlle::class, 'techniqueAddSave'])->name('addTechniqueSave');
+    Route::get('Technique-edit/{id}', [TechniqueControlle::class, 'techniqueEdit'])->name('editTechnique');
+    Route::post('Technique-edit-save/{id}', [TechniqueControlle::class, 'techniqueEditSave'])->name('editTechniqueSave');
+    Route::get('Technique-delete/{id}', [TechniqueControlle::class, 'techniqueDelete'])->name('deleteTechnique');
+
+    //Search
+    Route::get('Search', [NdController::class, 'search']);
+
+>>>>>>> 1255fd3 (first commit)
     // Route::get('index', [UserController::class, 'index'])->name(name:'index');
     Route::get('Update/{id}', [UserController::class, 'Update'])->name('up');
     Route::post('Update/{id}', [UserController::class, 'fromUpdate'])->name('Update');

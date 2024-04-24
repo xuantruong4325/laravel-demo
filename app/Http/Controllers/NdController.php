@@ -2,22 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Content;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\View\View;
 use App\Models\Comment;
-use Illuminate\Support\Facades\Storage;
+use App\Models\Company;
+use App\Models\ImageProduct;
+use App\Models\NdTechnique;
+use App\Models\Technique;
+use Illuminate\Support\Facades\DB;
+
+use function Laravel\Prompts\search;
 
 class NdController extends Controller
 {
-    public function form_basic(){
-        return view('form-basic');
+    public function form_basic()
+    {
+        $techniques = Technique::all();
+        $category = Category::all();
+        $company = Company::all();
+        return view('form-basic', compact('category', 'company', 'techniques'));
     }
-  
+
     public function ndstore(Request $request)
     {
+<<<<<<< HEAD
         $file_name=null;
         if($request->has('file')){
             $file = $request->file;
@@ -30,36 +39,104 @@ class NdController extends Controller
             
         $test = 1 - ($discount / 100);
         $gia = round($request->old_price * $test);
+=======
+
+        $file_name = null;
+        // dd($request->techniques, $request->nameTechniques);
+        if ($request->has('file')) {
+            $file = $request->file;
+            $file_name = $file->getClientOriginalName();
+            $file->move(base_path('public/image'), $file_name);
+>>>>>>> 1255fd3 (first commit)
         }
-        
+        $giam = null;
+        $gia = null;
+        if ($request->discount != null && $request->old_price != null) {
+            $giam = floatval($request->discount);
+
+            $test = 1 - ($giam / 100);
+            $gia = round($request->old_price * $test);
+        }
+
+
         $conten = Content::create([
             'product_type' => $request->product_type,
-            'discount' => $request->discount,
+            'discount' => $giam,
             'file' => $file_name,
             'content' => $request->content,
             'old_price' => $request->old_price,
             'price_after_discount' => $gia,
-            'status' => $request->status
+            'status' => $request->status,
+            'category_id' => $request->categoryId,
+            'company_id' => $request->companyId,
+            'product_specifications' => $request->product_specifications,
+            'quantity' => $request->quantity,
         ]);
+<<<<<<< HEAD
        
         return redirect()->route(route:'ndindex');
     }
     
+=======
+>>>>>>> 1255fd3 (first commit)
 
-    public function ndindex(){
-        $contents = Content::all();
+        if ($request->has('imageFiles')) {
+            foreach ($request->imageFiles as $item) {
+                $nameItem = $item->getClientOriginalName();
+                $item->move(base_path('public/imagesp'), $nameItem);
+                $imageProduct = ImageProduct::create([
+                    'title' => $nameItem,
+                    'content_id' => $conten->id,
+                ]);
+                // dd($conten->id);
+            }
+        }
+
+        $aa = 0;
+        if ($request->has('techniques')) {
+            foreach ($request->techniques as $item) {
+                $ndTechnique = NdTechnique::create([
+                    'nameTechnique' => $request->nameTechniques[$aa],
+                    'technique_id' => $item,
+                    'content_id' => $conten->id,
+                ]);
+                $aa++;
+            }
+        }
+
+        return redirect()->route(route: 'ndindex');
+    }
+
+
+    public function ndindex(Request $request)
+    {
+        $contents = Content::paginate(3);
+        if($request->has('keyword')){
+            $tk = $request->input('keyword');
+            $contents = $this->search($tk)->paginate(3);
+        }
+        // dd($contents);
         return view('nd', ['contents' => $contents]);
     }
 
-    public function nddelete($id){
+    public function search($tk){
+        $query = Content::where('content','like','%' .$tk. '%');
+        return $query;
+    }
+
+    public function nddelete($id)
+    {
         // $content = Content::where('id', '=', $id)->first();
         $content = Content::find($id);
         // if($content){
-            // $fileDelete = $content->file;
-            $path = public_path('image/' . $content->file);
-            if(unlink($path)){
-                $content->delete();
+        // $fileDelete = $content->file;
+        $imageProducts = ImageProduct::where("content_id", $id)->get();
+        foreach ($imageProducts as $imageProduct) {
+            $path = public_path('imagesp/' . $imageProduct->title);
+            if (unlink($path)) {
+                $imageProduct->delete();
             }
+<<<<<<< HEAD
         // }
         return redirect()->route(route:'ndindex');
     }
@@ -101,21 +178,137 @@ class NdController extends Controller
             $content->status = $request->input('status');
             $content->save();
             return redirect()->route(route:'ndindex');
+=======
+        }
+        $path = public_path('image/' . $content->file);
+        if (unlink($path)) {
+            $content->delete();
+        }
+        // }
+        return redirect()->route(route: 'ndindex');
+>>>>>>> 1255fd3 (first commit)
     }
-    public function ndSee($id){
+
+    public function ndUpdate($id)
+    {
+        $content = Content::find($id);
+        $category = Category::all();
+        $company = Company::all();
+        $ndTechniques = NdTechnique::where('content_id', $id)->get();
+        $techniques = Technique::all();
+        return view('form-update', compact('content', 'category', 'company', 'ndTechniques', 'techniques'));
+    }
+    public function ndfromUpdate(Request $request, $id)
+    {
+        $content = Content::find($id);
+        $contents = null;
+
+        $test2s = NdTechnique::where('content_id', $id)->get();
+        foreach($test2s as $test2){
+            $test2->delete();
+        }
+        $aa = 0;
+        if ($request->has('techniques')) {
+            foreach ($request->techniques as $item) {
+                $ndTechnique = NdTechnique::create([
+                    'nameTechnique' => $request->nameTechniques[$aa],
+                    'technique_id' => $item,
+                    'content_id' => $id,
+                ]);
+                $aa++;
+            }
+        }
+        
+
+
+        // dd($request->techniques,$request->nameTechniques);
+
+        if ($request->has('file')) {
+            $path = public_path('image/' . $content->file);
+            unlink($path);
+            $file = $request->file('file');
+            $contents = time() . "_" . $file->getClientOriginalName();
+            $file->move(base_path('public/image'), $contents);
+            $request['file'] = $contents;
+        }
+        if ($contents == null) {
+            $contents = $content->file;
+        }
+        $giam = null;
+        $gia = null;
+        if ($request->discount != null && $request->old_price != null) {
+            $giam = floatval($request->discount);
+
+            $test = 1 - ($giam / 100);
+            $gia = round($request->old_price * $test);
+        }
+
+        $content->product_type = $request->input('product_type');
+        $content->discount = $giam;
+        $content->file = $contents;
+        $content->content = $request->input('content');
+        $content->old_price = $request->input('old_price');
+        $content->price_after_discount = $gia;
+        $content->status = $request->input('status');
+        $content->product_specifications = $request->input('product_specifications');
+        $content->category_id = $request->input('categoryId');
+        $content->company_id = $request->input('companyId');
+        $content->quantity = $request->input('quantity');
+        $content->save();
+
+        if ($request->has('imageFiles')) {
+            foreach ($request->imageFiles as $item) {
+                $nameItem = $item->getClientOriginalName();
+                $item->move(base_path('public/imagesp'), $nameItem);
+                $imageProduct = ImageProduct::create([
+                    'title' => $nameItem,
+                    'content_id' => $id,
+                ]);
+                // dd($conten->id);
+            }
+        }
+
+        // $test2 = NdTechnique::all();
+        // $aa=0;
+        // if($request->has('techniques')){
+        //     foreach($request->techniques as $item){
+        //         if($test2->content_id == $id){
+        //             if($item != $test2->technique_id){
+
+        //             }
+
+        //         }
+        //         // if($item != $request){
+
+        //         // }
+        //         $ndTechnique = NdTechnique::create([
+        //             'nameTechnique'=>$request->nameTechniques[$aa],
+        //             'technique_id' =>$item,
+        //             'content_id'=>$id,
+        //         ]);
+        //         $aa++;
+        //     }
+        // }
+
+        return redirect()->route(route: 'ndindex');
+    }
+    public function ndSee($id)
+    {
         $content = Content::find($id);
         return view('form-see');
     }
-    public function ndfromSee($id){
+    public function ndfromSee($id)
+    {
         // $content = Content::where('id', '=', $id)->select('*')->first();
         $pro = Content::find($id);
-        $comments = Comment::where('article_id',$id)->get();
-        return view('form-see', compact('pro','comments'));
+        $comments = Comment::where('article_id', $id)->get();
+        return view('form-see', compact('pro', 'comments'));
     }
-    public function blfromSee(Request $request){
+    public function blfromSee(Request $request)
+    {
         $commen = Comment::create([
-            'article_id'=> $request->article_id,
-            'comment'=>$request->comment,
+            'article_id' => $request->article_id,
+            'comment' => $request->comment,
         ]);
         return redirect()->back();
     }

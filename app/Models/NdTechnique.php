@@ -5,22 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class tskt extends Model
+class NdTechnique extends Model
 {
-    use HasFactory;
     protected $fillable = [
-        'technicaInformation_id',
+        'nameTechnique',
         'content_id',
-        'information'
+        'technique_id',
     ];
 
     public function content()
     {
         return $this->belongsTo(Content::class);
     }
-
-    public function technicaInformation()
+    public function technique()
     {
-        return $this->belongsToMany(technicaInformation::class);
+        return $this->belongsTo(Technique::class);
     }
+
+    protected $table = 'nd_techniques';
 }

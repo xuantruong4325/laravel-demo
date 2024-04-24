@@ -16,30 +16,38 @@ use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
-    public function register(){
+    public function register()
+    {
         return view('from');
     }
-    public function fromSumbit(Request $request){
+    public function fromSumbit(Request $request)
+    {
         $email = $request->input('Email');
 
         $existingemail = User::where('Email', $email)->first();
 
-    if ($existingemail) {
-        return redirect()->back()->withErrors(['Email' => 'Tên email đã tồn tại']);
-    }
+        if ($existingemail) {
+            return redirect()->back()->withErrors(['Email' => 'Tên email đã tồn tại']);
+        }
 
         $user = new User();
         $user->Name = $request->Name;
         $user->Email = $request->Email;
         $user->Password = bcrypt($request->Password);
         $user->save();
-        return redirect()->route(route:'dkn');
+        return redirect()->route(route: 'dkn');
     }
-    public function Login(){
+    public function Login()
+    {
         return view('login');
     }
 
+<<<<<<< HEAD
     public function Error(){
+=======
+    public function Error()
+    {
+>>>>>>> 1255fd3 (first commit)
         return view('Error/error');
     }
     // phan quyen
@@ -50,46 +58,57 @@ class UserController extends Controller
     // }
 
 
+<<<<<<< HEAD
     public function fromLogin(Request $request){
+=======
+    public function fromLogin(Request $request)
+    {
+>>>>>>> 1255fd3 (first commit)
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
             if (User::where('email', $credentials['email'])->first()->user_type === 'admin') {
+<<<<<<< HEAD
                 return redirect()->route(route:'Admin');
             }else {
+=======
+                return redirect()->route(route: 'Admin');
+            } else {
+>>>>>>> 1255fd3 (first commit)
                 return redirect();
             }
-        }else {
-            return redirect()->back()->withErrors(['email'=>'Tài khoản hoặc mật khẩu không chính xác']);
+        } else {
+            return redirect()->back()->withErrors(['email' => 'Tài khoản hoặc mật khẩu không chính xác']);
         }
     }
     public function logout(Request $request)
     {
         Auth::logout();
- 
-    $request->session()->invalidate();
- 
-    $request->session()->regenerateToken();
- 
-    return redirect('/');
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/');
     }
 
     // public function index()
     // {
     //     $users=User::query();
-        // $user = DB::table('users')->get();
-        // return view('shows',['users' => $user]);
-        // $users = User::all();
-        // dd(Auth::User()->role === 'user');
+    // $user = DB::table('users')->get();
+    // return view('shows',['users' => $user]);
+    // $users = User::all();
+    // dd(Auth::User()->role === 'user');
     //     if(Auth::User()->user_type === 'user'){
     //         $users=$users->where('user_type','=','user');
     //     }
     //     $users = $users->get();
     //     return view('shows', ['users' => $users]);
     // }
-    public function Update($id){
-    $user = User::find($id);
-    return view('adduser/fix-usre', compact('user'));
+    public function Update($id)
+    {
+        $user = User::find($id);
+        return view('adduser/fix-usre', compact('user'));
     }
 
     public function fromUpdate(Request $request, $id)
@@ -107,44 +126,48 @@ class UserController extends Controller
         $user->Password = bcrypt($request->input('Password'));
         $user->save();
     }
-    public function Admin(){
-        $users=User::all();
-        if(Auth::User()->user_type === 'admin'){
-            $users=$users->where('user_type','=','admin');
+    public function Admin()
+    {
+        $users = User::all();
+        if (Auth::User()->user_type === 'admin') {
+            $users = $users->where('user_type', '=', 'admin');
         }
         // $users = $users->get();
         // $users = User::query();
         return view('admin', ['users' => $users]);
     }
     // hien thi tk user
-    public function User(){
-        $users=User::query();
-        if(Auth::User()->user_type === 'admin'){
-            $users=$users->where('user_type','=','user');
+    public function User()
+    {
+        $users = User::query();
+        if (Auth::User()->user_type === 'admin') {
+            $users = $users->where('user_type', '=', 'user');
         }
         $users = $users->get();
         return view('user', ['users' => $users]);
     }
-    public function delete($id){
+    public function delete($id)
+    {
         $user = User::where('id', '=', $id)->delete();
-        return redirect()->route(route:'Admin');
+        return redirect()->route(route: 'Admin');
     }
-    public function store( Request $request){
+    public function store(Request $request)
+    {
         // $email = $request->input('email');
 
         // $existingemail = User::where('email', $email)->first();
 
         // if ($existingemail) {
-            // dd($request);
-            $user = User::create([
-                'name' => $request->name,
-                'user_type' => $request->user_type,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-            ]);
-            
-        return redirect()->route(route:'Admin');
-           
+        // dd($request);
+        $user = User::create([
+            'name' => $request->name,
+            'user_type' => $request->user_type,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        return redirect()->route(route: 'Admin');
+
         // }
         // return redirect()->back()->withErrors(['Email' => 'Tên email đã tồn tại']);
     }
@@ -164,30 +187,31 @@ class UserController extends Controller
 
     // return response()->json($users);
     // }
-    public function Reset(){
+    public function Reset()
+    {
         return view('reset');
     }
-    public function fromReset(Request $request){
+    public function fromReset(Request $request)
+    {
         $email = $request->input('email');
 
         $existingemail = User::where('email', $email)->first();
 
-    if ($existingemail) {
-        $newPassword = Str::random(8);
+        if ($existingemail) {
+            $newPassword = Str::random(8);
 
-        $existingemail->password = bcrypt($newPassword);
-        $existingemail->save();
-        $mailData = [
-            'title' => 'Lấy lại mật khẩu',
-            'body' => 'Bạn đang yêu cầu lấy lại mật khẩu qua email:',
-            'email' => $request->email,
-            'new_password' => $newPassword
-        ];
+            $existingemail->password = bcrypt($newPassword);
+            $existingemail->save();
+            $mailData = [
+                'title' => 'Lấy lại mật khẩu',
+                'body' => 'Bạn đang yêu cầu lấy lại mật khẩu qua email:',
+                'email' => $request->email,
+                'new_password' => $newPassword
+            ];
 
-        Mail::to($request->email)->send(new MailPass($mailData));
-        return redirect()->back()->withErrors(['Email'=>'Gửi thành công']);
-    }
+            Mail::to($request->email)->send(new MailPass($mailData));
+            return redirect()->back()->withErrors(['Email' => 'Gửi thành công']);
+        }
         return redirect()->back()->withErrors(['Email' => 'Tài khoản không tồn tại']);
     }
-
 }

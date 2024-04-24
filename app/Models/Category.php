@@ -5,16 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class technicaInformation extends Model
+class Category extends Model
 {
     use HasFactory;
+
     protected $fillable = [
-        'technicaInformation',
-        'tskt_id'
+        'name_category',
     ];
 
-    public function tskt()
+    public function contents()
     {
-        return $this->belongsToMany(tskt::class);
+        return $this->hasMany(Content::class);
     }
+
+    protected $table = 'category';
+    
 }
