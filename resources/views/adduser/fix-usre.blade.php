@@ -48,7 +48,7 @@
 				</div>
 			</div>
 		</div>
-        <script>
+        
        <script>
             function addConten(){
                 Swal.fire('Thêm mới tài khoản thành công', '', 'success')

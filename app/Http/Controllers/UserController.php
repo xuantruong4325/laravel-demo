@@ -42,12 +42,8 @@ class UserController extends Controller
         return view('login');
     }
 
-<<<<<<< HEAD
-    public function Error(){
-=======
     public function Error()
     {
->>>>>>> 1255fd3 (first commit)
         return view('Error/error');
     }
     // phan quyen
@@ -58,24 +54,15 @@ class UserController extends Controller
     // }
 
 
-<<<<<<< HEAD
-    public function fromLogin(Request $request){
-=======
     public function fromLogin(Request $request)
     {
->>>>>>> 1255fd3 (first commit)
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
             if (User::where('email', $credentials['email'])->first()->user_type === 'admin') {
-<<<<<<< HEAD
-                return redirect()->route(route:'Admin');
-            }else {
-=======
                 return redirect()->route(route: 'Admin');
             } else {
->>>>>>> 1255fd3 (first commit)
-                return redirect();
+                return redirect()->route(route: 'home');
             }
         } else {
             return redirect()->back()->withErrors(['email' => 'Tài khoản hoặc mật khẩu không chính xác']);

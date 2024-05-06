@@ -26,20 +26,6 @@ class NdController extends Controller
 
     public function ndstore(Request $request)
     {
-<<<<<<< HEAD
-        $file_name=null;
-        if($request->has('file')){
-            $file = $request->file;
-            $file_name= $file -> getClientOriginalName();
-            $file -> move(base_path('public/image'),$file_name);
-        }
-        $gia=null;
-        if($request->discount != null && $request->old_price != null){
-            $discount = floatval($request->discount);
-            
-        $test = 1 - ($discount / 100);
-        $gia = round($request->old_price * $test);
-=======
 
         $file_name = null;
         // dd($request->techniques, $request->nameTechniques);
@@ -47,7 +33,6 @@ class NdController extends Controller
             $file = $request->file;
             $file_name = $file->getClientOriginalName();
             $file->move(base_path('public/image'), $file_name);
->>>>>>> 1255fd3 (first commit)
         }
         $giam = null;
         $gia = null;
@@ -72,13 +57,6 @@ class NdController extends Controller
             'product_specifications' => $request->product_specifications,
             'quantity' => $request->quantity,
         ]);
-<<<<<<< HEAD
-       
-        return redirect()->route(route:'ndindex');
-    }
-    
-=======
->>>>>>> 1255fd3 (first commit)
 
         if ($request->has('imageFiles')) {
             foreach ($request->imageFiles as $item) {
@@ -110,10 +88,10 @@ class NdController extends Controller
 
     public function ndindex(Request $request)
     {
-        $contents = Content::paginate(3);
+        $contents = Content::paginate(2);
         if($request->has('keyword')){
             $tk = $request->input('keyword');
-            $contents = $this->search($tk)->paginate(3);
+            $contents = $this->search($tk)->paginate(2);
         }
         // dd($contents);
         return view('nd', ['contents' => $contents]);
@@ -136,49 +114,6 @@ class NdController extends Controller
             if (unlink($path)) {
                 $imageProduct->delete();
             }
-<<<<<<< HEAD
-        // }
-        return redirect()->route(route:'ndindex');
-    }
-
-    public function ndUpdate($id){
-        $content = Content::find($id);
-        return view('form-update', compact('content'));
-    }
-    public function ndfromUpdate(Request $request, $id){
-        $content = Content::find($id);
-        $contents = null;
-        
-        if($request->has('file')){
-            $path = public_path('image/' . $content->file);
-            unlink($path);
-            $file = $request->file('file');
-            $contents = time()."_".$file-> getClientOriginalName();
-            $file -> move(base_path('public/image'),$contents);
-            $request['file']=$contents;         
-        }
-        if($contents == null){
-            $contents = $content->file;
-        }
-
-        $gia=null;
-        if($request->discount != null && $request->old_price != null){
-            $discount = floatval($request->discount);
-
-        $test = 1 - ($discount / 100);
-        $gia = round($request->old_price * $test);
-        }
-
-            $content->product_type = $request->input('product_type');
-            $content->discount = $request->input('discount');
-            $content->file = $contents;
-            $content->content = $request->input('content');
-            $content->old_price = $request->input('old_price');
-            $content->price_after_discount = $gia;
-            $content->status = $request->input('status');
-            $content->save();
-            return redirect()->route(route:'ndindex');
-=======
         }
         $path = public_path('image/' . $content->file);
         if (unlink($path)) {
@@ -186,7 +121,6 @@ class NdController extends Controller
         }
         // }
         return redirect()->route(route: 'ndindex');
->>>>>>> 1255fd3 (first commit)
     }
 
     public function ndUpdate($id)

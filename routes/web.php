@@ -8,6 +8,7 @@ use App\Http\Controllers\NdController;
 use App\Http\Controllers\TechniqueControlle;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\EditfooterController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\TechnicaInformationController;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\Authenticate;
@@ -37,8 +38,6 @@ Route::get('Error', [UserController::class, 'Error'])->name('error');
 
 
 Route::group(['prefix' => 'Admin', 'middleware' => ['auth', 'is_admin']], function () {
-<<<<<<< HEAD
-=======
     //category
     Route::get('Cartegory', [CategoriController::class, 'ListCategory'])->name('listCategory');
     Route::get('Cartegory-add', [CategoriController::class, 'AddCategory'])->name('addCategory');
@@ -66,7 +65,6 @@ Route::group(['prefix' => 'Admin', 'middleware' => ['auth', 'is_admin']], functi
     //Search
     Route::get('Search', [NdController::class, 'search']);
 
->>>>>>> 1255fd3 (first commit)
     // Route::get('index', [UserController::class, 'index'])->name(name:'index');
     Route::get('Update/{id}', [UserController::class, 'Update'])->name('up');
     Route::post('Update/{id}', [UserController::class, 'fromUpdate'])->name('Update');
@@ -93,17 +91,12 @@ Route::group(['prefix' => 'Admin', 'middleware' => ['auth', 'is_admin']], functi
     Route::post('BannerFooter/edit/save/{id}', [EditfooterController::class, 'form_edit_save'])->name(name:'from_footer_save');
     Route::get('BannerFooter', [EditfooterController::class, 'ndbanner'])->name(name:'ndbanner');
 
-
-
-    Route::get('/technicaInformation', [TechnicaInformationController::class, 'technicaInformation'])->name('technicaInformation');
-    Route::get('/add_technicaInformation', [TechnicaInformationController::class, 'add_information'])->name(name:'add_information');
-    Route::post('/add_technicaInformation', [TechnicaInformationController::class, 'add_information_save'])->name(name:'add_information_save');
-    Route::get('/edit_technicaInformation/{id}', [TechnicaInformationController::class, 'edit_information'])->name(name:'edit_information');
-    Route::post('/edit_technicaInformation/{id}', [TechnicaInformationController::class, 'edit_information_save'])->name(name:'edit_information_save');
-    Route::get('/delete_technicaInformation/{id}', [TechnicaInformationController::class, 'delete_information'])->name(name:'delete_information');
 });
 
 
 Route::prefix('Home')->group(function () {
     Route::get('/', [ProductsController::class, 'Home'])->name('home');
 });
+
+    //cart
+    Route::post('/cart-add', [CartController::class, 'cartAdd'])->name('cartAdd');

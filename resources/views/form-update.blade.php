@@ -78,25 +78,12 @@
                             <div class="form-group mb-4">
                                 <label for="image">Chọn ảnh sản phẩm</label> <input id="imageFiles" name="imageFiles[]" type="file" class="form-control-file">
                             </div>
-<<<<<<< HEAD
-                            <div class="form-group">
-                                <h5 class="mb-1">Chiết khấu</h5>
-                                <input
-                                    type="text"
-                                    name="discount"
-                                    class="form-control form-control-lg"
-                                    value="{{$content->discount}}"
-                                    oninput="new_price()"
-                                    id="discount"
-                                />
-=======
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group mb-4">
                                 <label for="image">Chọn ảnh sản phẩm</label> <input id="imageFiles" name="imageFiles[]" type="file" class="form-control-file">
->>>>>>> 1255fd3 (first commit)
                             </div>
                         </div>
                     </div>
