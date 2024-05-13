@@ -42,7 +42,7 @@
                             <div class="product">
                                 @if($conten->discount != null)
                                 <div class="discount">
-                                    <span id="discount">{{ $conten->discount }}</span>
+                                    <span id="discount">-{{ $conten->discount }}%</span>
                                 </div>
                                 @endif
                                 <div class="info">
@@ -62,11 +62,19 @@
                                             @endif
                                             <br>
                                             @if($conten->status == 'Publish')
-                                            <span id="span">
-                                                Còn hàng
-                                                <a onclick="addToCart('{{ $conten->id }}',1)"><i class="fa-solid fa-cart-shopping"></i></a>
-                                                <div class="tick"></div>
-                                            </span>
+                                                @if(auth()->user() != null)
+                                                <span id="span">
+                                                    Còn hàng
+                                                    <a onclick="addToCart('{{ $conten->id }}',1,'{{ $conten->content }}')"><i class="fa-solid fa-cart-shopping"></i></a>
+                                                    <div class="tick"></div>
+                                                </span>
+                                                @else
+                                                <span id="span">    
+                                                    Còn hàng
+                                                    <a onclick="alert('Xin vui lòng đăng nhập')"><i class="fa-solid fa-cart-shopping"></i></a>
+                                                    <div class="tick"></div>
+                                                </span>
+                                                @endif
                                             @endif
                                         </div>
                                     </div>
@@ -92,7 +100,7 @@
                             <div class="product">
                                 @if($conten->discount != null)
                                 <div class="discount">
-                                    <span id="discount">{{ $conten->discount }}</span>
+                                    <span id="discount">-{{ $conten->discount }}%</span>
                                 </div>
                                 @endif
                                 <div class="info">
@@ -147,7 +155,7 @@
                             <div class="product">
                                 @if($conten->discount != null)
                                 <div class="discount">
-                                    <span id="discount">{{ $conten->discount }}</span>
+                                    <span id="discount">-{{ $conten->discount }}%</span>
                                 </div>
                                 @endif
                                 <div class="info">

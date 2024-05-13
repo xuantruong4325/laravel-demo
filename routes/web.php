@@ -91,6 +91,9 @@ Route::group(['prefix' => 'Admin', 'middleware' => ['auth', 'is_admin']], functi
     Route::post('BannerFooter/edit/save/{id}', [EditfooterController::class, 'form_edit_save'])->name(name:'from_footer_save');
     Route::get('BannerFooter', [EditfooterController::class, 'ndbanner'])->name(name:'ndbanner');
 
+    //cart
+    Route::get('/list-cart', [CartController::class, 'listCart'])->name('listCart');
+
 });
 
 

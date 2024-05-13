@@ -11,14 +11,12 @@ use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
+    public function listCart(){
+        $carts = cart::all();
+        return view('Categorise/Cart/cart-list',['carts' => $carts]);
+    }
     public function cartAdd(Request $request)
     {
-        // if(Auth::check()){
-        //     $cart = cart::create([
-        //         'name' => $request->name,
-        //     ]);
-
-        // }
         if (Auth::check()) {
             $id_user = Auth::user()->id;
             $id_sp = $request -> productId;
@@ -26,13 +24,13 @@ class CartController extends Controller
             $product = Content::find($id_sp);
             $cart = cart::create([
                 'name' => $product->content,
-                'avatar' => 'null',
+                'avatar' => $product->file,
                 'price' => $product->old_price,
                 'quantity' => $quantity,
                 'user_id' => $id_user,
             ]);
         } else {
-            
+            return ;
         }
     }
 }

@@ -181,7 +181,7 @@
                             <li><a href="{{  route('ndindex')  }}">Sản phẩm</a></li>
                             <li><a href="{{  route('listTechnique')  }}">Thông số kỹ thuật</a></li>
                             <li><a href="{{  route('ndbanner')  }}">Footer và Banner</a></li>
-                            <li><a href="#">Header</a></li>
+                            <li><a href="{{  route('listCart')  }}">Giỏ hàng</a></li>
                         </ul>
                     </li>
                 </ul>

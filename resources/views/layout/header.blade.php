@@ -28,12 +28,40 @@
             </form>
         </div>
         <div style="margin-right: 10px; margin-top: -5px;">
-            <a class="btn-top btn-store" href="dn.html">
-                Đăng nhập
-            </a>
-            <a class="btn-top btn-visit" href="dk.html">
-                Đăng ký
-            </a>
+            @if(auth()->user() != null)
+            <ul class="btn-user" style="width: 200px;">
+                <li>
+                    <i class="fa-solid fa-circle-user icon-users"></i>
+                    <label style="margin-top: -10px;" class="btn-user-name">Xin chào, {{Auth::user()->name}}</label>
+                    <ul class="user-menu" style="width: 180px;">
+                        <li>
+                            <a href="">Tài khoản của tôi</a>
+                        </li>
+                        <li>
+                            <a href="">Đơn hàng của tôi</a>
+                        </li>
+                        <li>
+                            <a href="{{route('logout')}}">Đăng xuất</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            @else
+            <ul class="btn-user">
+                <li>
+                    <i class="fa-solid fa-circle-user icon-users"></i>
+                    <label style="margin-top: -10px;">Tài khoản</label>
+                    <ul class="user-menu">
+                        <li>
+                            <a href="{{route('register')}}">Đăng ký</a>
+                        </li>
+                        <li>
+                            <a href="{{route('Login')}}">Đăng nhập</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            @endif
             <a class="cart" href="gio.html">
                 <i class="fa-solid fa-cart-shopping"></i>
                 <span class="number">0</span>
@@ -267,12 +295,10 @@
     <script src="js/Home.js"></script>
     <script>
         //cart	
-        addToCart = function(_productId, _quantity) {
-            // alert("Thêm "  + _quantity + _productId + " sản phẩm '" + _productName + "' vào giỏ hàng ");
-            // let data = {
-            //     productId: _productId, //lay theo id
-            //     quantity: _quantity,
-            // };
+        addToCart = function(_productId, _quantity, _name) {
+
+            alert("Thêm " + _quantity + " sản phẩm " + _name + " vào giỏ hàng ");
+
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
