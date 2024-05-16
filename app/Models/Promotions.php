@@ -5,12 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class Promotions extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'name',
-        'email',
 
+    protected $fillable=[
+        'title',
+        'avatar',
+        'content',
+        'timeApplication',
     ];
 }

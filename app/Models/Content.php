@@ -18,6 +18,7 @@ class Content extends Model
         'price_after_discount',
         'status',
         'product_specifications',
+        'product_reviews',
         'category_id',
         'company_id',
         'quantity',

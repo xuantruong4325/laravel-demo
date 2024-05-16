@@ -12,10 +12,12 @@
 								<thead>
                                 <tr>
                                     <th>#</th>
+                                    <th>Câu chào</th>
                                     <th>Ảnh Banner 1</th>
                                     <th>Ảnh Banner 2</th>
                                     <th>Ảnh Banner 3</th>
                                     <th>Ảnh Banner 4</th>
+                                    <th>Ảnh Banner cart</th>
                                     <th>Ảnh Footer_left</th>
                                     <th>Ảnh Footer_right</th>
                                     <th class="datatable-nosort">Hành động</th>
@@ -25,6 +27,7 @@
                                     @foreach ($editfooter as $editfooters) 
                                         <tr>
                                             <th>#</th>
+                                            <td>{{ $editfooters->name }}</td>
                                             <td>
                                                 <img src="/FileImage/Layout/{{ $editfooters->file_banner1 }}" alt="" width="50" header="50">
                                             </td>
@@ -36,6 +39,9 @@
                                             </td>
                                             <td>
                                                 <img src="/FileImage/Layout/{{ $editfooters->file_banner4 }}" alt="" width="50" header="50">
+                                            </td>
+                                            <td>
+                                                <img src="/FileImage/Layout/{{ $editfooters->file_cart }}" alt="" width="50" header="50">
                                             </td>
                                             <td>
                                                 <img src="/FileImage/Layout/{{ $editfooters->file_footer_left }}" alt="" width="50" header="50">

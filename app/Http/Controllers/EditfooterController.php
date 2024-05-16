@@ -19,7 +19,7 @@ class EditfooterController extends Controller
 
             return $file_name;
         }else{
-            $path = public_path('FileImage/Layout/'.$test);
+            $path = public_path('public/FileImage/Layout/'.$test);
             unlink($path);
             $file_name = time()."_".$file-> getClientOriginalName();
             $file -> move(base_path('public/FileImage/Layout'),$file_name);
@@ -46,6 +46,10 @@ class EditfooterController extends Controller
         if($file_name4==null){
             $file_name4=$editfooter->file_banner4;
         }
+        $file_cart = $this->save_image($request->file('file_cart'),$editfooter->file_cart);
+        if($file_cart==null){
+            $file_cart=$editfooter->file_cart;
+        }
         $file_name_left = $this->save_image($request->file('file_footer_left'),$editfooter->file_footer_left);
         if($file_name_left==null){
             $file_name_left=$editfooter->file_footer_left;
@@ -54,10 +58,12 @@ class EditfooterController extends Controller
         if($file_name_right==null){
             $file_name_right=$editfooter->file_footer_right;
         }
+            $editfooter->name = $request->name;
             $editfooter->file_banner1 = $file_name1;
             $editfooter->file_banner2 = $file_name2;
             $editfooter->file_banner3 = $file_name3;
             $editfooter->file_banner4 = $file_name4;
+            $editfooter->file_cart = $file_cart;
             $editfooter->file_footer_left = $file_name_left;
             $editfooter->file_footer_right = $file_name_right;
             $editfooter->save();

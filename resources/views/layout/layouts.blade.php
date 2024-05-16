@@ -184,6 +184,11 @@
                             <li><a href="{{  route('listCart')  }}">Giỏ hàng</a></li>
                         </ul>
                     </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" href="{{  route('listPromotion')  }}">
+                            <span class="mtext">Khuyễn mãi</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
 

@@ -9,7 +9,7 @@ use App\Http\Controllers\TechniqueControlle;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\EditfooterController;
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\TechnicaInformationController;
+use App\Http\Controllers\PromotionsController;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\Authenticate;
 
@@ -64,6 +64,16 @@ Route::group(['prefix' => 'Admin', 'middleware' => ['auth', 'is_admin']], functi
 
     //Search
     Route::get('Search', [NdController::class, 'search']);
+
+    // Khuyến mãi
+
+    Route::get('Promotion', [PromotionsController::class, 'promotionList'])->name('listPromotion');
+    Route::get('Promotion-add', [PromotionsController::class, 'promotionAdd'])->name('addPromotion');
+    Route::post('Promotion-add-save', [PromotionsController::class, 'promotionAddSave'])->name('addPromotionSave');
+    Route::get('Promotion-edit/{id}', [PromotionsController::class, 'promotionEdit'])->name('editPromotion');
+    Route::post('Promotion-edit-save/{id}', [PromotionsController::class, 'promotionEditSave'])->name('editPromotionSave');
+    Route::get('Promotion-delete/{id}', [PromotionsController::class, 'promotionDelete'])->name('deletePromotion');
+
 
     // Route::get('index', [UserController::class, 'index'])->name(name:'index');
     Route::get('Update/{id}', [UserController::class, 'Update'])->name('up');

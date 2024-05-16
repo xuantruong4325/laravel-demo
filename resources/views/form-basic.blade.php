@@ -64,6 +64,12 @@
                         <label for="productType">Nhập thông số sản phẩm</label>
                         <textarea type="text" class="textarea_editor form-control border-radius-1" name="product_specifications"></textarea>
                     </div>
+
+                    <div class="form-group">
+                        <label for="productType">Đánh giá sản phẩm</label>
+                        <textarea type="text" class="textarea_editor1 form-control border-radius-1" name="product_reviews"></textarea>
+                    </div>
+
                     <div class="form-group">
                         <label for="productType">Trạng thái sản phẩm</label>
                         <select name="status" class="form-control form-control-lg">

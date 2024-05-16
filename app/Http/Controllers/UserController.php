@@ -112,6 +112,7 @@ class UserController extends Controller
         $user->Email = $request->input('Email');
         $user->Password = bcrypt($request->input('Password'));
         $user->save();
+        return redirect()->route(route: 'Admin');
     }
     public function Admin()
     {
@@ -136,7 +137,7 @@ class UserController extends Controller
     public function delete($id)
     {
         $user = User::where('id', '=', $id)->delete();
-        return redirect()->route(route: 'Admin');
+        return redirect()->route(route: 'User');
     }
     public function store(Request $request)
     {
@@ -146,6 +147,12 @@ class UserController extends Controller
 
         // if ($existingemail) {
         // dd($request);
+        // $email = $request->input('Email');
+        // $existingEmail = User::where('Email', $email)->first();
+
+        // if ($existingEmail) {
+        //     return redirect()->back()->withErrors(['Emaild' => 'Tên email đã tồn tại']);
+        // }
         $user = User::create([
             'name' => $request->name,
             'user_type' => $request->user_type,

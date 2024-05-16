@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('old_price')->nullable();
             $table->integer('price_after_discount')->nullable();
             $table->string("product_specifications")->nullable();
+            $table->string("product_reviews")->nullable();
             $table->unsignedBigInteger("category_id");
             $table->unsignedBigInteger("company_id");
             $table->string('status');

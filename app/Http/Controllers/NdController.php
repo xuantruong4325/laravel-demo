@@ -55,6 +55,7 @@ class NdController extends Controller
             'category_id' => $request->categoryId,
             'company_id' => $request->companyId,
             'product_specifications' => $request->product_specifications,
+            'product_reviews' => $request->product_reviews,
             'quantity' => $request->quantity,
         ]);
 
@@ -88,19 +89,40 @@ class NdController extends Controller
 
     public function ndindex(Request $request)
     {
-        $contents = Content::paginate(2);
+        $query = Content::query();
+        $category = Category::all();
+        $company = Company::all();
+        $namKey=null;
+        $namCom=null;
+        $namCate=null;
+        $namSta=null;
+
+        
+        if($request->searchStatus != 0){
+            $seachStatus = $request->input('searchStatus');
+            $query->where('status','like','%' .$seachStatus. '%');   
+            $namSta = $seachStatus;
+        }
+        if($request->proCom !=0){
+            $proCom = $request->input('proCom');
+            $query->where('company_id',$proCom);  
+            $namCom = $proCom;
+        }
+        if($request->proCate !=0){
+            $proCate = $request->input('proCate');
+            $query->where('category_id',$proCate);  
+            $namCate = $proCate;
+        }
         if($request->has('keyword')){
             $tk = $request->input('keyword');
-            $contents = $this->search($tk)->paginate(2);
+            $query->where('content','like','%' .$tk. '%');
+            $namKey = $tk;
         }
+        $contents = $query->paginate(3);
         // dd($contents);
-        return view('nd', ['contents' => $contents]);
+        return view('nd', compact('contents','namKey','category','company','namCom','namCate','namSta'));
     }
 
-    public function search($tk){
-        $query = Content::where('content','like','%' .$tk. '%');
-        return $query;
-    }
 
     public function nddelete($id)
     {
@@ -188,6 +210,7 @@ class NdController extends Controller
         $content->category_id = $request->input('categoryId');
         $content->company_id = $request->input('companyId');
         $content->quantity = $request->input('quantity');
+        $content->product_reviews = $request->input('product_reviews');
         $content->save();
 
         if ($request->has('imageFiles')) {
@@ -198,31 +221,8 @@ class NdController extends Controller
                     'title' => $nameItem,
                     'content_id' => $id,
                 ]);
-                // dd($conten->id);
             }
         }
-
-        // $test2 = NdTechnique::all();
-        // $aa=0;
-        // if($request->has('techniques')){
-        //     foreach($request->techniques as $item){
-        //         if($test2->content_id == $id){
-        //             if($item != $test2->technique_id){
-
-        //             }
-
-        //         }
-        //         // if($item != $request){
-
-        //         // }
-        //         $ndTechnique = NdTechnique::create([
-        //             'nameTechnique'=>$request->nameTechniques[$aa],
-        //             'technique_id' =>$item,
-        //             'content_id'=>$id,
-        //         ]);
-        //         $aa++;
-        //     }
-        // }
 
         return redirect()->route(route: 'ndindex');
     }

@@ -13,11 +13,7 @@ class ProductsController extends Controller
     public function Home(){
         $contents = Content::all();
         $editfooters=Editfooter::all();
-        $checkUser = "fales";
-        if(Auth::check()){
-            $checkUser == "true";
-        }
-        return view('product/Home', compact('contents','editfooters','checkUser'));
+        return view('product/Home', compact('contents','editfooters'));
     }
     
 }

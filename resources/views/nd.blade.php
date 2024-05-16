@@ -30,25 +30,39 @@
                         <div class="row">
                             <div class="col-md-2">
                                 <div class="form-group mb-4">
-                                    <select class="form-control" id="" name="">
-                                        <option>All</option>
-                                        <option value="Browsing">Chờ</option>
-                                        <option value="Publish">Còn hàng</option>
-                                        <option value="Draft">Hết hàng</option>
+                                    <select name="searchStatus" class="form-control">
+                                        <option value="0">All</option>
+                                        <option value="Browsing" {{ $namSta == 'Browsing' ? 'selected' : '' }}>Chờ</option>
+                                        <option value="Publish" {{ $namSta == 'Publish' ? 'selected' : '' }}>Còn hàng</option>
+                                        <option value="Draft" {{ $namSta == 'Draft' ? 'selected' : '' }}>Hết hàng</option>
                                     </select>
                                 </div>
                             </div>
 
                             <div class="col-md-2">
-                                <select class="form-control" id="" name="" style="margin-right: 10px;">
-                                    <option value="0">Select category</option>
-
-                                </select>
+                                <div class="form-group mb-4">
+                                    <select name="proCom" class="form-control">
+                                        <option value="0">Theo hãng</option>
+                                        @foreach ($company as $company)
+                                        <option value="{{ $company->id }}" {{ $company->id == $namCom ? 'selected' : '' }}>{{$company->name_company}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
 
-
                             <div class="col-md-2">
-                                <input type="text" class="form-control" id="keyword" name="keyword" placeholder="Tìm kiếm" />
+                                <div class="form-group mb-4">
+                                    <select name="proCate" class="form-control">
+                                        <option value="0">Theo loại</option>
+                                        @foreach ($category as $categor)
+                                        <option value="{{$categor->id}}" {{ $categor->id == $namCate ? 'selected' : '' }}>{{$categor->name_category}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <input type="text" class="form-control" id="keyword" name="keyword" placeholder="Tìm kiếm" value="{{$namKey}}" />
                             </div>
 
                             <div class="col-md-2">

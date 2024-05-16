@@ -103,7 +103,7 @@ body{
     margin-top: -4px;
 }
 .user-menu{
-    margin-left: 10px;
+    margin-left: 20px;
     position: absolute;
     top: 45px;
     left: 0;
@@ -206,7 +206,7 @@ ul{
     font-size: 15px;
     font-weight: bold;
     display: block;
-    padding: 15px 20px;
+    padding: 15px 40px;
 }
 .menu li a.active,.menu li a:hover{
     color: white;

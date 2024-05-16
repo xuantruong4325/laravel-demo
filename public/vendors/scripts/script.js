@@ -4,6 +4,9 @@ jQuery(window).on("load", function () {
 	$(".textarea_editor").wysihtml5({
 		html: true,
 	});
+	$(".textarea_editor1").wysihtml5({
+		html: true,
+	});
 });
 jQuery(window).on("load resize", function () {
 	// custom scrollbar
