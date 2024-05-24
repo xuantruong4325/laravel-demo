@@ -1,0 +1,232 @@
+.tt-ctn {
+    width: calc(97% + 1px);
+    min-height: 100vh;
+    box-shadow: #3333332b 0px 0px 0.25em, #33333359 0px 0.25em 1em;
+    border-radius: 5px;
+    padding: 15px;
+}
+
+.tt-ctn h2 {
+    margin: 0 0 10px;
+    font-size: 1.2rem;
+}
+
+.tt-box-1 {
+    width: 60%;
+}
+.scroll {
+    height: 600px;
+    overflow-y:scroll ;
+}
+
+.scroll::-webkit-scrollbar {
+    width: 12px;
+    height: 12px; 
+}
+
+.scroll::-webkit-scrollbar-thumb {
+    background-color: rgba(169, 169, 169, 0.392); /* Màu nền của thanh cuộn */
+    border-radius: 6px; /* Góc bo tròn cho thanh cuộn */
+    border: 3px solid transparent; /* Đặt viền trong suốt để tạo khoảng cách bên trong */
+    background-clip: content-box; /* Đảm bảo viền không làm ảnh hưởng tới màu nền */
+}
+
+.btn-control {
+    width: 100%;
+}
+
+.tt-box-1 .sptt {
+    padding: 15px 10px;
+    border-bottom: 2px solid #dadada;
+    display: flex;
+    gap: 20px;
+    cursor: pointer;
+}
+.tt-box-1 .sptt:hover {
+    background: #dadada38;
+}
+.tt-box-1 .sptt:last-child {
+    border-bottom: none;
+}
+
+.sptt img {
+    width: 15%;
+    height: 100px;
+    object-fit: cover;
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+}
+
+.checkbox-select {
+    width: 20px;
+    height: 20px;
+}   
+
+.sptt-content {
+    display: flex;
+    flex-direction: column;
+    font-size: 1rem;
+}
+.sptt-content p {
+    margin: 0 0 10px;   
+}
+
+.sl {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+}
+.sl input {
+    width: 15%;
+    border-radius: 5px;
+    padding: 2px;
+    text-align: center;
+}
+
+.giatien {
+    width: 30%;
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+    align-items: end;
+}
+.giatien h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color:#cb1c22;
+}
+.giatien i {
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+.giatien .giagoc {
+    font-size: 0.9rem;
+    text-decoration: line-through;
+}
+
+.flex-content {
+    width: 40%;
+    min-height: 500px;
+    background: #dadada3e;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
+}
+
+.flex-content h2 {
+    margin: 15px 0;
+}
+
+.tt-box-2 {
+    margin: 0 0 20px;
+}
+form {
+    width: 100%;
+}
+.form-box {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+.form-box label {
+    font-size: 0.9rem;
+    color: #333;
+}
+.form-box input::placeholder {
+    color: #636363;
+}
+.form-box input {
+    width: 100%;
+    max-width: 250px;
+    padding: 8px 10px;
+    border-radius: 5px;
+    border: 1px solid #c5c4c4;
+    outline: none;
+}
+.form-box select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 100%;
+    max-width: 271px;
+    padding: 8px 10px;
+    border-radius: 5px;
+    border: 1px solid #c5c4c4;
+    outline: none;
+    color: #636363;
+}
+.form-box select option {
+    width: 100%;
+    height: 40px;
+    overflow-y: scroll;
+    border: 1px solid #dadada;
+    line-height: 30px;
+    color: #333;
+    background: #fff; 
+    padding: 10px; 
+}
+
+.tt-box-3 div {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.tt-box-3 div input {
+    margin: 0;
+}
+
+.tt-box-3 div label {
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.tt-box-3 .qr {
+    width: 50%;
+    height: 200px;
+    margin: 0 auto;
+    background: #333;
+    display: none;
+    border-radius: 5px;
+}
+
+hr.space {
+    margin: 20px 0 10px;
+    border: 0;
+    outline: 0;
+    height: 2px;
+    background: #dadada;
+}
+
+.btn-control {
+    width: 97%;
+    margin-top: 20px;
+    background: #dadada;
+    padding: 15px;
+    border-radius: 20px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.tt-thanhtoan span {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #cb1c22;
+}
+
+.btn-control button {
+    padding: 8px 15px;
+    border-radius: 10px;
+    border: 0;
+    outline: 0;
+    background: #bfbfbf;
+    margin-right: 20px;
+    font-size: 1rem;
+    cursor: pointer;  
+}
+.btn-control button:hover {
+    background: #9c9a9a98;
+}

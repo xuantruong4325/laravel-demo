@@ -448,13 +448,13 @@ h1{
     font-size: 18px;
     font-weight: 600;
 }
-.info div i{
+.info div .iconCart{
     float: right;
     margin-right: 20px;
     font-size: 20px;
     color: #888888;
 }
-.info div i:hover{
+.info div .iconCart:hover{
     background: linear-gradient(to right, #f0f, rgb(250, 221, 6));
     -webkit-background-clip: text;
     background-clip: text;
@@ -462,6 +462,20 @@ h1{
     text-fill-color: transparent;
     transition: 2s;
     scale: 1.05;
+}
+.info div #spanH{
+    color: #0074da;
+    padding: 15px 0px 0px 6px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.icon-phone{
+    float: left;
+    margin: 0;
+    font-size: 12px;
+    margin-top: 4px;
+    margin-left: 2px;
 }
 .info div .span{
     font-size: 13px;

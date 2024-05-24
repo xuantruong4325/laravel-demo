@@ -189,6 +189,11 @@
                             <span class="mtext">Khuyễn mãi</span>
                         </a>
                     </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" href="{{  route('listIntroduces')  }}">
+                            <span class="mtext">Giới thiệu</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
 

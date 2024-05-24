@@ -10,6 +10,7 @@ use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\EditfooterController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\PromotionsController;
+use App\Http\Controllers\IntroducesController;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\Authenticate;
 
@@ -74,9 +75,15 @@ Route::group(['prefix' => 'Admin', 'middleware' => ['auth', 'is_admin']], functi
     Route::post('Promotion-edit-save/{id}', [PromotionsController::class, 'promotionEditSave'])->name('editPromotionSave');
     Route::get('Promotion-delete/{id}', [PromotionsController::class, 'promotionDelete'])->name('deletePromotion');
 
+    // Giới thiệu
+    Route::get('Introduces', [IntroducesController::class, 'introducesList'])->name('listIntroduces');
+    Route::get('Introduces-add', [IntroducesController::class, 'introducesAdd'])->name('addIntroduces');
+    Route::post('Introduces-add-save', [IntroducesController::class, 'introducesAddSave'])->name('addIntroducesSave');
+    Route::get('Introduces-edit/{id}', [IntroducesController::class, 'introducesEdit'])->name('editIntroduces');
+    Route::post('Introduces-edit-save/{id}', [IntroducesController::class, 'introducesEditSave'])->name('editIntroducesSave');
 
     // Route::get('index', [UserController::class, 'index'])->name(name:'index');
-    Route::get('Update/{id}', [UserController::class, 'Update'])->name('up');
+    Route::get('Update/{id}', [UserController::class, 'Update'])->name('up');   
     Route::post('Update/{id}', [UserController::class, 'fromUpdate'])->name('Update');
     Route::get('/', [UserController::class, 'Admin'])->name(name:'Admin');
     Route::get('deleteuser/{id}', [UserController::class, 'delete'])->name(name:'delete');
@@ -110,6 +117,9 @@ Route::group(['prefix' => 'Admin', 'middleware' => ['auth', 'is_admin']], functi
 Route::prefix('Home')->group(function () {
     Route::get('/', [ProductsController::class, 'Home'])->name('home');
 });
-
+    Route::get('/Khuyến-mại', [ProductsController::class, 'Khuyenmai'])->name('list-khuyenmai');
+    Route::get('/Chi-tiết-khuyến-mại/{id}', [ProductsController::class, 'Khuyenmai2'])->name('khuyen-mai');
+    Route::get('/Giới-thiệu', [ProductsController::class, 'Gioithieu'])->name('gioithieu');
+    Route::get('/Thông-tin-tài-khoản/{id}', [ProductsController::class, 'Tttk'])->name('tttk');
     //cart
     Route::post('/cart-add', [CartController::class, 'cartAdd'])->name('cartAdd');

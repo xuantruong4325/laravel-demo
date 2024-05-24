@@ -62,20 +62,26 @@
                                             @endif
                                             <br>
                                             @if($conten->status == 'Publish')
-                                                @if(auth()->user() != null)
-                                                <span id="span">
-                                                    Còn hàng
-                                                    <a onclick="addToCart('{{ $conten->id }}',1,'{{ $conten->content }}')"><i class="fa-solid fa-cart-shopping"></i></a>
-                                                    <div class="tick"></div>
-                                                </span>
-                                                @else
-                                                <span id="span">    
-                                                    Còn hàng
-                                                    <a onclick="alert('Xin vui lòng đăng nhập')"><i class="fa-solid fa-cart-shopping"></i></a>
-                                                    <div class="tick"></div>
-                                                </span>
-                                                @endif
+                                            @if(auth()->user() != null)
+                                            <span id="span">
+                                                Còn hàng
+                                                <a onclick="addToCart('{{ $conten->id }}',1,'{{ $conten->content }}')"><i class="fa-solid fa-cart-shopping iconCart"></i></a>
+                                                <div class="tick"></div>
+                                            </span>
+                                            @else
+                                            <span id="span">
+                                                Còn hàng
+                                                <a onclick="alert('Xin vui lòng đăng nhập')"><i class="fa-solid fa-cart-shopping iconCart"></i></a>
+                                                <div class="tick"></div>
+                                            </span>
                                             @endif
+                                            @elseif($conten->status == 'Draft')
+                                            <span id="spanH">
+                                                <i class="fa-solid fa-phone icon-phone"></i>
+                                                Đặt hàng 
+                                            </span>
+                                            @endif
+
                                         </div>
                                     </div>
                                 </div>
@@ -122,13 +128,13 @@
                                             @if($conten->status == 'Publish')
                                             <span id="span">
                                                 Còn hàng
-                                                <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
+                                                <a href=""><i class="fa-solid fa-cart-shopping iconCart"></i></a>
                                                 <div class="tick"></div>
                                             </span>
                                             @elseif($conten->status == 'Draft')
-                                            <span id="span2">
-                                                Đặt trước
-                                                <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
+                                            <span id="spanH">
+                                                <i class="fa-solid fa-phone icon-phone"></i>
+                                                Đặt hàng
                                             </span>
                                             @endif
                                         </div>
@@ -177,13 +183,13 @@
                                             @if($conten->status == 'Publish')
                                             <span id="span">
                                                 Còn hàng
-                                                <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
+                                                <a href=""><i class="fa-solid fa-cart-shopping iconCart"></i></a>
                                                 <div class="tick"></div>
                                             </span>
                                             @elseif($conten->status == 'Draft')
-                                            <span id="span2">
+                                            <span id="spanH">
                                                 Đặt trước
-                                                <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
+                                                <a href=""><i class="fa-solid fa-cart-shopping iconCart"></i></a>
                                             </span>
                                             @endif
                                         </div>

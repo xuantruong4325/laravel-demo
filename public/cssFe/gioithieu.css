@@ -1,0 +1,143 @@
+.bw-gt-ctn {
+    width: 100%;
+    padding: 10px 0;
+    color: #333;
+}
+
+.title-gt {
+    font-size: 32px;
+    text-transform: uppercase;
+    color: #333;
+}
+
+.gt  {
+    margin-top: 30px;
+}
+
+.gt h2 {
+    margin: 5px 0;
+    font-size: 25px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.gt hr {
+    border: 0;
+    outline: 0;
+    height: 2px;
+    background: #dadada;
+}
+
+.gt.box-1 p {
+    text-align: justify;
+    font-size: 1rem;
+}
+.gt.box-1 p span {
+    font-weight: 600;
+}
+
+.gt.box-2 h3 {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.gt.box-3 .title-box-3 {
+    font-size: 1rem;
+}
+.gt.box-3 .title-box-3 span {
+    font-weight: 600;
+    color: rgba(0, 110, 255, 0.811);
+}
+
+.gt.box-3 div {
+    margin: 20px 0 40px;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-gap: 20px;
+}
+
+.gt.box-3 div .box-flex {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    align-items: center;
+    border: 1px;
+    border-style: solid;
+    padding: 20px;
+    border-radius: 2px;
+}
+
+.gt.box-3 div .box-flex.yellow {
+    border-color: orange;
+}
+.gt.box-3 div .box-flex.yellow h1 {
+    color: orange;
+}
+
+.gt.box-3 div .box-flex.red {
+    border-color: red;
+}
+.gt.box-3 div .box-flex.red h1 {
+    color: red;
+}
+
+.gt.box-3 div .box-flex.blue {
+    border-color: rgba(9, 109, 224, 0.964);
+}
+.gt.box-3 div .box-flex.blue h1 {
+    color: rgba(9, 109, 224, 0.964);
+}
+
+.gt.box-3 div .box-flex.purple {
+    border-color: #242156;
+}
+.gt.box-3 div .box-flex.purple h1 {
+    color: #242156;
+}
+
+
+.title-box-flex {
+    font-size: 32px;
+    text-transform: uppercase;
+}
+.box-flex p {
+    font-size: 0.8rem;
+    text-align: center;
+}
+.box-flex b {
+    font-style: italic;
+    font-weight: 600;
+}
+
+.gt.box-4 div {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 20px 0;
+}
+.box-4-left {
+    width: 45%;
+}
+.box-4-left img {
+    width: 100%;
+}
+.box-4-right {
+    width: 45%;
+}
+.box-4-right p {
+    font-size: 1rem;
+    line-height: 25px;
+}
+
+.gt.box-5 div {
+    margin: 20px 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.gt.box-5 img {
+    width: 49%;
+    height: 300px;
+}

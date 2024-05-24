@@ -1,0 +1,249 @@
+a {
+    text-decoration: none;
+}
+p {
+    margin: 0;
+    padding: 0;
+}
+
+.title-ct-km{
+    text-align: left;
+    color: #333;
+}
+.betwen-content {
+    margin-top: 30px;
+    width: 100%;
+    display: grid;
+    /* grid-template-columns: auto auto auto;   */
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 20px;
+}
+
+.content-box a{
+    padding: 5px;
+    width: 100%;
+    width: 350px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border-radius: 5px;
+    color: #333;
+    cursor: pointer;
+}
+
+.content-box-img {
+    position: relative;
+}
+.content-box-img img {
+    width: 100%;
+    height: 260px;
+}
+
+.content-box-img:hover .overlay {
+    opacity: 1;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(148, 147, 147, 0.405); /* Màu nền và độ trong suốt của lớp phủ */
+    color: white; /* Màu chữ của lớp phủ */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.content-box-text {
+    width: 95%;
+    min-height: 20px;
+    padding: 10px;
+    background: #dadada50;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 20px;
+}
+
+.content-box-time {
+    padding: 10px;
+    font-size: 15px;
+    height: 45px;
+    overflow-y: scroll;
+}
+.content-box-time::-webkit-scrollbar {
+    display: none;
+}
+
+.betwen-bottom {
+    width: 100%;
+    min-height: 40px;
+    padding: 30px 0;
+    background: #202C43;
+}
+.betwen-bottom  h1 {
+    margin: 0 0 10px;
+    font-size: 1rem;
+    color: white;
+}
+.betwen-bottom form {
+    width: 50%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+}
+.betwen-bottom form input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    outline: 0;
+    font-size: 16px;
+    border-radius: 4px 0 0 4px;
+}
+.betwen-bottom form input::placeholder {
+    font-size: 14px;
+    color: #a3a1a1;
+}
+.betwen-bottom form button {
+    width: 20%;
+    border: 0;
+    outline: 0;
+    padding: 10px;
+    font-size: 16px;
+    background: #ed1b24;
+    color: white;
+    cursor: pointer;
+    border-radius: 0 4px 4px 0;
+}
+
+
+/*  Kuyen mai 2 */
+.km-2-content {
+    width: calc(96% + 3px);
+    min-height: 100vh;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    padding: 20px;
+    border-radius: 4px;
+}
+
+.title-km-2 {
+    font-size: 32px;
+    text-align: start;
+}
+
+.time-up-sale {
+    margin-bottom: 40px;
+    font-size: 0.9rem;
+}
+
+.title-ul {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.km-2-content ul li {
+    font-size: 1rem;
+    line-height: 30px;
+}
+.km-2-content ul li span {
+    font-weight: 600;
+}
+
+.img-main-km {
+    width: 80%;
+    height: auto;
+    margin: 20px 10%;
+}
+
+.tt-km {
+    font-size: 1rem;
+    line-height: 30px;
+}
+.tt-km a {
+    color: rgba(0, 85, 255, 0.764);
+}
+.tt-km a:hover {
+    text-decoration: underline;
+}
+.tt-km img{
+    width: 860px;
+    height: 760px;
+    margin: 20px 107px;
+}
+.km-2-content hr {
+    margin:30px 0 ;
+    border: 0;
+    outline: 0;
+    height: 2px;
+    background: #dadada;
+}
+.km-2-content h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin: 10px 0;
+}
+.km-2-content p {
+    color: #333;
+}
+
+textarea {
+    width: calc(96% + 3px);
+    height: 100px;
+    padding: 20px;
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+.lb-name {
+    font-size: 1rem;
+    font-weight: 600;
+}
+.input-box {
+    width: 96%;    
+    height: 30px;
+    padding: 0 10px;
+    border: 1px solid #dadada;
+    border-radius: 3px;
+    outline: 0;
+    margin: 5px 0 20px;
+}
+.input-box.name {
+    width: calc(98% );
+}
+.km-2-content div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.input-box-left {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-box-right {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+}
+.km-2-content button {
+    padding: 10px 30px;
+    border: 0;
+    outline: 0;
+    background: #ed1b24;
+    color: white;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+.km-2-content button:hover {
+    background: #ed1b26d9;
+}

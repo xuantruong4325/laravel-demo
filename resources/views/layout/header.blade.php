@@ -4,10 +4,14 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Ba cuoi khoa</title>
+    <title>Laptop Việt Nam</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel='stylesheet' type='text/css' media='screen' href="{{ asset('Home.css') }}">
+    <link rel='stylesheet' type='text/css' media='screen' href="{{ asset('cssFe/Home.css') }}">
+    <link rel='stylesheet' type='text/css' media='screen' href="{{ asset('cssFe/km.css') }}">
+    <link rel='stylesheet' type='text/css' media='screen' href="{{ asset('cssFe/gioithieu.css') }}">
+    <link rel='stylesheet' type='text/css' media='screen' href="{{ asset('cssFe/tkct.css') }}">
+    <link rel='stylesheet' type='text/css' media='screen' href="{{ asset('cssFe/ttkh.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 </head>
@@ -35,7 +39,7 @@
                     <label style="margin-top: -10px;" class="btn-user-name">Xin chào, {{Auth::user()->name}}</label>
                     <ul class="user-menu" style="width: 180px;">
                         <li>
-                            <a href="">Tài khoản của tôi</a>
+                            <a href="{{ route('tttk', ['id' => Auth::user()->id ])  }} ">Tài khoản của tôi</a>
                         </li>
                         <li>
                             <a href="">Đơn hàng của tôi</a>
@@ -78,10 +82,10 @@
     <nav>
         <div class="container">
             <ul class="menu">
-                <li><a class="active" href="">trang chủ</a></li>
+                <li><a href="{{  route('home')  }}">trang chủ</a></li>
                 <li><a href="">sản phẩm</a></li>
-                <li><a href="">khuyến mại</a></li>
-                <li><a href="">Giới thiệu</a></li>
+                <li><a href="{{  route('list-khuyenmai')  }}">khuyến mại</a></li>
+                <li><a href="{{  route('gioithieu')  }}">Giới thiệu</a></li>
                 <li><a href="">Tin tức</a></li>
                 <li><a href="">Liên hệ</a></li>
 
