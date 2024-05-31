@@ -120,6 +120,10 @@ Route::prefix('Home')->group(function () {
     Route::get('/Khuyến-mại', [ProductsController::class, 'Khuyenmai'])->name('list-khuyenmai');
     Route::get('/Chi-tiết-khuyến-mại/{id}', [ProductsController::class, 'Khuyenmai2'])->name('khuyen-mai');
     Route::get('/Giới-thiệu', [ProductsController::class, 'Gioithieu'])->name('gioithieu');
-    Route::get('/Thông-tin-tài-khoản/{id}', [ProductsController::class, 'Tttk'])->name('tttk');
+    Route::get('/Thông-tin-tài-khoản', [ProductsController::class, 'Tttk'])->name('tttk');
+    Route::get('/Đổi-mật-khẩu', [ProductsController::class, 'Dmk'])->name('dmk');
+    Route::post('/Đổi-mật-khẩu-save', [ProductsController::class, 'saveDmk'])->name('dmkSave');
+    Route::post('/ajax/huyen', [ProductsController::class, 'ajaxHuyen'])->name('ajax-huyen');
+
     //cart
     Route::post('/cart-add', [CartController::class, 'cartAdd'])->name('cartAdd');

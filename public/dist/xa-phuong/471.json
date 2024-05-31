@@ -1,0 +1,12 @@
+{
+    "00471": {
+        "name": "Cồn Cỏ",
+        "type": "thi-tran",
+        "slug": "con-co",
+        "name_with_type": "Cồn Cỏ",
+        "path": "Cồn Cỏ, Hải Lăng, Quảng Trị",
+        "path_with_type": "Cồn Cỏ, Huyện Hải Lăng, Tỉnh Quảng Trị",
+        "code": "00471",
+        "parent_code": "471"
+    }
+}

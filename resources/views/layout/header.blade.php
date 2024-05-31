@@ -74,9 +74,9 @@
     </div>
     <div class="container">
         @foreach ($editfooters as $editfooter)
-            <marquee scrollamount="10">
-                {{ $editfooter->name }}
-            </marquee>
+        <marquee scrollamount="10">
+            {{ $editfooter->name }}
+        </marquee>
         @endforeach
     </div>
     <nav>
@@ -137,7 +137,6 @@
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-    <script src="js/Home.js"></script>
     <script>
         //cart	
         addToCart = function(_productId, _quantity, _name) {
@@ -158,6 +157,52 @@
             });
         }
 
+        $(document).ready(function() {
+            $('#tinh').on('change', function() {
+                var id = $(this).val();
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: "{{ route('ajax-huyen') }}",
+                    type: "POST",
+                    data: {
+                        'code': id,
+                    },
+                    success: function(data) {
+                        console.log(data);
+                        var option = [];
+                        // foreach (data) {
+                        //     option.push(`<option value="${data[tt].code_district}">${data[tt].district}</option>`);
+                        // }
+                        // var techni = `
+                        //     <select class="custom-select2 form-control form-control-lg" name="techniques[]" style="width: 100%; height: 38px">
+                        //         ` + option + `
+                        //     </select>
+                        //     `
+                        $.each(data, function(i, district){
+                            option.push(`<option value="${ district.id}">${district.name}</option>`);
+                            // $('#huyen').append($('<option>', {
+
+                            //     value: district.code_district,
+                            //     text: district.district
+                            // }));
+                        });
+                        $("#huyen").append(option);
+                    },
+                    // dataType: "json", //Kieu du lieu tra ve tu controller la json
+                });
+            });
+
+        });
+
+        function tb() {
+            let x = document.getElementById('newPass').value;
+            let y = document.getElementById('passNew').value;
+            if (!isNaN(x) && !isNaN(y) && x == y) {
+                alert("Đổi mật khẩu thành công");
+            }
+        }
 
         $('.slider_left').slick({
             // dots: true,
