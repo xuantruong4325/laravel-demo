@@ -28,13 +28,13 @@ use App\Http\Middleware\Authenticate;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('register', [UserController::class, 'register'])->name(name:'dky');
-Route::post('register', [UserController::class, 'fromSumbit'])->name(name:'register');
-Route::get('Login', [UserController::class, 'Login'])->name(name:'dkn');
-Route::post('Login', [UserController::class, 'fromLogin'])->name(name:'Login');
+Route::get('register', [UserController::class, 'register'])->name(name: 'dky');
+Route::post('register', [UserController::class, 'fromSumbit'])->name(name: 'register');
+Route::get('Login', [UserController::class, 'Login'])->name(name: 'dkn');
+Route::post('Login', [UserController::class, 'fromLogin'])->name(name: 'Login');
 Route::get('logout', [UserController::class, 'logout'])->name('logout');
 Route::get('Reset', [UserController::class, 'Reset']);
-Route::post('Reset', [UserController::class, 'fromReset'])->name(name:'password.link');
+Route::post('Reset', [UserController::class, 'fromReset'])->name(name: 'password.link');
 Route::get('Error', [UserController::class, 'Error'])->name('error');
 
 
@@ -83,47 +83,55 @@ Route::group(['prefix' => 'Admin', 'middleware' => ['auth', 'is_admin']], functi
     Route::post('Introduces-edit-save/{id}', [IntroducesController::class, 'introducesEditSave'])->name('editIntroducesSave');
 
     // Route::get('index', [UserController::class, 'index'])->name(name:'index');
-    Route::get('Update/{id}', [UserController::class, 'Update'])->name('up');   
+    Route::get('Update/{id}', [UserController::class, 'Update'])->name('up');
     Route::post('Update/{id}', [UserController::class, 'fromUpdate'])->name('Update');
-    Route::get('/', [UserController::class, 'Admin'])->name(name:'Admin');
-    Route::get('deleteuser/{id}', [UserController::class, 'delete'])->name(name:'delete');
-    Route::post('store', [UserController::class, 'store'])->name(name:'store');
+    Route::get('/', [UserController::class, 'Admin'])->name(name: 'Admin');
+    Route::get('deleteuser/{id}', [UserController::class, 'delete'])->name(name: 'delete');
+    Route::post('store', [UserController::class, 'store'])->name(name: 'store');
 
 
-    Route::get('/user', [UserController::class, 'User'])->name(name:'User');
+    Route::get('/user', [UserController::class, 'User'])->name(name: 'User');
 
 
-    Route::get('from', [NdController::class, 'form_basic'])->name(name:'from');
+    Route::get('from', [NdController::class, 'form_basic'])->name(name: 'from');
     // Route::get('Content', [NdController::class, 'nd'])->name('Content');
-    Route::post('Content/ndstore', [NdController::class, 'ndstore'])->name(name:'ndstore');
-    Route::get('Content', [NdController::class, 'ndindex'])->name(name:'ndindex');
-    Route::get('Content/delete/{id}', [NdController::class, 'nddelete'])->name(name:'nddelete');
+    Route::post('Content/ndstore', [NdController::class, 'ndstore'])->name(name: 'ndstore');
+    Route::get('Content', [NdController::class, 'ndindex'])->name(name: 'ndindex');
+    Route::get('Content/delete/{id}', [NdController::class, 'nddelete'])->name(name: 'nddelete');
     Route::get('Content/Update/{id}', [NdController::class, 'ndUpdate'])->name('ndup');
     Route::post('Content/Update/{id}', [NdController::class, 'ndfromUpdate'])->name('ndUpdate');
     Route::get('Content/{id}', [NdController::class, 'ndSee']);
     Route::get('Content/{id}', [NdController::class, 'ndfromSee'])->name('ndSee');
     Route::post('Content/comment', [NdController::class, 'blfromSee'])->name('blSee');
 
-    Route::get('BannerFooter/edit/{id}', [EditfooterController::class, 'form_edit'])->name(name:'from_footer');
-    Route::post('BannerFooter/edit/save/{id}', [EditfooterController::class, 'form_edit_save'])->name(name:'from_footer_save');
-    Route::get('BannerFooter', [EditfooterController::class, 'ndbanner'])->name(name:'ndbanner');
+    Route::get('BannerFooter/edit/{id}', [EditfooterController::class, 'form_edit'])->name(name: 'from_footer');
+    Route::post('BannerFooter/edit/save/{id}', [EditfooterController::class, 'form_edit_save'])->name(name: 'from_footer_save');
+    Route::get('BannerFooter', [EditfooterController::class, 'ndbanner'])->name(name: 'ndbanner');
 
     //cart
     Route::get('/list-cart', [CartController::class, 'listCart'])->name('listCart');
-
 });
 
 
 Route::prefix('Home')->group(function () {
     Route::get('/', [ProductsController::class, 'Home'])->name('home');
 });
-    Route::get('/Khuyến-mại', [ProductsController::class, 'Khuyenmai'])->name('list-khuyenmai');
-    Route::get('/Chi-tiết-khuyến-mại/{id}', [ProductsController::class, 'Khuyenmai2'])->name('khuyen-mai');
-    Route::get('/Giới-thiệu', [ProductsController::class, 'Gioithieu'])->name('gioithieu');
+Route::get('/Khuyến-mại', [ProductsController::class, 'Khuyenmai'])->name('list-khuyenmai');
+Route::get('/Chi-tiết-khuyến-mại/{id}', [ProductsController::class, 'Khuyenmai2'])->name('khuyen-mai');
+Route::get('/Giới-thiệu', [ProductsController::class, 'Gioithieu'])->name('gioithieu');
+Route::get('/cart', [ProductsController::class, 'cart'])->name('cart');
+
+
+//cart
+Route::post('/cart-add', [CartController::class, 'cartAdd'])->name('cartAdd');
+
+Route::group(['middleware' => ['auth', 'is_user']], function () {
+    //category
     Route::get('/Thông-tin-tài-khoản', [ProductsController::class, 'Tttk'])->name('tttk');
     Route::get('/Đổi-mật-khẩu', [ProductsController::class, 'Dmk'])->name('dmk');
     Route::post('/Đổi-mật-khẩu-save', [ProductsController::class, 'saveDmk'])->name('dmkSave');
     Route::post('/ajax/huyen', [ProductsController::class, 'ajaxHuyen'])->name('ajax-huyen');
-
-    //cart
-    Route::post('/cart-add', [CartController::class, 'cartAdd'])->name('cartAdd');
+    Route::post('/ajax/xa', [ProductsController::class, 'ajaxXa'])->name('ajax-xa');
+    Route::post('/editUserSave', [ProductsController::class, 'editUserSave'])->name('editUserSave');
+    Route::post('/ajax/sp', [ProductsController::class, 'ajaxSp'])->name('ajax-sp');
+});

@@ -36,7 +36,7 @@
             <ul class="btn-user" style="width: 220px;">
                 <li>
                     <i class="fa-solid fa-circle-user icon-users"></i>
-                    <label style="margin-top: -10px;" class="btn-user-name">Xin chào, {{Auth::user()->name}}</label>
+                    <label style="margin-top: -10px;" class="btn-user-name">Xin chào, {!! substr(Auth::user()->name,0,15) !!}...</label>
                     <ul class="user-menu" style="width: 180px;">
                         <li>
                             <a href="{{ route('tttk', ['id' => Auth::user()->id ])  }} ">Tài khoản của tôi</a>
@@ -66,10 +66,17 @@
                 </li>
             </ul>
             @endif
-            <a class="cart" href="gio.html">
+            @if(auth()->user() != null)
+            <a class="cart" href="{{route('cart')}}">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="number" id="cart"></span>
+            </a>
+            @else
+            <a class="cart" href="{{route('cart')}}">
                 <i class="fa-solid fa-cart-shopping"></i>
                 <span class="number">0</span>
             </a>
+            @endif
         </div>
     </div>
     <div class="container">
@@ -160,38 +167,73 @@
         $(document).ready(function() {
             $('#tinh').on('change', function() {
                 var id = $(this).val();
+                $("#huyen").empty();
+                $("#xa").empty();
+                if(id){
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        url: "{{ route('ajax-huyen') }}",
+                        type: "POST",
+                        data: {
+                            'code': id,
+                        },
+                        success: function(data) {
+                            console.log(data);
+                            var option = [];
+                            $.each(data, function(i, district){
+                                option.push(`<option value="${ district.id}">${district.name}</option>`);
+                            });
+                            $("#huyen").append(option);
+                        },
+                    });
+                }else{
+                    $("#huyen").empty();
+                }
+            });
+
+        });
+
+        $(document).ready(function() {
+            $('#huyen').on('change', function() {
+                var id = $(this).val();
+                $("#xa").empty();
                 $.ajax({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
-                    url: "{{ route('ajax-huyen') }}",
+                    url: "{{ route('ajax-xa') }}",
                     type: "POST",
                     data: {
                         'code': id,
                     },
-                    success: function(data) {
-                        console.log(data);
+                    success: function(datas) {
+                        console.log(datas);
                         var option = [];
-                        // foreach (data) {
-                        //     option.push(`<option value="${data[tt].code_district}">${data[tt].district}</option>`);
-                        // }
-                        // var techni = `
-                        //     <select class="custom-select2 form-control form-control-lg" name="techniques[]" style="width: 100%; height: 38px">
-                        //         ` + option + `
-                        //     </select>
-                        //     `
-                        $.each(data, function(i, district){
-                            option.push(`<option value="${ district.id}">${district.name}</option>`);
-                            // $('#huyen').append($('<option>', {
-
-                            //     value: district.code_district,
-                            //     text: district.district
-                            // }));
+                        $.each(datas, function(i, commune){
+                            option.push(`<option value="${ commune.id}">${commune.name}</option>`);
                         });
-                        $("#huyen").append(option);
+                        $("#xa").append(option);
                     },
-                    // dataType: "json", //Kieu du lieu tra ve tu controller la json
                 });
+            });
+
+        });
+
+
+        $(document).ready(function() {
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "{{ route('ajax-sp') }}",
+                type: "POST",
+                data: {},
+                success: function(dataCart) {
+                    console.log(dataCart);
+                    $("#cart").append(dataCart);
+                },
             });
 
         });
