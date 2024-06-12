@@ -26,7 +26,6 @@ class NdController extends Controller
 
     public function ndstore(Request $request)
     {
-
         $file_name = null;
         // dd($request->techniques, $request->nameTechniques);
         if ($request->has('file')) {
@@ -41,6 +40,9 @@ class NdController extends Controller
 
             $test = 1 - ($giam / 100);
             $gia = round($request->old_price * $test);
+
+            $gia = $this->roundDownToNearest($gia,1000);
+
         }
 
 
@@ -118,7 +120,7 @@ class NdController extends Controller
             $query->where('content','like','%' .$tk. '%');
             $namKey = $tk;
         }
-        $contents = $query->paginate(3);
+        $contents = $query->paginate(10);
         // dd($contents);
         return view('nd', compact('contents','namKey','category','company','namCom','namCate','namSta'));
     }
@@ -197,6 +199,8 @@ class NdController extends Controller
 
             $test = 1 - ($giam / 100);
             $gia = round($request->old_price * $test);
+
+            $gia = $this->roundDownToNearest($gia,1000);
         }
 
         $content->product_type = $request->input('product_type');
@@ -256,6 +260,8 @@ class NdController extends Controller
     //     ]);
     // }
 
-
+    private function roundDownToNearest($number, $nearest) {
+        return ceil($number / $nearest) * $nearest;
+    }
 
 }

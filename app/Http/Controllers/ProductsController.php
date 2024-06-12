@@ -146,15 +146,23 @@ class ProductsController extends Controller
     }
 
     public function cart(){
+        $priceCart = 0;
+        $test = Auth()->User()->id;
+        $carts= cart::where('user_id', $test)->get();
         $editfooters = Editfooter::all();
-        return view('product/Gio', compact('editfooters'));
+        foreach($carts as $cart){
+            $priceCart += $cart->quantity * $cart->price;
+        }
+        return view('product/Gio', compact('editfooters','carts','priceCart'));
     }
     public function ajaxSp(Request $request){
         $dataCart = 0;
         $user = User::find(Auth()->User()->id);
-        $consciouse_code = $request->code;
         $carts = cart::where('user_id', $user->id)->get();
-        $dataCart= $carts->count();
+        // $dataCart= $carts->count();
+        foreach($carts as $cart){
+            $dataCart += $cart->quantity;
+        }
         // }echo json_encode($data);
         return response()->json($dataCart);
     }

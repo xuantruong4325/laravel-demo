@@ -11,25 +11,44 @@ use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
-    public function listCart(){
+    public function listCart()
+    {
         $carts = cart::all();
-        return view('Categorise/Cart/cart-list',['carts' => $carts]);
+        return view('Categorise/Cart/cart-list', ['carts' => $carts]);
     }
     public function cartAdd(Request $request)
     {
         if (Auth::check()) {
             $id_user = Auth::user()->id;
-            $id_sp = $request -> productId;
-            $quantity = $request -> quantity;
+            $price = null;
+            $id_sp = $request->productId;
+            $quantity = 0;
             $product = Content::find($id_sp);
-            $cart = cart::create([
-                'name' => $product->content,
-                'avatar' => $product->file,
-                'price' => $product->old_price,
-                'quantity' => $quantity,
-                'user_id' => $id_user,
-            ]);
-        } else {
+            if ($product->discount != 0) {
+                $price = $product->price_after_discount;
+            } else {
+                $price = $product->old_price;
+            }
+            $cartQua = cart::where('name', $product->content)->first();
+            if ($cartQua) {
+                $quantity = $cartQua->quantity + 1;
+                $cartQua->quantity = $quantity;
+                $cartQua->save();
+            } else {
+                $quantity = $request->quantity;
+
+                $cart = cart::create([
+                    'name' => $product->content,
+                    'avatar' => $product->file,
+                    'price' => $price,
+                    'quantity' => $quantity,
+                    'user_id' => $id_user,
+                ]);
+            }
+
+            $product->quantity = $product->quantity - 1;
+            $product->save();
+        }else{
             return ;
         }
     }

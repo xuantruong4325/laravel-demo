@@ -286,7 +286,7 @@ main .sile{
 }
 .sile .left , .right{
     width: 200px;
-    margin-bottom: -50px;
+    margin-bottom: -30px;
 }
 .sile .left a{
     position: sticky;
@@ -626,16 +626,16 @@ table th , td{
     box-sizing: border-box;
 }
 .gio_sp{
-    width: 16%;
+    width: 12%;
 }
 .gio_sl{
     width: 12%;
 }
 .gio_tsp{
-    width: 44%;
+    width: 40%;
 }
 .gio_gt{
-    width: 16%;
+    width: 12%;
 }
 .gio_xoa{
     width: 12%;

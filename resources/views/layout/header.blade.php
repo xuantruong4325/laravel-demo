@@ -160,7 +160,10 @@
                     'productId': _productId,
                     'quantity': _quantity,
                 },
-                // dataType: "json", //Kieu du lieu tra ve tu controller la json
+                success: function(response) {
+                    // Xử lý sau khi sản phẩm được thêm thành công vào giỏ hàng
+                    location.reload(); // Tải lại trang
+                },
             });
         }
 
@@ -169,7 +172,7 @@
                 var id = $(this).val();
                 $("#huyen").empty();
                 $("#xa").empty();
-                if(id){
+                if (id) {
                     $.ajax({
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -182,13 +185,13 @@
                         success: function(data) {
                             console.log(data);
                             var option = [];
-                            $.each(data, function(i, district){
+                            $.each(data, function(i, district) {
                                 option.push(`<option value="${ district.id}">${district.name}</option>`);
                             });
                             $("#huyen").append(option);
                         },
                     });
-                }else{
+                } else {
                     $("#huyen").empty();
                 }
             });
@@ -211,7 +214,7 @@
                     success: function(datas) {
                         console.log(datas);
                         var option = [];
-                        $.each(datas, function(i, commune){
+                        $.each(datas, function(i, commune) {
                             option.push(`<option value="${ commune.id}">${commune.name}</option>`);
                         });
                         $("#xa").append(option);
@@ -232,7 +235,7 @@
                 data: {},
                 success: function(dataCart) {
                     console.log(dataCart);
-                    $("#cart").append(dataCart);
+                    $("#cart").html(dataCart);
                 },
             });
 

@@ -66,7 +66,7 @@
                     </div>
                     <div class="form-group">
                         <label for="productType">Đánh giá sản phẩm</label>
-                        <textarea type="text" class="textarea_editor1 form-control border-radius-1" name="product_reviews">{{$content->product_reviews}}</textarea>
+                        <textarea type="text" class="textarea_editor1 form-control border-radius-1" name="product_reviews" style="height:500px;">{{$content->product_reviews}}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="productType">Thái sản phẩm</label>
@@ -202,6 +202,10 @@
         Swal.fire('Sửa nội dung mới thành công', '', 'success')
     }
 
+    function roundUpToNearest(value, factor) {
+        return Math.ceil(value / factor) * factor;
+    }
+
     function new_price() {
         let x = parseFloat(document.getElementById('discount').value);
         let y = parseFloat(document.getElementById('old_price').value);
@@ -210,6 +214,7 @@
             let test = (100 - x) / 100;
             let gia = y * test;
             gia = Math.round(gia);
+            gia = roundUpToNearest(gia,1000);
             document.getElementById('result').textContent = gia;
         } else {
             document.getElementById('result').textContent = '';
