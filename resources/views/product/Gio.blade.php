@@ -58,7 +58,7 @@
                             {{ number_format($cart->quantity*$cart->price, 0, '.', '.') }} đ
                         </td>
                         <td class="gio_xoa">
-                            <button type="button"><i class="fa-solid fa-trash-can"></i></button>
+                            <button type="button"><a href="" onclick="deleteCart('{{ $cart->id }}',1,'{{ $cart->name }}')"><i class="fa-solid fa-trash-can"></i></a></button>
                         </td>
                     </tr>
                     @endforeach
@@ -72,8 +72,8 @@
                     </tr>
                 </table>
                 <div style="margin: 50px 0 0; text-align: center;">
-                    <button type="button"><a href="ttkh.html">Thanh toán</a></button>
-                    <button type="reset" class="clear-cart">Xóa giỏ hàng</button>
+                    <button type="button" class="cart-pay"><a>Thanh toán</a></button>
+                    <button type="reset" class="clear-cart" onclick="deleteAllCart('{{ Auth::user()->id }}')">Xóa giỏ hàng</button>
                 </div>
             </div>
         </div>

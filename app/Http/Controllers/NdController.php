@@ -54,6 +54,7 @@ class NdController extends Controller
             'old_price' => $request->old_price,
             'price_after_discount' => $gia,
             'status' => $request->status,
+            'sold' => 0,
             'category_id' => $request->categoryId,
             'company_id' => $request->companyId,
             'product_specifications' => $request->product_specifications,

@@ -13,18 +13,19 @@ return new class extends Migration
     {
         Schema::create('contents', function (Blueprint $table) {
             $table->id();
-            $table->string('product_type');
-            $table->string('discount')->nullable();
-            $table->string('file');
-            $table->string('content')->nullable();
+            $table->string('product_type',50);
+            $table->string('discount',10)->nullable();
+            $table->string('file',255);
+            $table->string('content',255)->nullable();
             $table->integer('quantity')->nullable();
+            $table->integer('sold')->nullable();
             $table->integer('old_price')->nullable();
             $table->integer('price_after_discount')->nullable();
-            $table->string("product_specifications")->nullable();
-            $table->string("product_reviews")->nullable();
+            $table->text("product_specifications")->nullable();
+            $table->text("product_reviews")->nullable();
             $table->unsignedBigInteger("category_id");
             $table->unsignedBigInteger("company_id");
-            $table->string('status');
+            $table->string('status',20);
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('category')->onDelete('no action');

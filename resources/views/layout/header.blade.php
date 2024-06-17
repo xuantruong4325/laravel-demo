@@ -76,7 +76,7 @@
                 <i class="fa-solid fa-cart-shopping"></i>
                 <span class="number">0</span>
             </a>
-            @endif
+            @endif  
         </div>
     </div>
     <div class="container">
@@ -159,6 +159,46 @@
                 data: {
                     'productId': _productId,
                     'quantity': _quantity,
+                },
+                success: function(response) {
+                    // Xử lý sau khi sản phẩm được thêm thành công vào giỏ hàng
+                    location.reload(); // Tải lại trang
+                },
+            });
+        }
+
+        deleteCart = function(_productDeleteId, _quantity, _name) {
+
+            alert("Xóa sản phẩm " + _name + " Thành công ");
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "{{ route('cartDelete') }}",
+                type: "POST",
+                data: {
+                    'productDelete': _productDeleteId,
+                },
+                success: function(response) {
+                    // Xử lý sau khi sản phẩm được thêm thành công vào giỏ hàng
+                    location.reload(); // Tải lại trang
+                },
+            });
+        }
+
+        deleteAllCart = function(_productDeleteAll,) {
+
+            alert("Xóa giỏ hàng thành công ");
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "{{ route('cartDeleteAll') }}",
+                type: "POST",
+                data: {
+                    'productDeleteAll': _productDeleteAll,
                 },
                 success: function(response) {
                     // Xử lý sau khi sản phẩm được thêm thành công vào giỏ hàng

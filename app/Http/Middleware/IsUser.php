@@ -15,7 +15,7 @@ class IsUser
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->check() && auth()->user()->user_type == 'user'){
+        if(auth()->check() && auth()->user()->user_type == 'user' || auth()->user()->user_type == 'admin'){
             return $next($request);
         }
    

@@ -119,14 +119,16 @@ Route::prefix('Home')->group(function () {
 Route::get('/Khuyến-mại', [ProductsController::class, 'Khuyenmai'])->name('list-khuyenmai');
 Route::get('/Chi-tiết-khuyến-mại/{id}', [ProductsController::class, 'Khuyenmai2'])->name('khuyen-mai');
 Route::get('/Giới-thiệu', [ProductsController::class, 'Gioithieu'])->name('gioithieu');
-Route::get('/cart', [ProductsController::class, 'cart'])->name('cart');
 
 
 //cart
 Route::post('/cart-add', [CartController::class, 'cartAdd'])->name('cartAdd');
+Route::post('/cart-delete', [CartController::class, 'cartDelete'])->name('cartDelete');
+Route::post('/cart-delete-all', [CartController::class, 'cartDeleteAll'])->name('cartDeleteAll');
 
 Route::group(['middleware' => ['auth', 'is_user']], function () {
     //category
+    Route::get('/cart', [ProductsController::class, 'cart'])->name('cart');
     Route::get('/Thông-tin-tài-khoản', [ProductsController::class, 'Tttk'])->name('tttk');
     Route::get('/Đổi-mật-khẩu', [ProductsController::class, 'Dmk'])->name('dmk');
     Route::post('/Đổi-mật-khẩu-save', [ProductsController::class, 'saveDmk'])->name('dmkSave');

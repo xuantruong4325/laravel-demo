@@ -83,6 +83,7 @@
                                 <th>Hình ảnh</th>
                                 <th>Nội dung</th>
                                 <th>Số lượng</th>
+                                <th>Đã bán</th>
                                 <th>Giá</th>
                                 <th>Giá mới</th>
                                 <th>Tình trạng</th>
@@ -110,6 +111,7 @@
                                 </td>
                                 <td>{!! $conten->content !!}</td>
                                 <td>{!! $conten->quantity !!}</td>
+                                <td>{{ $conten->sold }}</td>
                                 <td>{{ $conten->old_price }}</td>
                                 <td>{{ $conten->price_after_discount }}</td>
                                 <td>

@@ -13,6 +13,7 @@ class Content extends Model
         'product_type',
         'discount',
         'file',
+        'sold',
         'content',
         'old_price',
         'price_after_discount',

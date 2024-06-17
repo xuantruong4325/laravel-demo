@@ -16,6 +16,14 @@ class CartController extends Controller
         $carts = cart::all();
         return view('Categorise/Cart/cart-list', ['carts' => $carts]);
     }
+    private function kt($id){
+        $product = Content::find($id);
+        if($product->quantity = 0){
+            return 0;
+        }
+        return 1;
+
+    }
     public function cartAdd(Request $request)
     {
         if (Auth::check()) {
@@ -41,15 +49,44 @@ class CartController extends Controller
                     'name' => $product->content,
                     'avatar' => $product->file,
                     'price' => $price,
+                    'id_product' => $id_sp,
                     'quantity' => $quantity,
                     'user_id' => $id_user,
                 ]);
             }
 
             $product->quantity = $product->quantity - 1;
+            $product->sold +=$request->quantity;
             $product->save();
-        }else{
-            return ;
+        } else {
+            return;
         }
+    }
+
+    public function cartDelete(Request $request)
+    {
+        $id = $request->productDelete;
+        $cart = cart::find($id);
+        $product = Content::find($cart->id_product);
+        $quantitys = $product->quantity + $cart->quantity;
+        $product->quantity = $quantitys;
+        $product->sold = 0;
+        $product->save();
+        $cart->delete();
+        return;
+    }
+    public function cartDeleteAll(Request $request)
+    {
+        $id = $request->productDeleteAll;
+        $carts = cart::where('user_id', $id)->get();
+        foreach ($carts as $cart) {
+            $product = Content::find($cart->id_product);
+            $quantitys = $product->quantity + $cart->quantity;
+            $product->quantity = $quantitys;
+            $product->sold = 0;
+            $product->save();
+            $cart->delete();
+        }
+        return;
     }
 }

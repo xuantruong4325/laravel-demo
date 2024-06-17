@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('nd_techniques', function (Blueprint $table) {
             $table->id();
-            $table->string('nameTechnique')->nullable();
+            $table->string('nameTechnique',300)->nullable();
             $table->unsignedBigInteger("content_id");
             $table->unsignedBigInteger("technique_id");
             $table->timestamps();

@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('communes', function (Blueprint $table) {
             $table->id();
-            $table->string('commune');
-            $table->string('code_commune');
-            $table->string('district_code');
+            $table->string('commune',50);
+            $table->string('code_commune',10);
+            $table->string('district_code',10);
             $table->timestamps();
         });
     }

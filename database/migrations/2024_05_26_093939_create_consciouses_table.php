@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('consciouses', function (Blueprint $table) {
             $table->id();
-            $table->string('consciouse');
-            $table->string('code_consciouse');
+            $table->string('consciouse',50);
+            $table->string('code_consciouse',10);
             $table->timestamps();
         });
     }

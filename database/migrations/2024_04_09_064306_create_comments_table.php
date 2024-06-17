@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('article_id');
-            $table->string('comment');
+            $table->string('comment',2000);
             $table->timestamps();
         
             $table->foreign('article_id')->references('id')->on('contents')->onDelete('cascade');
