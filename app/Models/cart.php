@@ -12,6 +12,7 @@ class cart extends Model
         'avatar',
         'id_product',
         'price',
+        'new_price',
         'quantity',
         'user_id',
     ];

@@ -14,6 +14,14 @@
                     <img src="/FileImage/Layout/{{ $editfooter->file_cart }}" width="100%">
                 </div>
             </div>
+            @if($check == null)
+            <div class="container1">
+                <div class="no-cart">
+                    <img src="image/no-cart.png" alt="">
+                    <button><a href="{{ route('home') }}">Mua ngay</a></button>
+                </div>
+            </div>
+            @else
             <div class="container1">
                 <div class="gio_hang">
                     giỏ hàng
@@ -51,12 +59,21 @@
                         <td class="gio_sl">
                             <div class="input_sl">{{ $cart->quantity }}</div>
                         </td>
+                        @if($cart->new_price != 0)
+                        <td class="gio_gt">
+                            {{ number_format($cart->new_price, 0, '.', '.') }} đ
+                        </td>
+                        <td class="gio_gtt">
+                            {{ number_format($cart->quantity*$cart->new_price, 0, '.', '.') }} đ
+                        </td>
+                        @else
                         <td class="gio_gt">
                             {{ number_format($cart->price, 0, '.', '.') }} đ
                         </td>
                         <td class="gio_gtt">
                             {{ number_format($cart->quantity*$cart->price, 0, '.', '.') }} đ
                         </td>
+                        @endif
                         <td class="gio_xoa">
                             <button type="button"><a href="" onclick="deleteCart('{{ $cart->id }}',1,'{{ $cart->name }}')"><i class="fa-solid fa-trash-can"></i></a></button>
                         </td>
@@ -72,10 +89,12 @@
                     </tr>
                 </table>
                 <div style="margin: 50px 0 0; text-align: center;">
-                    <button type="button" class="cart-pay"><a>Thanh toán</a></button>
+                    <button type="button" class="cart-pay"><a href="{{ route('cart-checkout') }}">Thanh toán</a></button>
                     <button type="reset" class="clear-cart" onclick="deleteAllCart('{{ Auth::user()->id }}')">Xóa giỏ hàng</button>
                 </div>
             </div>
+            @endif
+
         </div>
         <div class="right">
             <a href="">

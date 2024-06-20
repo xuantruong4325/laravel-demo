@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string("avatar",255);
             $table->integer("id_product");
             $table->integer("price");
+            $table->integer("new_price")->nullable();
             $table->integer("quantity");
             $table->unsignedBigInteger("user_id");
 

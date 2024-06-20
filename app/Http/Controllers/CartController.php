@@ -29,11 +29,13 @@ class CartController extends Controller
         if (Auth::check()) {
             $id_user = Auth::user()->id;
             $price = null;
+            $new_price = 0;
             $id_sp = $request->productId;
             $quantity = 0;
             $product = Content::find($id_sp);
             if ($product->discount != 0) {
-                $price = $product->price_after_discount;
+                $price = $product->old_price;
+                $new_price = $product->price_after_discount;
             } else {
                 $price = $product->old_price;
             }
@@ -49,6 +51,7 @@ class CartController extends Controller
                     'name' => $product->content,
                     'avatar' => $product->file,
                     'price' => $price,
+                    'new_price' => $new_price,
                     'id_product' => $id_sp,
                     'quantity' => $quantity,
                     'user_id' => $id_user,
@@ -70,7 +73,7 @@ class CartController extends Controller
         $product = Content::find($cart->id_product);
         $quantitys = $product->quantity + $cart->quantity;
         $product->quantity = $quantitys;
-        $product->sold = 0;
+        $product->sold -= $cart->quantity;
         $product->save();
         $cart->delete();
         return;
@@ -83,7 +86,7 @@ class CartController extends Controller
             $product = Content::find($cart->id_product);
             $quantitys = $product->quantity + $cart->quantity;
             $product->quantity = $quantitys;
-            $product->sold = 0;
+            $product->sold -= $cart->quantity;
             $product->save();
             $cart->delete();
         }

@@ -67,6 +67,7 @@
     display: flex;
     flex-direction: column;
     font-size: 1rem;
+    width: 55%;
 }
 .sptt-content p {
     margin: 0 0 10px;   
@@ -90,6 +91,7 @@
     font-size: 1rem;
     display: flex;
     flex-direction: column;
+    float: right;
     row-gap: 5px;
     align-items: end;
 }
@@ -109,11 +111,24 @@
 
 .flex-content {
     width: 40%;
-    min-height: 500px;
+    height: 600px;
     background: #dadada3e;
     padding: 20px;
     border-radius: 5px;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
+    overflow-y: scroll;
+}
+
+.flex-content::-webkit-scrollbar {
+    width: 12px;
+    height: 12px; 
+}
+
+.flex-content::-webkit-scrollbar-thumb {
+    background-color: rgba(169, 169, 169, 0.392); /* Màu nền của thanh cuộn */
+    border-radius: 6px; /* Góc bo tròn cho thanh cuộn */
+    border: 3px solid transparent; /* Đặt viền trong suốt để tạo khoảng cách bên trong */
+    background-clip: content-box; /* Đảm bảo viền không làm ảnh hưởng tới màu nền */
 }
 
 .flex-content h2 {
@@ -171,7 +186,7 @@ form {
     padding: 10px; 
 }
 
-.tt-box-3 div {
+.tt-box-3 .checked {
     margin: 10px 0;
     display: flex;
     align-items: center;
@@ -186,14 +201,7 @@ form {
     color: #333;
 }
 
-.tt-box-3 .qr {
-    width: 50%;
-    height: 200px;
-    margin: 0 auto;
-    background: #333;
-    display: none;
-    border-radius: 5px;
-}
+
 
 hr.space {
     margin: 20px 0 10px;
@@ -229,4 +237,43 @@ hr.space {
 }
 .btn-control button:hover {
     background: #9c9a9a98;
+}
+.focus-chuyenkhooan, .focus-qr {
+    /* flex-direction: column;
+    align-items: center; */
+    display: none;
+}
+.focus-chuyenkhooan.show {
+    flex-direction: column;
+    align-items: center;
+    display: block;
+}
+.focus-chuyenkhooan .form-box {
+    margin: 10px 0;
+}
+
+.focus-qr.show {
+    display: block;
+}
+
+.focus-qr {
+    margin-top: 30px;
+}
+
+.focus-qr .qr {
+    width: 50%;
+    margin: 0 auto;
+    height: 200px;
+    background: #000;
+}
+
+.ttck_nh{   
+    max-width: 271px;
+    max-height: 25px;
+    width: 100%;
+    height: 25px;
+    border-radius: 5px ;
+    border: 1px solid #c5c4c4 ;
+    background-color: white;
+    padding: 10px 8px 0px 10px;
 }

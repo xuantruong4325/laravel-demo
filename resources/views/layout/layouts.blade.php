@@ -182,11 +182,17 @@
                             <li><a href="{{  route('listTechnique')  }}">Thông số kỹ thuật</a></li>
                             <li><a href="{{  route('ndbanner')  }}">Footer và Banner</a></li>
                             <li><a href="{{  route('listCart')  }}">Giỏ hàng</a></li>
+                            <li><a href="{{  route('listEndow')  }}">Ưu đãi</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" href="{{  route('listPromotion')  }}">
                             <span class="mtext">Khuyễn mãi</span>
+                        </a>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" href="{{  route('listBank')  }}">
+                            <span class="mtext">Quản lý ngân hàng</span>
                         </a>
                     </li>
                     <li class="dropdown">

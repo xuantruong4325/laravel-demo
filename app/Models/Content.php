@@ -40,6 +40,10 @@ class Content extends Model
     {
         return $this->hasMany(ImageProduct::class);
     }
+    public function endowProduct()
+    {
+        return $this->hasMany(endow_product::class);
+    }
 
     public function category()
     {

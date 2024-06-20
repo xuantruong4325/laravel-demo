@@ -11,6 +11,8 @@ use App\Http\Controllers\EditfooterController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\PromotionsController;
 use App\Http\Controllers\IntroducesController;
+use App\Http\Controllers\EndowsController;
+use App\Http\Controllers\BanksController;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\Authenticate;
 
@@ -75,12 +77,28 @@ Route::group(['prefix' => 'Admin', 'middleware' => ['auth', 'is_admin']], functi
     Route::post('Promotion-edit-save/{id}', [PromotionsController::class, 'promotionEditSave'])->name('editPromotionSave');
     Route::get('Promotion-delete/{id}', [PromotionsController::class, 'promotionDelete'])->name('deletePromotion');
 
+    //bank
+    Route::get('Bank', [BanksController::class, 'bankList'])->name('listBank');
+    Route::get('Bank-add', [BanksController::class, 'bankAdd'])->name('addBank');
+    Route::post('Bank-add-save', [BanksController::class, 'bankAddSave'])->name('addBankSave');
+    Route::get('Bank-edit/{id}', [BanksController::class, 'bankEdit'])->name('editBank');
+    Route::post('Bank-edit-save/{id}', [BanksController::class, 'bankEditSave'])->name('editBankSave');
+    Route::get('Bank-delete/{id}', [BanksController::class, 'bankDelete'])->name('deleteBank');
+
     // Giới thiệu
     Route::get('Introduces', [IntroducesController::class, 'introducesList'])->name('listIntroduces');
     Route::get('Introduces-add', [IntroducesController::class, 'introducesAdd'])->name('addIntroduces');
     Route::post('Introduces-add-save', [IntroducesController::class, 'introducesAddSave'])->name('addIntroducesSave');
     Route::get('Introduces-edit/{id}', [IntroducesController::class, 'introducesEdit'])->name('editIntroduces');
     Route::post('Introduces-edit-save/{id}', [IntroducesController::class, 'introducesEditSave'])->name('editIntroducesSave');
+
+     // Ưu đãi
+     Route::get('Endows', [EndowsController::class, 'endowsList'])->name('listEndow');
+     Route::get('Endows-add', [EndowsController::class, 'endowsAdd'])->name('addEndow');
+     Route::post('Endows-add-save', [EndowsController::class, 'endowsAddSave'])->name('addEndowSave');
+     Route::get('Endows-edit/{id}', [EndowsController::class, 'endowsEdit'])->name('editEndow');
+     Route::post('Endows-edit-save/{id}', [EndowsController::class, 'endowsEditSave'])->name('editEndowSave');
+     Route::get('Endows-delete/{id}', [EndowsController::class, 'endowsDelete'])->name('deleteEndow');
 
     // Route::get('index', [UserController::class, 'index'])->name(name:'index');
     Route::get('Update/{id}', [UserController::class, 'Update'])->name('up');
@@ -129,6 +147,7 @@ Route::post('/cart-delete-all', [CartController::class, 'cartDeleteAll'])->name(
 Route::group(['middleware' => ['auth', 'is_user']], function () {
     //category
     Route::get('/cart', [ProductsController::class, 'cart'])->name('cart');
+    Route::post('/cart-pay', [ProductsController::class, 'pay'])->name('pay');
     Route::get('/Thông-tin-tài-khoản', [ProductsController::class, 'Tttk'])->name('tttk');
     Route::get('/Đổi-mật-khẩu', [ProductsController::class, 'Dmk'])->name('dmk');
     Route::post('/Đổi-mật-khẩu-save', [ProductsController::class, 'saveDmk'])->name('dmkSave');
@@ -136,4 +155,5 @@ Route::group(['middleware' => ['auth', 'is_user']], function () {
     Route::post('/ajax/xa', [ProductsController::class, 'ajaxXa'])->name('ajax-xa');
     Route::post('/editUserSave', [ProductsController::class, 'editUserSave'])->name('editUserSave');
     Route::post('/ajax/sp', [ProductsController::class, 'ajaxSp'])->name('ajax-sp');
+    Route::get('/cart/cart-checkout', [ProductsController::class, 'cartCheckout'])->name('cart-checkout');
 });

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Content;
 use App\Models\Comment;
 use App\Models\Company;
+use App\Models\endow_product;
+use App\Models\Endows;
 use App\Models\ImageProduct;
 use App\Models\NdTechnique;
 use App\Models\Technique;
@@ -21,7 +23,8 @@ class NdController extends Controller
         $techniques = Technique::all();
         $category = Category::all();
         $company = Company::all();
-        return view('form-basic', compact('category', 'company', 'techniques'));
+        $endows = Endows::all();
+        return view('form-basic', compact('category', 'company', 'techniques', 'endows'));
     }
 
     public function ndstore(Request $request)
@@ -83,6 +86,15 @@ class NdController extends Controller
                     'content_id' => $conten->id,
                 ]);
                 $aa++;
+            }
+        }
+
+        if ($request->has('endows')) {
+            foreach ($request->endows as $item) {
+                $endowProduct = endow_product::create([
+                    'endow_id' => $item,
+                    'content_id' => $conten->id,
+                ]);
             }
         }
 
@@ -155,7 +167,9 @@ class NdController extends Controller
         $company = Company::all();
         $ndTechniques = NdTechnique::where('content_id', $id)->get();
         $techniques = Technique::all();
-        return view('form-update', compact('content', 'category', 'company', 'ndTechniques', 'techniques'));
+        $endows = Endows::all();
+        $endowProducts = endow_product::where('content_id', $id)->get();
+        return view('form-update', compact('content', 'category', 'company', 'ndTechniques', 'techniques' , 'endows', 'endowProducts'));
     }
     public function ndfromUpdate(Request $request, $id)
     {
@@ -177,8 +191,20 @@ class NdController extends Controller
                 $aa++;
             }
         }
-        
 
+        $endowProducts = endow_product::where('content_id', $id)->get();
+        foreach($endowProducts as $endowProduct){
+            $endowProduct->delete();
+        }
+
+        if ($request->has('endows')) {
+            foreach ($request->endows as $item) {
+                $endowProduct = endow_product::create([
+                    'endow_id' => $item,
+                    'content_id' => $id,
+                ]);
+            }
+        }
 
         // dd($request->techniques,$request->nameTechniques);
 
