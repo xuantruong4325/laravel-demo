@@ -132,7 +132,7 @@ Route::group(['prefix' => 'Admin', 'middleware' => ['auth', 'is_admin']], functi
 
 
 Route::prefix('Home')->group(function () {
-    Route::get('/', [ProductsController::class, 'Home'])->name('home');
+    Route::get('/', [ProductsController::class, 'Home' ])->name('home');
 });
 Route::get('/Khuyến-mại', [ProductsController::class, 'Khuyenmai'])->name('list-khuyenmai');
 Route::get('/Chi-tiết-khuyến-mại/{id}', [ProductsController::class, 'Khuyenmai2'])->name('khuyen-mai');
@@ -143,6 +143,7 @@ Route::get('/Giới-thiệu', [ProductsController::class, 'Gioithieu'])->name('g
 Route::post('/cart-add', [CartController::class, 'cartAdd'])->name('cartAdd');
 Route::post('/cart-delete', [CartController::class, 'cartDelete'])->name('cartDelete');
 Route::post('/cart-delete-all', [CartController::class, 'cartDeleteAll'])->name('cartDeleteAll');
+
 
 Route::group(['middleware' => ['auth', 'is_user']], function () {
     //category

@@ -46,7 +46,6 @@ class CartController extends Controller
                 $cartQua->save();
             } else {
                 $quantity = $request->quantity;
-
                 $cart = cart::create([
                     'name' => $product->content,
                     'avatar' => $product->file,

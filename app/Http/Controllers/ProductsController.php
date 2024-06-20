@@ -24,6 +24,16 @@ class ProductsController extends Controller
     public function Home()
     {
         $contents = Content::inRandomOrder()->limit(10)->get();
+        foreach($contents as $conten){
+            if($conten->status == 'Publish' || $conten->status == 'Draft')
+            if($conten->quantity < 1){
+                $conten->status = 'Draft';
+                $conten->save();
+            }else{
+                $conten->status = 'Publish';
+                $conten->save();
+            }
+        }
         // $contents = Content::orderBy('created_at', 'desc')->limit(2)->get();
         // $contents = Content::orderBy('sold', 'desc')->limit(2)->get();
         $editfooters = Editfooter::all();
