@@ -13,6 +13,7 @@ use App\Http\Controllers\PromotionsController;
 use App\Http\Controllers\IntroducesController;
 use App\Http\Controllers\EndowsController;
 use App\Http\Controllers\BanksController;
+use App\Http\Controllers\OrderController;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\Authenticate;
 
@@ -92,6 +93,12 @@ Route::group(['prefix' => 'Admin', 'middleware' => ['auth', 'is_admin']], functi
     Route::get('Introduces-edit/{id}', [IntroducesController::class, 'introducesEdit'])->name('editIntroduces');
     Route::post('Introduces-edit-save/{id}', [IntroducesController::class, 'introducesEditSave'])->name('editIntroducesSave');
 
+    // Đơn hàng
+    Route::get('Order', [OrderController::class, 'orderList'])->name('listOrder');
+    Route::get('Order/product-list/{id}', [OrderController::class, 'orderProductList'])->name('orderProductList');
+    Route::post('/ajax/statusCart', [OrderController::class, 'statusCart'])->name('statusCart');
+
+
      // Ưu đãi
      Route::get('Endows', [EndowsController::class, 'endowsList'])->name('listEndow');
      Route::get('Endows-add', [EndowsController::class, 'endowsAdd'])->name('addEndow');
@@ -107,33 +114,30 @@ Route::group(['prefix' => 'Admin', 'middleware' => ['auth', 'is_admin']], functi
     Route::get('deleteuser/{id}', [UserController::class, 'delete'])->name(name: 'delete');
     Route::post('store', [UserController::class, 'store'])->name(name: 'store');
 
-
     Route::get('/user', [UserController::class, 'User'])->name(name: 'User');
-
 
     Route::get('from', [NdController::class, 'form_basic'])->name(name: 'from');
     // Route::get('Content', [NdController::class, 'nd'])->name('Content');
-    Route::post('Content/ndstore', [NdController::class, 'ndstore'])->name(name: 'ndstore');
-    Route::get('Content', [NdController::class, 'ndindex'])->name(name: 'ndindex');
-    Route::get('Content/delete/{id}', [NdController::class, 'nddelete'])->name(name: 'nddelete');
-    Route::get('Content/Update/{id}', [NdController::class, 'ndUpdate'])->name('ndup');
-    Route::post('Content/Update/{id}', [NdController::class, 'ndfromUpdate'])->name('ndUpdate');
-    Route::get('Content/{id}', [NdController::class, 'ndSee']);
-    Route::get('Content/{id}', [NdController::class, 'ndfromSee'])->name('ndSee');
-    Route::post('Content/comment', [NdController::class, 'blfromSee'])->name('blSee');
+    Route::post('Product/ndstore', [NdController::class, 'ndstore'])->name(name: 'ndstore');
+    Route::get('Product', [NdController::class, 'ndindex'])->name(name: 'ndindex');
+    Route::get('Product/delete/{id}', [NdController::class, 'nddelete'])->name(name: 'nddelete');
+    Route::get('Product/Update/{id}', [NdController::class, 'ndUpdate'])->name('ndup');
+    Route::post('Product/Update/{id}', [NdController::class, 'ndfromUpdate'])->name('ndUpdate');
+    Route::get('Product/{id}', [NdController::class, 'ndSee']);
+    Route::get('Product/{id}', [NdController::class, 'ndfromSee'])->name('ndSee');
+    Route::post('Product/comment', [NdController::class, 'blfromSee'])->name('blSee');
 
     Route::get('BannerFooter/edit/{id}', [EditfooterController::class, 'form_edit'])->name(name: 'from_footer');
     Route::post('BannerFooter/edit/save/{id}', [EditfooterController::class, 'form_edit_save'])->name(name: 'from_footer_save');
     Route::get('BannerFooter', [EditfooterController::class, 'ndbanner'])->name(name: 'ndbanner');
-
-    //cart
-    Route::get('/list-cart', [CartController::class, 'listCart'])->name('listCart');
 });
 
 
-Route::prefix('Home')->group(function () {
+Route::prefix('Trang-chủ')->group(function () {
     Route::get('/', [ProductsController::class, 'Home' ])->name('home');
 });
+Route::get('/Sản-phẩm', [ProductsController::class, 'Sp'])->name('product');
+Route::get('/Thông-tin-sản-phẩm/{id}', [ProductsController::class, 'Ttsp'])->name('ttsp');
 Route::get('/Khuyến-mại', [ProductsController::class, 'Khuyenmai'])->name('list-khuyenmai');
 Route::get('/Chi-tiết-khuyến-mại/{id}', [ProductsController::class, 'Khuyenmai2'])->name('khuyen-mai');
 Route::get('/Giới-thiệu', [ProductsController::class, 'Gioithieu'])->name('gioithieu');

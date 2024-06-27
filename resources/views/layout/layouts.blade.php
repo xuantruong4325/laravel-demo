@@ -12,6 +12,8 @@
         <!-- Mobile Specific Metas -->
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
         <!-- Google Font -->
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
         <!-- css ms -->
@@ -23,6 +25,7 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('src/plugins/datatables/css/dataTables.bootstrap4.min.css') }}" />
         <link rel="stylesheet" type="text/css" href="{{ asset('src/plugins/datatables/css/responsive.bootstrap4.min.css') }}" />
         <link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/style.css') }}" />
+        <script src="{{ asset('https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js') }}"></script>
 
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-GBZ3SGGX85"></script>
@@ -181,7 +184,6 @@
                             <li><a href="{{  route('ndindex')  }}">Sản phẩm</a></li>
                             <li><a href="{{  route('listTechnique')  }}">Thông số kỹ thuật</a></li>
                             <li><a href="{{  route('ndbanner')  }}">Footer và Banner</a></li>
-                            <li><a href="{{  route('listCart')  }}">Giỏ hàng</a></li>
                             <li><a href="{{  route('listEndow')  }}">Ưu đãi</a></li>
                         </ul>
                     </li>
@@ -196,10 +198,15 @@
                         </a>
                     </li>
                     <li class="dropdown">
+                        <a class="dropdown-toggle" href="{{  route('listOrder')  }}">
+                            <span class="mtext">Quản đơn hàng</span>
+                        </a>
+                    </li>
+                    <!-- <li class="dropdown">
                         <a class="dropdown-toggle" href="{{  route('listIntroduces')  }}">
                             <span class="mtext">Giới thiệu</span>
                         </a>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
 
@@ -211,7 +218,6 @@
 
     <!-- welcome modal end -->
     <!-- jquery -->
-    <script src="{{ asset('https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js') }}"></script>
     <script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js') }}" type="text/javascript" charset="utf-8" async defer></script>
 
     <!-- js ms -->

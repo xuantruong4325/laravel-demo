@@ -17,6 +17,7 @@ class checkoutCart extends Model
         'totalProduct',
         'totalPrice',
         'order_status',
+        'address',
     ];
 
     public function product_carts()

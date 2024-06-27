@@ -50,7 +50,6 @@ class NdController extends Controller
 
 
         $conten = Content::create([
-            'product_type' => $request->product_type,
             'discount' => $giam,
             'file' => $file_name,
             'content' => $request->content,
@@ -133,7 +132,7 @@ class NdController extends Controller
             $query->where('content','like','%' .$tk. '%');
             $namKey = $tk;
         }
-        $contents = $query->paginate(10);
+        $contents = $query->paginate(3);
         // dd($contents);
         return view('nd', compact('contents','namKey','category','company','namCom','namCate','namSta'));
     }
@@ -230,7 +229,6 @@ class NdController extends Controller
             $gia = $this->roundDownToNearest($gia,1000);
         }
 
-        $content->product_type = $request->input('product_type');
         $content->discount = $giam;
         $content->file = $contents;
         $content->content = $request->input('content');

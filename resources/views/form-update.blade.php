@@ -12,15 +12,6 @@
                 <form action="{{ route('ndUpdate', ['id' => $content->id]) }}" method="post" role="form" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
-                        <label for="productType">Vị trí sản phẩm</label>
-                        <select name="product_type" class="form-control form-control-lg">
-                            <option value="Product_type">---Vị trí---</option>
-                            <option value="Sp" {{ $content->product_type === 'Sp' ? 'selected' : '' }}>Sản phẩm</option>
-                            <option value="Spm" {{ $content->product_type === 'Spm' ? 'selected' : '' }}>Sản phẩm mới</option>
-                            <option value="Spbc" {{ $content->product_type === 'Spbc' ? 'selected' : '' }}>Sản phẩm bán chạy</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
                         <label for="productType">Hãng sản phẩm</label>
                         <select class="custom-select2 form-control form-control-lg" name="companyId" style="width: 100%; height: 38px">
                             @foreach ($company as $company)

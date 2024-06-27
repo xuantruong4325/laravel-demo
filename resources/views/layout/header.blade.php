@@ -86,11 +86,11 @@
         </marquee>
         @endforeach
     </div>
-    <nav>
+    <nav style="background-color: #eeecec;">
         <div class="container">
             <ul class="menu">
                 <li><a href="{{  route('home')  }}">trang chủ</a></li>
-                <li><a href="">sản phẩm</a></li>
+                <li><a href="{{  route('product')  }}">sản phẩm</a></li>
                 <li><a href="{{  route('list-khuyenmai')  }}">khuyến mại</a></li>
                 <li><a href="{{  route('gioithieu')  }}">Giới thiệu</a></li>
                 <li><a href="">Tin tức</a></li>
@@ -289,6 +289,10 @@
             if (!isNaN(x) && !isNaN(y) && x == y) {
                 alert("Đổi mật khẩu thành công");
             }
+        }
+
+        function goToSp() {
+            window.location = '{{ route('product') }}';
         }
 
         $('.slider_left').slick({

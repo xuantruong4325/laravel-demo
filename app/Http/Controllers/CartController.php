@@ -11,11 +11,6 @@ use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
-    public function listCart()
-    {
-        $carts = cart::all();
-        return view('Categorise/Cart/cart-list', ['carts' => $carts]);
-    }
     private function kt($id){
         $product = Content::find($id);
         if($product->quantity = 0){

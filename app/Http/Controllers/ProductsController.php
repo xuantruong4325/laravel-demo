@@ -7,15 +7,21 @@ use App\Models\Banks;
 use App\Models\cart;
 use App\Models\checkoutCart;
 use App\Models\Communes;
+use App\Models\Company;
 use App\Models\Conscious;
 use Illuminate\Http\Request;
 use App\Models\Content;
 use App\Models\Districts;
 use App\Models\User;
 use App\Models\Editfooter;
+use App\Models\endow_product;
+use App\Models\Endows;
+use App\Models\ImageProduct;
 use App\Models\Introduces;
+use App\Models\NdTechnique;
 use App\Models\product_carts;
 use App\Models\Promotions;
+use App\Models\Technique;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -23,24 +29,33 @@ class ProductsController extends Controller
 {
     public function Home()
     {
-        $contents = Content::inRandomOrder()->limit(10)->get();
-        foreach($contents as $conten){
-            if($conten->status == 'Publish' || $conten->status == 'Draft')
-            if($conten->quantity < 1){
-                $conten->status = 'Draft';
-                $conten->save();
-            }else{
-                $conten->status = 'Publish';
-                $conten->save();
-            }
-        }
+        $products = Content::inRandomOrder()->limit(10)->get();
+        $contents = $this->kt($products);
+        $productsNew = Content::orderBy('created_at', 'desc')->limit(10)->get();
+        $productsSold = Content::orderBy('sold', 'desc')->limit(10)->get();
+        $newProducts = $this->kt($productsNew);
+        $soldProducts = $this->kt($productsSold);
         //okok
         // $contents = Content::orderBy('created_at', 'desc')->limit(2)->get();
         // $contents = Content::orderBy('sold', 'desc')->limit(2)->get();
         $editfooters = Editfooter::all();
-        return view('product/Home', compact('contents', 'editfooters'));
+        return view('product/Home', compact('contents', 'editfooters', 'newProducts', 'soldProducts'));
     }
-
+    private function kt($products)
+    {
+        foreach ($products as $conten) {
+            if ($conten->status == 'Publish' || $conten->status == 'Draft') {
+                if ($conten->quantity < 1) {
+                    $conten->status = 'Draft';
+                    $conten->save();
+                } else {
+                    $conten->status = 'Publish';
+                    $conten->save();
+                }
+            }
+        }
+        return $products;
+    }
     public function Khuyenmai()
     {
         $promotions = Promotions::all();
@@ -205,7 +220,11 @@ class ProductsController extends Controller
         $communes = Communes::where('district_code', $test->district)->get();
         $carts = cart::where('user_id', $test1)->get();
         foreach ($carts as $cart) {
-            $priceCart += $cart->quantity * $cart->price;
+            if ($cart->new_price != 0) {
+                $priceCart += $cart->quantity * $cart->new_price;
+            } else {
+                $priceCart += $cart->quantity * $cart->price;
+            }
         }
         $editfooters = Editfooter::all();
         return view('product/Ttck', compact('editfooters', 'carts', 'priceCart', 'conscious', 'districts', 'communes', 'bank'));
@@ -227,10 +246,18 @@ class ProductsController extends Controller
         $user->save();
 
         $carts = cart::where('user_id', $user->id)->get();
-        foreach ($carts as $item) {
-            $priceCart += $item->quantity * $item->price;
-            $total += $item->quantity;
+        foreach ($carts as $cart) {
+            if ($cart->new_price != 0) {
+                $priceCart += $cart->quantity * $cart->new_price;
+            } else {
+                $priceCart += $cart->quantity * $cart->price;
+            }
+            $total += $cart->quantity;
         }
+
+        $conscious = Conscious::where('code_consciouse', $request->idTinh)->first();
+        $district = Districts::where('code_district', $request->idHuyen)->first();
+        $commune = Communes::where('code_commune', $request->idXa)->first();
 
         $cart = checkoutCart::create([
             'nameUser' => $request->nameUser,
@@ -239,6 +266,7 @@ class ProductsController extends Controller
             'payments' => $request->giaohang,
             'totalProduct' => $priceCart,
             'totalPrice' => $total,
+            'address' => $request->address. ',' .$commune->commune. ',' .$district->district. ','  .$conscious->consciouse,
             'order_status' => 0,
         ]);
 
@@ -254,4 +282,48 @@ class ProductsController extends Controller
         }
         return redirect()->route(route: 'home');
     }
+
+    public function sp(){
+        $contents = Content::paginate(4);
+        $products = $this->kt($contents);
+        // $products= $products->paginate(20);
+        $editfooters = Editfooter::all();
+        return view('product/Sp', compact('products', 'editfooters'));
+    }
+
+    public function Ttsp($id){
+        $product = Content::find($id);
+        if ($product->status == 'Publish' || $product->status == 'Draft') {
+            if ($product->quantity < 1) {
+                $product->status = 'Draft';
+                $product->save();
+            } else {
+                $product->status = 'Publish';
+                $product->save();
+            }
+        }
+        $techineques = NdTechnique::where('content_id', $id)->get();
+        $endowPros = endow_product::where('content_id', $id)->get();
+        $datas = [];
+        $endows = [];
+        foreach($techineques as $techineque){
+            $nameTechi = Technique::find($techineque->technique_id);
+            $datas[] = [
+                'contentTechni' => $techineque->nameTechnique,
+                'nameTechni' => $nameTechi->technique,
+            ];
+        }
+        foreach($endowPros as $item){
+            $data = Endows::find($item->endow_id );
+            $endows[] = [
+                'nameEndow' => $data->nameEndow,
+            ];
+        }
+        // dd($datas[1]['contentTechni']);
+        $imageProducts = ImageProduct::where('content_id', $id)->get();
+        $company = Company::find($product->company_id);
+        $editfooters = Editfooter::all();
+        return view('product/Ttsp', compact('product', 'editfooters', 'imageProducts', 'datas', 'company', 'endows'));
+    }
+
 }

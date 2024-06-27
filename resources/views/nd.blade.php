@@ -78,7 +78,6 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Vị trí</th>
                                 <th>Chiết khấu</th>
                                 <th>Hình ảnh</th>
                                 <th>Nội dung</th>
@@ -96,16 +95,11 @@
 
                             <tr>
                                 <td>{{ $keg +1 }}</td>
-                                <td>
-                                    @if($conten->product_type == 'Sp')
-                                    Sản phẩm
-                                    @elseif($conten->product_type == 'Spm')
-                                    Sản phẩm mới
-                                    @else
-                                    Sản phẩm bán chạy
-                                    @endif
-                                </td>
-                                <td>{{ $conten->discount }}</td>
+                                @if($conten->discount != null)
+                                <td>{{ $conten->discount }}%</td>
+                                @else
+                                <td>0</td>
+                                @endif
                                 <td>
                                     <img src="/image/{{ $conten->file }}" alt="" width="50" header="50">
                                 </td>

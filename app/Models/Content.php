@@ -10,7 +10,6 @@ class Content extends Model
     use HasFactory;
 
     protected $fillable = [
-        'product_type',
         'discount',
         'file',
         'sold',

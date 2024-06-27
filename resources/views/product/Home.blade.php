@@ -37,7 +37,6 @@
                         </div>
                         <div class="gfgfgf">
                             @foreach ($contents as $conten)
-                            @if($conten->product_type == 'Sp')
                             @if($conten->status == 'Publish' || $conten->status == 'Draft')
                             <div class="product">
                                 @if($conten->discount != null)
@@ -46,12 +45,12 @@
                                 </div>
                                 @endif
                                 <div class="info">
-                                    <a class="img_product" href="">
+                                    <a class="img_product" href="{{ route('ttsp', ['id' => $conten->id]) }}">
                                         <img src="/image/{{ $conten->file }}" alt="">
                                     </a>
                                     <div>
                                         <h3>
-                                            <a href="">{{ $conten->content }}</a>
+                                            <a href="{{ route('ttsp', ['id' => $conten->id]) }}">{{ $conten->content }}</a>
                                         </h3>
                                         <div class="a">
                                             @if($conten->price_after_discount != null)
@@ -71,7 +70,7 @@
                                             @else
                                             <span id="span">
                                                 Còn hàng
-                                                <a onclick="alert('Xin vui lòng đăng nhập')"><i class="fa-solid fa-cart-shopping iconCart"></i></a>
+                                                <a onclick="alert('Xin vui lòng đăng nhập')" href="{{route('Login')}}"><i class="fa-solid fa-cart-shopping iconCart"></i></a>
                                                 <div class="tick"></div>
                                             </span>
                                             @endif
@@ -87,11 +86,10 @@
                                 </div>
                             </div>
                             @endif
-                            @endif
                             @endforeach
                         </div>
 
-                        <button id="but" type="submit">Xem Thêm</button>
+                        <button id="but" type="button" onclick="goToSp()">Xem Thêm </button>
                     </div>
                     <div class="spm">
                         <div>
@@ -100,8 +98,7 @@
                             <h1>Sản Phẩm Mới</h1>
                         </div>
                         <div class="gfgfgf">
-                            @foreach ($contents as $conten)
-                            @if($conten->product_type == 'Spm')
+                            @foreach ($newProducts as $conten)
                             @if($conten->status == 'Publish' || $conten->status == 'Draft')
                             <div class="product">
                                 @if($conten->discount != null)
@@ -110,15 +107,15 @@
                                 </div>
                                 @endif
                                 <div class="info">
-                                    <a class="img_product" href="">
+                                    <a class="img_product" href="{{ route('ttsp', ['id' => $conten->id]) }}">
                                         <img src="/image/{{ $conten->file }}" alt="">
                                     </a>
                                     <div>
                                         <h3>
-                                            <a href="" name="name">{{ $conten->content }}</a>
+                                            <a href="{{ route('ttsp', ['id' => $conten->id]) }}" name="name">{{ $conten->content }}</a>
                                         </h3>
                                         <div class="a">
-                                            @if($conten->price_after_discount != null)
+                                        @if($conten->price_after_discount != null)
                                             {{ number_format($conten->price_after_discount, 0, '.', '.') }} đ
                                             <span class="span">{{ number_format($conten->old_price, 0, '.', '.') }} đ</span>
                                             @else
@@ -126,15 +123,23 @@
                                             @endif
                                             <br>
                                             @if($conten->status == 'Publish')
+                                            @if(auth()->user() != null)
                                             <span id="span">
                                                 Còn hàng
-                                                <a href=""><i class="fa-solid fa-cart-shopping iconCart"></i></a>
+                                                <a onclick="addToCart('{{ $conten->id }}',1,'{{ $conten->content }}')"><i class="fa-solid fa-cart-shopping iconCart"></i></a>
                                                 <div class="tick"></div>
                                             </span>
+                                            @else
+                                            <span id="span">
+                                                Còn hàng
+                                                <a onclick="alert('Xin vui lòng đăng nhập')" href="{{route('Login')}}"><i class="fa-solid fa-cart-shopping iconCart"></i></a>
+                                                <div class="tick"></div>
+                                            </span>
+                                            @endif
                                             @elseif($conten->status == 'Draft')
                                             <span id="spanH">
                                                 <i class="fa-solid fa-phone icon-phone"></i>
-                                                Đặt hàng
+                                                Đặt hàng 
                                             </span>
                                             @endif
                                         </div>
@@ -142,10 +147,9 @@
                                 </div>
                             </div>
                             @endif
-                            @endif
                             @endforeach
                         </div>
-                        <button id="but" type="button">Xem Thêm</button>
+                        <button id="but" type="button" onclick="goToSp()">Xem Thêm</button>
                     </div>
 
                     <div class="spbc">
@@ -155,8 +159,7 @@
                             <h1>Sản Phẩm Bán chạy</h1>
                         </div>
                         <div class="gfgfgf">
-                            @foreach ($contents as $conten)
-                            @if($conten->product_type == 'Spbc')
+                            @foreach ($soldProducts as $conten)
                             @if($conten->status == 'Publish' || $conten->status == 'Draft')
                             <div class="product">
                                 @if($conten->discount != null)
@@ -166,14 +169,14 @@
                                 @endif
                                 <div class="info">
                                     <a class="img_product" href="">
-                                        <img src="/image/{{ $conten->file }}" alt="">
+                                        <img src="/image/{{ $conten->file }}" alt="{{ route('ttsp', ['id' => $conten->id]) }}">
                                     </a>
                                     <div>
                                         <h3>
-                                            <a href="">{{ $conten->content }}</a>
+                                            <a href="{{ route('ttsp', ['id' => $conten->id]) }}">{{ $conten->content }}</a>
                                         </h3>
                                         <div class="a">
-                                            @if($conten->price_after_discount != null)
+                                        @if($conten->price_after_discount != null)
                                             {{ number_format($conten->price_after_discount, 0, '.', '.') }} đ
                                             <span class="span">{{ number_format($conten->old_price, 0, '.', '.') }} đ</span>
                                             @else
@@ -181,15 +184,23 @@
                                             @endif
                                             <br>
                                             @if($conten->status == 'Publish')
+                                            @if(auth()->user() != null)
                                             <span id="span">
                                                 Còn hàng
-                                                <a href=""><i class="fa-solid fa-cart-shopping iconCart"></i></a>
+                                                <a onclick="addToCart('{{ $conten->id }}',1,'{{ $conten->content }}')"><i class="fa-solid fa-cart-shopping iconCart"></i></a>
                                                 <div class="tick"></div>
                                             </span>
+                                            @else
+                                            <span id="span">
+                                                Còn hàng
+                                                <a onclick="alert('Xin vui lòng đăng nhập')" href="{{route('Login')}}"><i class="fa-solid fa-cart-shopping iconCart"></i></a>
+                                                <div class="tick"></div>
+                                            </span>
+                                            @endif
                                             @elseif($conten->status == 'Draft')
                                             <span id="spanH">
-                                                Đặt trước
-                                                <a href=""><i class="fa-solid fa-cart-shopping iconCart"></i></a>
+                                                <i class="fa-solid fa-phone icon-phone"></i>
+                                                Đặt hàng 
                                             </span>
                                             @endif
                                         </div>
@@ -197,11 +208,10 @@
                                 </div>
                             </div>
                             @endif
-                            @endif
                             @endforeach
 
                         </div>
-                        <button id="but" type="button">Xem Thêm</button>
+                        <button id="but" type="button" onclick="goToSp()">Xem Thêm</button>
                     </div>
                 </form>
                 <script>

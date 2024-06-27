@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('payments',255)->nullable();
             $table->integer('totalProduct')->nullable();
             $table->integer('totalPrice')->nullable();
+            $table->integer('address')->nullable();
             $table->string('order_status',30)->nullable();
             $table->timestamps();
         });
