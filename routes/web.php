@@ -147,6 +147,7 @@ Route::get('/Giới-thiệu', [ProductsController::class, 'Gioithieu'])->name('g
 Route::post('/cart-add', [CartController::class, 'cartAdd'])->name('cartAdd');
 Route::post('/cart-delete', [CartController::class, 'cartDelete'])->name('cartDelete');
 Route::post('/cart-delete-all', [CartController::class, 'cartDeleteAll'])->name('cartDeleteAll');
+Route::get('/Order', [ProductsController::class, 'orderAll'])->name('orderAll');
 
 
 Route::group(['middleware' => ['auth', 'is_user']], function () {

@@ -326,4 +326,10 @@ class ProductsController extends Controller
         return view('product/Ttsp', compact('product', 'editfooters', 'imageProducts', 'datas', 'company', 'endows'));
     }
 
+    public function orderAll(){
+        $editfooters = Editfooter::all();
+        $carts = checkoutCart::where('idUser', Auth()->User()->id)->get();
+        return view('product/OrderAll', compact('editfooters','carts'));
+    }
+
 }

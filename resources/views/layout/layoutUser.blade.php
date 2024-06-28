@@ -24,7 +24,7 @@
                                 <i class="fa-solid fa-user"></i>
                                 Thông tin tài khoản</a>
                         </li>
-                        <li><a href="#">
+                        <li><a href="{{ route('orderAll')  }}">
                                 <i class="fa-solid fa-bars"></i>
                                 Đơn hàng của tôi</a>
                         </li>

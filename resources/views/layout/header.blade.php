@@ -12,6 +12,7 @@
     <link rel='stylesheet' type='text/css' media='screen' href="{{ asset('cssFe/gioithieu.css') }}">
     <link rel='stylesheet' type='text/css' media='screen' href="{{ asset('cssFe/tkct.css') }}">
     <link rel='stylesheet' type='text/css' media='screen' href="{{ asset('cssFe/ttkh.css') }}">
+    <link rel='stylesheet' type='text/css' media='screen' href="{{ asset('cssFe/cxn.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 </head>
@@ -42,7 +43,7 @@
                             <a href="{{ route('tttk', ['id' => Auth::user()->id ])  }} ">Tài khoản của tôi</a>
                         </li>
                         <li>
-                            <a href="">Đơn hàng của tôi</a>
+                            <a href="{{ route('orderAll')  }}">Đơn hàng của tôi</a>
                         </li>
                         <li>
                             <a href="{{route('logout')}}">Đăng xuất</a>

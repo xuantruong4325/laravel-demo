@@ -124,3 +124,123 @@
     width: 100%;
     max-width: 522px;
 }
+
+
+.list-menu-donhang {
+    display: flex;
+    align-items: center;
+}
+
+.list-menu-donhang li a{
+    text-decoration: none;
+    padding: 8px 38.4px;
+    color: #333;
+    position: relative;
+    font-size: 1rem;
+}
+.list-menu-donhang li a::before {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    content: '';
+    width: 0%;
+    height: 3px;
+    background: #ED1B24;
+    border-radius: 20px;
+}
+.list-menu-donhang li:hover a::before {
+    width: 100%;
+    transition: 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+/* tất cả */
+.list-menu-donhang li a.all{
+    text-decoration: none;
+    padding: 8px 38.4px;
+    color: #ED1B24;
+    position: relative;
+}
+.list-menu-donhang li a.all::before {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    content: '';
+    width: 100%;
+    height: 3px;
+    background: #ED1B24;
+    border-radius: 20px;
+}
+/* chờ xác nhận */
+.list-menu-donhang li a.cxn{
+    text-decoration: none;
+    padding: 8px 38.4px;
+    color: #ED1B24;
+    position: relative;
+}
+.list-menu-donhang li a.cxn::before {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    content: '';
+    width: 100%;
+    height: 3px;
+    background: #ED1B24;
+    border-radius: 20px;
+}
+/* đang giao */
+.list-menu-donhang li a.danggiao{
+    text-decoration: none;
+    padding: 8px 38.4px;
+    color: #ED1B24;
+    position: relative;
+}
+.list-menu-donhang li a.danggiao::before {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    content: '';
+    width: 100%;
+    height: 3px;
+    background: #ED1B24;
+    border-radius: 20px;
+}
+/* đã giao */
+.list-menu-donhang li a.dagiao{
+    text-decoration: none;
+    padding: 8px 38.4px;
+    color: #ED1B24;
+    position: relative;
+}
+.list-menu-donhang li a.dagiao::before {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    content: '';
+    width: 100%;
+    height: 3px;
+    background: #ED1B24;
+    border-radius: 20px;
+}
+
+/* đã hủy */
+.list-menu-donhang li a.dahuy{
+    text-decoration: none;
+    padding: 8px 38.4px;
+    color: #ED1B24;
+    position: relative;
+}
+.list-menu-donhang li a.dahuy::before {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    content: '';
+    width: 100%;
+    height: 3px;
+    background: #ED1B24;
+    border-radius: 20px;
+}
+.no-sp {
+    margin-top:80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
