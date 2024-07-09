@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('nameProduct',255)->nullable();
             $table->integer('quantity')->nullable();
             $table->integer('price')->nullable();
+            $table->integer('idProduct')->nullable();
             $table->unsignedBigInteger("checkout_cart_id");
             $table->timestamps();
 

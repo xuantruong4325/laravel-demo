@@ -56,6 +56,7 @@ body{
     border-radius:20px 0px 0px 20px;
 }
 #form_search button{
+    cursor: pointer;
     background-color: #1790cf;
     color: white;
     border-color:#1790cf;

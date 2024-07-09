@@ -27,63 +27,63 @@
                     giỏ hàng
                 </div>
 
-                <table width="100%">
+                <table width="100%" style="border: 1px solid #bdbdbd88;">
                     <tr>
-                        <th class="gio_sp">
+                        <th class="gio_sp" style="border: 1px solid #bdbdbd88;">
                             Sản phẩm
                         </th>
-                        <th class="gio_tsp">
+                        <th class="gio_tsp" style="border: 1px solid #bdbdbd88;">
                             Tên sản phẩm
                         </th>
-                        <th class="gio_sl">
+                        <th class="gio_sl" style="border: 1px solid #bdbdbd88;">
                             Số lượng
                         </th>
-                        <th class="gio_gt">
+                        <th class="gio_gt" style="border: 1px solid #bdbdbd88;">
                             Giá tiền
                         </th>
-                        <th class="gio_gt">
+                        <th class="gio_gt" style="border: 1px solid #bdbdbd88;">
                             Tổng
                         </th>
-                        <th class="gio_xoa">
+                        <th class="gio_xoa" style="border: 1px solid #bdbdbd88;">
                             Xóa
                         </th>
                     </tr>
                     @foreach($carts as $cart)
                     <tr>
-                        <td class="gio_sp">
+                        <td class="gio_sp" style="border: 1px solid #bdbdbd88;">
                             <a href="ttsp.html"><img src="/image/{{ $cart->avatar }}" width="100px" header="100px"></a>
                         </td>
-                        <td class="gio_tsp">
+                        <td class="gio_tsp" style="border: 1px solid #bdbdbd88;">
                             <a href="ttsp.html">{{ $cart->name }} </a>
                         </td>
-                        <td class="gio_sl">
+                        <td class="gio_sl" style="border: 1px solid #bdbdbd88;">
                             <div class="input_sl">{{ $cart->quantity }}</div>
                         </td>
                         @if($cart->new_price != 0)
-                        <td class="gio_gt">
+                        <td class="gio_gt" style="border: 1px solid #bdbdbd88;">
                             {{ number_format($cart->new_price, 0, '.', '.') }} đ
                         </td>
-                        <td class="gio_gtt">
+                        <td class="gio_gtt" style="border: 1px solid #bdbdbd88;">
                             {{ number_format($cart->quantity*$cart->new_price, 0, '.', '.') }} đ
                         </td>
                         @else
-                        <td class="gio_gt">
+                        <td class="gio_gt" style="border: 1px solid #bdbdbd88;">
                             {{ number_format($cart->price, 0, '.', '.') }} đ
                         </td>
-                        <td class="gio_gtt">
+                        <td class="gio_gtt" style="border: 1px solid #bdbdbd88;">
                             {{ number_format($cart->quantity*$cart->price, 0, '.', '.') }} đ
                         </td>
                         @endif
-                        <td class="gio_xoa">
+                        <td class="gio_xoa" style="border: 1px solid #bdbdbd88;">
                             <button type="button"><a href="" onclick="deleteCart('{{ $cart->id }}',1,'{{ $cart->name }}')"><i class="fa-solid fa-trash-can"></i></a></button>
                         </td>
                     </tr>
                     @endforeach
-                    <tr>
-                        <td colspan="3">
+                    <tr style="border: 1px solid #bdbdbd88;">
+                        <td colspan="3" style="border: 1px solid #bdbdbd88;">
                             <label class="gio_label">Tổng tiền</label>
                         </td>
-                        <td colspan="2" id="gio_all">
+                        <td colspan="2" id="gio_all" style="border: 1px solid #bdbdbd88;">
                             {{ number_format($priceCart, 0, '.', '.') }} đ
                         </td>
                     </tr>

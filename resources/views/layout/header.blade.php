@@ -13,6 +13,7 @@
     <link rel='stylesheet' type='text/css' media='screen' href="{{ asset('cssFe/tkct.css') }}">
     <link rel='stylesheet' type='text/css' media='screen' href="{{ asset('cssFe/ttkh.css') }}">
     <link rel='stylesheet' type='text/css' media='screen' href="{{ asset('cssFe/cxn.css') }}">
+    <link rel='stylesheet' type='text/css' media='screen' href="{{ asset('cssFe/chitiet.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 </head>
@@ -25,7 +26,7 @@
             </h2>
         </div>
         <div>
-            <form id="form_search" action="tim-kiem.html" method="get">
+            <form id="form_search" action="{{ route('product') }}" role="get">
                 <input type="text" placeholder="Từ khóa tìm kiếm" name="keyword">
                 <button type="submit">
                     <i class="fa-solid fa-magnifying-glass"></i>
@@ -202,6 +203,26 @@
                 type: "POST",
                 data: {
                     'productDeleteAll': _productDeleteAll,
+                },
+                success: function(response) {
+                    // Xử lý sau khi sản phẩm được thêm thành công vào giỏ hàng
+                    location.reload(); // Tải lại trang
+                },
+            });
+        }
+
+        cartCan = function(_idOrder) {
+
+            alert("Hủy đơn hàng thành công");
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "{{ route('cartCancel') }}",
+                type: "POST",
+                data: {
+                    'idOrder': _idOrder,
                 },
                 success: function(response) {
                     // Xử lý sau khi sản phẩm được thêm thành công vào giỏ hàng

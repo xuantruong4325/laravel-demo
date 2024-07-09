@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\cart;
 use App\Models\Content;
 use App\Models\User;
+use App\Models\checkoutCart;
+use App\Models\product_carts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -84,6 +86,21 @@ class CartController extends Controller
             $product->save();
             $cart->delete();
         }
+        return;
+    }
+
+    public function cartCancel(Request $request){
+        $id = $request->idOrder;
+        $cart = checkoutCart::find($id);
+        $cartPros = product_carts::where('checkout_cart_id', $cart->id)->get();
+        foreach($cartPros as $cartPro){
+            $product = Content::find($cartPro->idProduct);
+            $product->quantity += $cartPro->quantity;
+            $product->sold -=$cartPro->quantity;
+            $product->save(); 
+        }
+        $cart->order_status = 3;
+        $cart->save();
         return;
     }
 }

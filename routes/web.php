@@ -29,7 +29,7 @@ use App\Http\Middleware\Authenticate;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route(route: 'home');
 });
 Route::get('register', [UserController::class, 'register'])->name(name: 'dky');
 Route::post('register', [UserController::class, 'fromSumbit'])->name(name: 'register');
@@ -148,6 +148,8 @@ Route::post('/cart-add', [CartController::class, 'cartAdd'])->name('cartAdd');
 Route::post('/cart-delete', [CartController::class, 'cartDelete'])->name('cartDelete');
 Route::post('/cart-delete-all', [CartController::class, 'cartDeleteAll'])->name('cartDeleteAll');
 Route::get('/Order', [ProductsController::class, 'orderAll'])->name('orderAll');
+Route::get('/OrderProduct/{id}', [ProductsController::class, 'orderProduct'])->name('orderProduct');
+Route::post('/ajax/cancel', [CartController::class, 'cartCancel'])->name('cartCancel');
 
 
 Route::group(['middleware' => ['auth', 'is_user']], function () {

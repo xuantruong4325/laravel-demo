@@ -14,6 +14,7 @@ class product_carts extends Model
         'quantity',
         'price',
         'checkout_cart_id',
+        'idProduct',
     ];
 
     public function checkoutCart()

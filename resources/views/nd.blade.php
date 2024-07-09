@@ -68,8 +68,6 @@
                             <div class="col-md-2">
                                 <button type="submit" id="btnSearch" name="btnSearch" class="btn btn-primary">Tìm kiếm</button>
                             </div>
-
-
                         </div>
                     </form>
                 </div>

@@ -69,7 +69,6 @@
                                 @endforeach
                             </tbody>
                             <tr>
-                                <td></td>
                                 <td colspan="2" style="text-align: center;">
                                     <p style="font-size: 25px;">Tổng</p>
                                 </td>

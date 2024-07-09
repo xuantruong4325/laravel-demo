@@ -264,31 +264,43 @@ class ProductsController extends Controller
             'phoneUser' => $request->phoneUser,
             'idUser' => $user->id,
             'payments' => $request->giaohang,
-            'totalProduct' => $priceCart,
-            'totalPrice' => $total,
+            'totalProduct' => $total,
+            'totalPrice' => $priceCart,
             'address' => $request->address. ',' .$commune->commune. ',' .$district->district. ','  .$conscious->consciouse,
             'order_status' => 0,
         ]);
-
+        $id = $cart->id;
         foreach ($carts as $item) {
+            $price = $item->new_price;
+            if($price == 0){
+                $price = $item->price;
+            }
             $productCart = product_carts::create([
                 'avatar' => $item->avatar,
                 'nameProduct' => $item->name,
                 'quantity' => $item->quantity,
-                'price' => $cart->id,
-                'checkout_cart_id' => $cart->id,
+                'price' => $price,
+                'checkout_cart_id' => $id,
+                'idProduct' => $item->id_product,
             ]);
             $item->delete();
         }
         return redirect()->route(route: 'home');
     }
 
-    public function sp(){
-        $contents = Content::paginate(4);
-        $products = $this->kt($contents);
+    public function sp(Request $request){
+        $namKey=null;
+        $query = Content::query();
+        // $products = $this->kt($contents);
         // $products= $products->paginate(20);
+        if($request->has('keyword')){
+            $tk = $request->input('keyword');
+            $query->where('content','like','%' .$tk. '%');
+            $namKey = $tk;
+        }
+        $products = $query->paginate(3);
         $editfooters = Editfooter::all();
-        return view('product/Sp', compact('products', 'editfooters'));
+        return view('product/Sp', compact('products', 'editfooters', 'namKey'));
     }
 
     public function Ttsp($id){
@@ -332,4 +344,10 @@ class ProductsController extends Controller
         return view('product/OrderAll', compact('editfooters','carts'));
     }
 
+    public function orderProduct($id){
+        $editfooters = Editfooter::all();
+        $cart = checkoutCart::find($id);
+        $cartProducts = product_carts::where('checkout_cart_id', $cart->id)->get();
+        return view('product/OrderProduct', compact('editfooters','cart','cartProducts'));
+    }
 }

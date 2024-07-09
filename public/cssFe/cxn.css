@@ -1,95 +1,190 @@
-.box-cxn {
+.tb-trangthai {
     width: 100%;
-    height: 470px;
+    border-spacing:0;
+    font-size: 15px;
+}
+.tb-title {
+    width: 100%;
+    border-spacing: 0;
+    padding-right: 10px;
+}
+.tb-title th {
+    padding: 10px 0;
+}
+.tb-trangthai .trangthai-kh {
+    width: 20%;
+}
+.tb-trangthai .trangthai-tsp {
+    width: 15%;
+}
+.tb-trangthai .trangthai-tt {
+    width: 20%;
+}
+.tb-trangthai .trangthai-trt {
+    width: 20%;
+}
+.tb-trangthai .trangthai-tc {
+    width: 10%;
+}
+
+.scroll-trangthai {
+    width: 100%;
+    height: 500px;
+    border-top: 1px solid #333;
     overflow-y: scroll;
 }
-/* .box-cxn::-webkit-scrollbar {
-   display: none;
-}  */
 
-.box-cxn::-webkit-scrollbar {
-    width: 5px; 
+.scroll-trangthai::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
 }
 
-.box-cxn::-webkit-scrollbar-track {
-    background: #f1f1f1; 
-}
-
-.box-cxn::-webkit-scrollbar-thumb {
-    background: #88888865; 
-    border-radius: 10px; 
-}
-
-.box-cxn-sp {
-    width: 97%;
-    height: 100px;
-    display: flex;
-    gap: 15px;
-    padding:10px 10px;
-}
-.box-cxn-sp:hover {
-    background: rgba(128, 128, 128, 0.152);
-    cursor: pointer;
-}
-.box-cxn-sp p {
-    margin: 0;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: #333;
-}
-.box-cxn-sp img {
-    flex-basis: 10%;
-    width: 100%;
-    height: 100%;
-    border-radius: 2px;
-}
-.box-cxn-tensp {
-    flex-basis: 30%;
-    height: 100%;
-    font-size: 0.9rem;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-}
-.box-cxn-giatien {
-    flex-basis: 18%;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.box-cxn-tt {
-    flex-basis: 20%;
-    font-size: 0.9rem;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.box-cxn-tt span {
-    width: 100%;
-    padding: 8px 2px;
-    background: grey;
-    border-radius: 10px;
-    color: white;
-    text-align: center;
-}
-.box-cxn-huy {
-    flex-basis: 20%;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.box-cxn-huy button {
-    width: 100%;
-    padding: 8px 15px;
-    border: none;
+.scroll-trangthai::-webkit-scrollbar-track {
+    /* background: #f1f1f1; */
     border-radius: 20px;
-    background: #ED1B24;
-    color: white;
+}
+
+.scroll-trangthai::-webkit-scrollbar-thumb {
+    background: #8888883b;
+    border-radius: 6px;
+}  
+
+.tb-thongtin {
+    width: 100%;
+    border: 0;
+    border-spacing: 0;
+}
+
+.tb-thongtin .cot-kh {
+    width: 20%;   
+    border-bottom: 1px solid #ccc;
+}
+.tb-thongtin .cot-tsp {
+    width: 15%;
+    border-bottom: 1px solid #ccc;
+}
+.tb-thongtin .cot-tt {
+    width: 20%;
+    border-bottom: 1px solid #ccc;
+}
+.tb-thongtin .cot-trt {
+    width: 20%;
+    border-bottom: 1px solid #ccc;
+}
+.tb-thongtin .cot-tc {
+    width: 10%;
+    border-bottom: 1px solid #ccc;
+}
+
+.cot-tc i {
+    padding: 0 10px;
+}
+.cot-tc a {
+    color: #2e8d5d;
+}
+.cot-tc button {
+    padding: 0;
+    border: 0;
+    background-color: transparent;
+    font-size: 15px;
+    color: #ce3939;
     cursor: pointer;
 }
-.box-cxn-huy button:hover {
-    background: #ed1b26c2;
+.tb-trangthai thead th{
+    border:0;
 }
+
+.tb-thongtin tr,th,td {
+    border: 0;
+}
+.item-thongtin:hover {
+    background: #cccccc35;
+    cursor: pointer;
+}
+
+/*  Chi tiet */
+
+.tb-chitiet {
+    width: 100%;
+    border-spacing:0;
+    font-size: 15px;
+}
+.tb-title {
+    width: 100%;
+    border-spacing: 0;
+    padding-right: 10px;
+}
+.tb-title th {
+    padding: 10px 0;
+}
+.tb-chitiet .chitiet-tsp {
+    width: 20%;
+}
+.tb-chitiet .chitiet-asp {
+    width: 15%;
+}
+.tb-chitiet .chitiet-ssp {
+    width: 15%;
+}
+.tb-chitiet .chitiet-tt {
+    width: 20%;
+}
+.tb-chitiet .chitiet-trt {
+    width: 20%;
+}
+.tb-chitiet .chitiet-tc {
+    width: 10%;
+}
+
+.tb-thongtin {
+    width: 100%;
+    border: 0;
+    border-spacing: 0;
+}
+
+.tb-thongtin .cot-chitiet-tsp {
+    width: 20%;
+}
+.tb-thongtin .cot-chitiet-asp {
+    width: 15%;
+}
+.tb-thongtin .cot-chitiet-ssp {
+    width: 15%;
+}
+.tb-thongtin .cot-chitiet-tt {
+    width: 20%;
+}
+.tb-thongtin .cot-chitiet-trt {
+    width: 20%;
+}
+.tb-thongtin .cot-chitiet-tc {
+    width: 10%;
+}
+
+.cot-chitiet-asp img {
+    width: 100%;
+    object-fit: contain;
+} 
+
+.cot-chitiet-tc button {
+    padding: 0;
+    border: 0;
+    background-color: transparent;
+    font-size: 15px;
+    color: #ce3939;
+    cursor: pointer;
+}
+
+.tb-chitiet thead th{
+    border:0;
+}
+
+.tb-thongtin tr,th,td {
+    border: 0;
+}
+.item-thongtin:hover {
+    background: #cccccc35;
+    cursor: pointer;
+}
+
+

@@ -22,8 +22,8 @@
             </h2>
         </div>
         <div>
-            <form id="form_search" action="tim-kiem.html" method="get">
-                <input type="text" placeholder="Từ khóa tìm kiếm" name="keyword">
+            <form id="form_search" action="{{ route('product') }}" role="get">
+                <input type="text" placeholder="Từ khóa tìm kiếm" name="keyword" value="{{$namKey}}">
                 <button type="submit">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
@@ -138,8 +138,8 @@
                                     </div>
                                     @endif
                                     <div class="info">
-                                        <a class="img_product" href="">
-                                            <img src="/image/{{ $product->file }}" href="{{ route('ttsp', ['id' => $product->id]) }}">
+                                        <a class="img_product" href="{{ route('ttsp', ['id' => $product->id]) }}">
+                                            <img src="/image/{{ $product->file }}" >
                                         </a>
                                         <div>
                                             <h3 class="sp_h3" style="font-weight: 600;">
