@@ -166,6 +166,11 @@
             <div class="sidebar-menu">
                 <ul id="accordion-menu">
                     <li class="dropdown">
+                        <a class="dropdown-toggle" href="{{  route('homePage')  }}">
+                            <span class="mtext">Trang chủ</span>
+                        </a>
+                    </li>
+                    <li class="dropdown">
                         <a class="dropdown-toggle" href="#">
                             <span class="mtext">Tài khoản</span>
                         </a>
@@ -185,6 +190,7 @@
                             <li><a href="{{  route('listTechnique')  }}">Thông số kỹ thuật</a></li>
                             <li><a href="{{  route('ndbanner')  }}">Footer và Banner</a></li>
                             <li><a href="{{  route('listEndow')  }}">Ưu đãi</a></li>
+                            <li><a href="{{  route('dkntbList')  }}">Đanh sách khách hàng nhận thông báo</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">

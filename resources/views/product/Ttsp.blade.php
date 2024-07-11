@@ -78,13 +78,29 @@
                             </div>
                         </div>
                         @if($product->quantity == 0)
-                        <div class="box-dathang">
-                            <div class="title-dathang">đăng kí nhận thông tin khi có hàng</div>
-                            <input type="text" placeholder="Họ tên (bắt buộc)">
-                            <input type="text" placeholder="Số điện thoại (bắt buộc)">
-                            <input type="email" placeholder="Email">
-                            <button>Đăng kí nhận thông</button>
-                        </div>
+                            @if(auth()->user() != null)
+                            <form action="" id="formDkntb">
+                                <div class="box-dathang">
+                                    <div class="title-dathang">đăng kí nhận thông tin khi có hàng</div>
+                                    <input name="name" type="text" placeholder="Họ tên (bắt buộc)" value="{{ Auth::user()->name }}">
+                                    <input name="phone" type="text" placeholder="Số điện thoại (bắt buộc)" value="{{ Auth::user()->phone }}">
+                                    <input name="email" type="email" placeholder="Email (bắt buộc)" value="{{ Auth::user()->email }}">
+                                    <input value="{{ $product->id }}" name="idProduct" type="text" style="z-index: -99; width: 0px; height: 0px; padding: 0px; border: 0px;">
+                                    <button type="submit">Đăng kí nhận thông</button>
+                                </div>
+                            </form>
+                            @else
+                            <form action=""  id="formDkntb">
+                                <div class="box-dathang">
+                                    <div class="title-dathang">đăng kí nhận thông tin khi có hàng</div>
+                                    <input name="name" type="text" placeholder="Họ tên (bắt buộc)">
+                                    <input name="phone" type="text" placeholder="Số điện thoại (bắt buộc)">
+                                    <input name="email" type="email" placeholder="Email">
+                                    <input value="{{ $product->id }}" name="idProduct" type="text" style="z-index: -99; width: 0px; height: 0px; padding: 0px; border: 0px;">
+                                    <button type="submit">Đăng kí nhận thông</button>
+                                </div>
+                            </form>
+                            @endif
                         @else
                         <div class="pay">
                             <div class="price">

@@ -232,6 +232,24 @@
         }
 
         $(document).ready(function() {
+            $('#formDkntb').submit(function(event) {
+                alert("Bạn đã đăng ký thành công");
+                $.ajax({
+                    headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: "{{ route('dkntbAdd') }}", 
+                    type: 'POST',
+                    data: $(this).serialize(), 
+                    success: function(response) {
+                    // Xử lý sau khi sản phẩm được thêm thành công vào giỏ hàng
+                    location.reload(); // Tải lại trang
+                },
+                });
+            });
+        });
+
+        $(document).ready(function() {
             $('#tinh').on('change', function() {
                 var id = $(this).val();
                 $("#huyen").empty();

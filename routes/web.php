@@ -14,6 +14,7 @@ use App\Http\Controllers\IntroducesController;
 use App\Http\Controllers\EndowsController;
 use App\Http\Controllers\BanksController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\DkntbController;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\Authenticate;
 
@@ -42,6 +43,9 @@ Route::get('Error', [UserController::class, 'Error'])->name('error');
 
 
 Route::group(['prefix' => 'Admin', 'middleware' => ['auth', 'is_admin']], function () {
+
+    Route::get('Trang-chủ', [NdController::class, 'homePage'])->name('homePage');
+
     //category
     Route::get('Cartegory', [CategoriController::class, 'ListCategory'])->name('listCategory');
     Route::get('Cartegory-add', [CategoriController::class, 'AddCategory'])->name('addCategory');
@@ -130,7 +134,13 @@ Route::group(['prefix' => 'Admin', 'middleware' => ['auth', 'is_admin']], functi
     Route::get('BannerFooter/edit/{id}', [EditfooterController::class, 'form_edit'])->name(name: 'from_footer');
     Route::post('BannerFooter/edit/save/{id}', [EditfooterController::class, 'form_edit_save'])->name(name: 'from_footer_save');
     Route::get('BannerFooter', [EditfooterController::class, 'ndbanner'])->name(name: 'ndbanner');
+
+    //dkntb
+    Route::get('Dkntb', [DkntbController::class, 'dkntbList'])->name('dkntbList');
+    Route::Post('/ajax/editDkntb', [DkntbController::class, 'dkntbEdit'])->name('dkntbEdit');
 });
+
+Route::Post('/ajax/dkntb', [DkntbController::class, 'dkntbAdd'])->name('dkntbAdd');
 
 
 Route::prefix('Trang-chủ')->group(function () {

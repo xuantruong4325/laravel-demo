@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\checkoutCart;
 use Illuminate\Http\Request;
 use App\Models\Content;
 use App\Models\Comment;
@@ -12,6 +13,7 @@ use App\Models\Endows;
 use App\Models\ImageProduct;
 use App\Models\NdTechnique;
 use App\Models\Technique;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
 use function Laravel\Prompts\search;
@@ -287,6 +289,28 @@ class NdController extends Controller
 
     private function roundDownToNearest($number, $nearest) {
         return ceil($number / $nearest) * $nearest;
+    }
+
+    public function homePage(){
+        $cart = 0;
+        $cartCancel = 0;
+        $price = 0;
+        $product = Content::all()->count();
+        $user = User::where('user_type', 'user')->get()->count();
+        $inventory = Content::where('sold', '<=',1)->get()->count();
+        $carts = checkoutCart::all();
+        foreach($carts as $item){
+            if($item->order_status != 3){
+                $cart += 1;
+                $price += $item->totalPrice;
+            }else{
+                $cartCancel += 1;
+            }
+        }
+        $products = Content::where('sold','>',1)->orderBy('sold', 'desc')->limit(10)->get();
+
+        // dd($user);
+        return view('index', compact('cart','cartCancel','product','user','inventory','price','products'));
     }
 
 }
