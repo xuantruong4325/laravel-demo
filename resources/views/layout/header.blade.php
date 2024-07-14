@@ -14,6 +14,9 @@
     <link rel='stylesheet' type='text/css' media='screen' href="{{ asset('cssFe/ttkh.css') }}">
     <link rel='stylesheet' type='text/css' media='screen' href="{{ asset('cssFe/cxn.css') }}">
     <link rel='stylesheet' type='text/css' media='screen' href="{{ asset('cssFe/chitiet.css') }}">
+    <link rel='stylesheet' type='text/css' media='screen' href="{{ asset('cssFe/baohanh.css') }}">
+    <link rel='stylesheet' type='text/css' media='screen' href="{{ asset('cssFe/giaohang.css') }}">
+    <link rel='stylesheet' type='text/css' media='screen' href="{{ asset('cssFe/tintuc.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 </head>
@@ -21,9 +24,11 @@
 <body id="topqw">
     <div class="container header">
         <div class="logo">
-            <h2>
-                laptop.vn
-            </h2>
+            <a href="{{  route('home')  }}">
+                <h2>
+                    laptop.vn
+                </h2>
+            </a>
         </div>
         <div>
             <form id="form_search" action="{{ route('product') }}" role="get">
@@ -95,8 +100,17 @@
                 <li><a href="{{  route('product')  }}">sản phẩm</a></li>
                 <li><a href="{{  route('list-khuyenmai')  }}">khuyến mại</a></li>
                 <li><a href="{{  route('gioithieu')  }}">Giới thiệu</a></li>
-                <li><a href="">Tin tức</a></li>
-                <li><a href="">Liên hệ</a></li>
+                <li><a href="{{  route('list-tintuc')  }}">Tin tức</a></li>
+                <li><a href="">Chính sách <i class="fa-solid fa-chevron-down"></i></a>
+                    <ul class="sub_menu">
+                        <li>
+                            <a href="{{  route('baohanh')  }}">Chính sách bảo hành</a>
+                        </li>
+                        <li>
+                            <a href="{{  route('giaohang')  }}">Chính sách giao hàng</a>
+                        </li>
+                    </ul>
+                </li>
 
             </ul>
         </div>
@@ -333,6 +347,14 @@
 
         function goToSp() {
             window.location = '{{ route('product') }}';
+        }
+
+        function goToSpbc() {
+            window.location = '{{ route('productBc') }}';
+        }
+
+        function goToSpNew() {
+            window.location = '{{ route('productNew') }}';
         }
 
         $('.slider_left').slick({

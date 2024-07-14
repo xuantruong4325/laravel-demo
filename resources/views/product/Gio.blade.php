@@ -51,10 +51,10 @@
                     @foreach($carts as $cart)
                     <tr>
                         <td class="gio_sp" style="border: 1px solid #bdbdbd88;">
-                            <a href="ttsp.html"><img src="/image/{{ $cart->avatar }}" width="100px" header="100px"></a>
+                            <a href="{{ route('ttsp', ['id' => $cart->id_product]) }}"><img src="/image/{{ $cart->avatar }}" width="100px" header="100px"></a>
                         </td>
                         <td class="gio_tsp" style="border: 1px solid #bdbdbd88;">
-                            <a href="ttsp.html">{{ $cart->name }} </a>
+                            <a href="{{ route('ttsp', ['id' => $cart->id_product]) }}">{{ $cart->name }} </a>
                         </td>
                         <td class="gio_sl" style="border: 1px solid #bdbdbd88;">
                             <div class="input_sl">{{ $cart->quantity }}</div>

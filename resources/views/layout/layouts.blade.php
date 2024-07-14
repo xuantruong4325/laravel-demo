@@ -26,6 +26,8 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('src/plugins/datatables/css/responsive.bootstrap4.min.css') }}" />
         <link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/style.css') }}" />
         <script src="{{ asset('https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js') }}"></script>
+        <script src="https://cdn.jsdelivr.net/jquery.validation/1.19.3/jquery.validate.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-GBZ3SGGX85"></script>
@@ -64,64 +66,10 @@
 
     <div class="header">
         <div class="header-left">
-            <div class="menu-icon bi bi-list"></div>
-            <div class="search-toggle-icon bi bi-search" data-toggle="header_search"></div>
-            <div class="header-search">
-                <form>
-                    <div class="form-group mb-0">
-                        <i class="dw dw-search2 search-icon"></i>
-                        <input type="text" class="form-control search-input" placeholder="Search Here" />
-                        <div class="dropdown">
-                            <a class="dropdown-toggle no-arrow" href="#" role="button" data-toggle="dropdown">
-                                <i class="ion-arrow-down-c"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <div class="form-group row">
-                                    <label class="col-sm-12 col-md-2 col-form-label">From</label>
-                                    <div class="col-sm-12 col-md-10">
-                                        <input class="form-control form-control-sm form-control-line" type="text" />
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-12 col-md-2 col-form-label">To</label>
-                                    <div class="col-sm-12 col-md-10">
-                                        <input class="form-control form-control-sm form-control-line" type="text" />
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-12 col-md-2 col-form-label">Subject</label>
-                                    <div class="col-sm-12 col-md-10">
-                                        <input class="form-control form-control-sm form-control-line" type="text" />
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <button class="btn btn-primary">Tìm kiếm</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
+            
         </div>
         <div class="header-right">
-            <div class="dashboard-setting user-notification">
-                <div class="dropdown">
-                    <a class="dropdown-toggle no-arrow" href="javascript:;" data-toggle="right-sidebar">
-                        <i class="dw dw-settings2"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="user-notification">
-                <div class="dropdown">
-                    <a class="dropdown-toggle no-arrow" href="#" role="button" data-toggle="dropdown">
-                        <i class="icon-copy dw dw-notification"></i>
-                        <span class="badge notification-active"></span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right">
 
-                    </div>
-                </div>
-            </div>
             <div class="user-info-dropdown">
                 <div class="dropdown">
                     <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
@@ -155,18 +103,19 @@
     <div class="left-side-bar sidebar-light">
         <div class="brand-logo">
             <a href="#">
-                <img src="{{ asset('vendors/images/deskapp-logo.svg') }}" alt="" class="dark-logo" />
-                <img src="{{ asset('vendors/images/deskapp-logo-white.svg') }}" alt="" class="light-logo" />
+                <h3>
+                LAPTOP.VN
+                </h3>
             </a>
             <div class="close-sidebar" data-toggle="left-sidebar-close">
                 <i class="ion-close-round"></i>
             </div>
         </div>
-        <div class="menu-block customscroll">
+        <div class="menu-block">
             <div class="sidebar-menu">
                 <ul id="accordion-menu">
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" href="{{  route('homePage')  }}">
+                    <li>
+                        <a class="dropdown-toggle no-arrow" href="{{  route('homePage')  }}">
                             <span class="mtext">Trang chủ</span>
                         </a>
                     </li>
@@ -193,22 +142,27 @@
                             <li><a href="{{  route('dkntbList')  }}">Đanh sách khách hàng nhận thông báo</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" href="{{  route('listPromotion')  }}">
+                    <li>
+                        <a class="dropdown-toggle no-arrow" href="{{  route('listPromotion')  }}">
                             <span class="mtext">Khuyễn mãi</span>
                         </a>
                     </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" href="{{  route('listBank')  }}">
+                    <li>
+                        <a class="dropdown-toggle no-arrow" href="{{  route('listBank')  }}">
                             <span class="mtext">Quản lý ngân hàng</span>
                         </a>
                     </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" href="{{  route('listOrder')  }}">
+                    <li>
+                        <a class="dropdown-toggle no-arrow" href="{{  route('listOrder')  }}">
                             <span class="mtext">Quản đơn hàng</span>
                         </a>
                     </li>
-                    <!-- <li class="dropdown">
+                    <li>
+                        <a class="dropdown-toggle no-arrow" href="{{  route('listNews')  }}">
+                            <span class="mtext">Tin tức</span>
+                        </a>
+                    </li>
+                    <!-- <li>
                         <a class="dropdown-toggle" href="{{  route('listIntroduces')  }}">
                             <span class="mtext">Giới thiệu</span>
                         </a>

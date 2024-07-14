@@ -26,38 +26,35 @@
                                                                 Thêm tài khoản
                                                             </h2>
                                                         </div>
-                                                        <form action="{{ route('store') }}" method="POST">
+                                                        <form action="{{ route('store') }}" method="POST" id="formDkUser">
                                                             @csrf
-
                                                             <div class="input-group custom d-block">
-
-                                                                <input type="text" name="name" class="form-control form-control-lg" placeholder="Username" />
+                                                                <input type="text" name="name" class="form-control form-control-lg" placeholder="Username" required />
                                                                 <div class="input-group-append custom">
                                                                     <span class="input-group-text"><i class="icon-copy dw dw-user1"></i></span>
                                                                 </div>
+                                                                <span class="form-message" name="messages"></span>
                                                             </div>
                                                             <div class="input-group custom">
-
                                                                 <select name="user_type" class="form-control form-control-lg">
                                                                     <option value="user">user</option>
                                                                     <option value="admin">admin</option>
                                                                 </select>
-
                                                             </div>
                                                             <div class="input-group custom">
-                                                                <input type="email" name="email" class="form-control form-control-lg" placeholder="Email" />
+                                                                <input type="email" id="email" name="email" class="form-control form-control-lg" placeholder="Email" required />
                                                                 <div class="input-group-append custom">
                                                                     <span class="input-group-text"><i class="icon-copy dw dw-email1"></i></span>
                                                                 </div>
                                                             </div>
-                                                            <!-- @if($errors->has('Emaild'))
-                                                            <span class="error">{{ $errors->first('Emaild') }}</span>
-                                                            @endif -->
                                                             <div class="input-group custom">
-                                                                <input type="password" name="password" class="form-control form-control-lg" placeholder="**********" />
+                                                                <input type="password" name="password" class="form-control form-control-lg" minlength="6" placeholder="**********" required />
                                                                 <div class="input-group-append custom">
                                                                     <span class="input-group-text"><i class="dw dw-padlock1"></i></span>
                                                                 </div>
+                                                                <!-- @if($errors->has('mess'))
+                                                                <span class="form-message">Email đã tồn tại</span>
+                                                                @endif -->
                                                             </div>
                                                             <div class="row pb-30">
                                                                 <div class="col-6">
@@ -75,10 +72,10 @@
                                                             <div class="row">
                                                                 <div class="col-sm-12">
                                                                     <div class="input-group mb-0">
-                                                                        <button class="btn btn-primary btn-lg btn-block" onclick="addConten()">
+                                                                        <button type="submit" class="btn btn-primary btn-lg btn-block" onclick="addConten()">
                                                                             Xác nhận
                                                                         </button>
-                                                                        <a class="btn btn-primary btn-lg btn-block" href="{{  route('Admin')  }}" type="submit">Quay lại</a>
+                                                                        <a class="btn btn-primary btn-lg btn-block" href="{{  route('Admin')  }}" type="button">Quay lại</a>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -152,14 +149,71 @@
     </div>
 </div>
 <script>
+    // $(document).ready(function() {
+    //     $('#formDkUser').submit(function(event) {
+    //         $.ajax({
+    //             headers: {
+    //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //             },
+    //             url: "{{ route('store') }}",
+    //             type: 'POST',
+    //             success: function(mess) {
+    //                 if(data == 1){
+    //                     Swal.fire('Email đã tồn tại', '', 'error')
+    //                 }else{
+    //                     Swal.fire('Thêm mới tài khoản thành công', '', 'success')
+    //                 }
+    //             },
+    //         });
+    //     });
+    // });
     function addConten() {
         Swal.fire('Thêm mới tài khoản thành công', '', 'success')
-        
+
     }
     // function addeConten() {
     //     Swal.fire('Thêm mới tài khoản thành công', '', 'success')
-        
+
     // }
+    // $(document).ready(function() {
+    //     $("form").validate({
+    //         rules: {
+    //             name: {
+    //                 required: true,
+    //                 minlength: 3
+    //             },
+    //             user_type: {
+    //                 required: true
+    //             },
+    //             email: {
+    //                 required: true,
+    //                 email: true
+    //             },
+    //             password: {
+    //                 required: true,
+    //                 minlength: 6
+    //             }
+    //         },
+    //         messages: {
+    //             name: {
+    //                 required: "Vui lòng nhập tên người dùng",
+    //                 minlength: "Tên người dùng phải có ít nhất 3 ký tự"
+    //             },
+    //             user_type: {
+    //                 required: "Vui lòng chọn loại người dùng"
+    //             },
+    //             email: {
+    //                 required: "Vui lòng nhập email",
+    //                 email: "Vui lòng nhập địa chỉ email hợp lệ"
+    //             },
+    //             password: {
+    //                 required: "Vui lòng nhập mật khẩu",
+    //                 minlength: "Mật khẩu phải có ít nhất 6 ký tự"
+    //             }
+    //         },
+    //     });
+
+    // });
 </script>
 
 @endsection

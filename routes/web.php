@@ -15,6 +15,7 @@ use App\Http\Controllers\EndowsController;
 use App\Http\Controllers\BanksController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\DkntbController;
+use App\Http\Controllers\NewsController;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\Authenticate;
 
@@ -69,6 +70,14 @@ Route::group(['prefix' => 'Admin', 'middleware' => ['auth', 'is_admin']], functi
     Route::get('Technique-edit/{id}', [TechniqueControlle::class, 'techniqueEdit'])->name('editTechnique');
     Route::post('Technique-edit-save/{id}', [TechniqueControlle::class, 'techniqueEditSave'])->name('editTechniqueSave');
     Route::get('Technique-delete/{id}', [TechniqueControlle::class, 'techniqueDelete'])->name('deleteTechnique');
+
+    //Tin tức
+    Route::get('News', [NewsController::class, 'newsList'])->name('listNews');
+    Route::get('News-add', [NewsController::class, 'newsAdd'])->name('addNews');
+    Route::post('News-add-save', [NewsController::class, 'newsAddSave'])->name('addNewsSave');
+    Route::get('News-edit/{id}', [NewsController::class, 'newsEdit'])->name('editNews');
+    Route::post('News-edit-save/{id}', [NewsController::class, 'newsEditSave'])->name('editNewsSave');
+    Route::get('News-delete/{id}', [NewsController::class, 'newsDelete'])->name('deleteNews');
 
     //Search
     Route::get('Search', [NdController::class, 'search']);
@@ -151,6 +160,13 @@ Route::get('/Thông-tin-sản-phẩm/{id}', [ProductsController::class, 'Ttsp'])
 Route::get('/Khuyến-mại', [ProductsController::class, 'Khuyenmai'])->name('list-khuyenmai');
 Route::get('/Chi-tiết-khuyến-mại/{id}', [ProductsController::class, 'Khuyenmai2'])->name('khuyen-mai');
 Route::get('/Giới-thiệu', [ProductsController::class, 'Gioithieu'])->name('gioithieu');
+Route::get('/Chính-sách-bảo-hành', [ProductsController::class, 'Baohanh'])->name('baohanh');
+Route::get('/Chính-sách-giao-hàng', [ProductsController::class, 'Giaohang'])->name('giaohang');
+Route::get('/Sản-phẩm-bán-chạy', [ProductsController::class, 'Spbc'])->name('productBc');
+Route::get('/Tin-tức', [ProductsController::class, 'Tintuc'])->name('list-tintuc');
+Route::get('/Chi-tiết-tin-tức/{id}', [ProductsController::class, 'Tintuc2'])->name('tintuc');
+Route::get('/Sản-phẩm-mới', [ProductsController::class, 'Spm'])->name('productNew');
+Route::get('/Sản-phẩm-bán-chạy', [ProductsController::class, 'Spbc'])->name('productBc');
 
 
 //cart

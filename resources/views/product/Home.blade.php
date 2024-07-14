@@ -95,7 +95,7 @@
                         <div>
                             <hr class="hr_left" style="width: 37%;">
                             <hr class="hr_right" style="width: 37%;">
-                            <h1>Sản Phẩm Mới</h1>
+                            <h1>Sản Phẩm <span style="color: red;">Mới</span></h1>
                         </div>
                         <div class="gfgfgf">
                             @foreach ($newProducts as $conten)
@@ -149,14 +149,14 @@
                             @endif
                             @endforeach
                         </div>
-                        <button id="but" type="button" onclick="goToSp()">Xem Thêm</button>
+                        <button id="but" type="button" onclick="goToSpNew()">Xem Thêm</button>
                     </div>
 
                     <div class="spbc">
                         <div>
                             <hr class="hr_left" style="width: 33%;">
                             <hr class="hr_right" style="width: 33%;">
-                            <h1>Sản Phẩm Bán chạy</h1>
+                            <h1>Sản Phẩm <span style="color: red;">Bán chạy</span></h1>
                         </div>
                         <div class="gfgfgf">
                             @foreach ($soldProducts as $conten)
@@ -211,7 +211,7 @@
                             @endforeach
 
                         </div>
-                        <button id="but" type="button" onclick="goToSp()">Xem Thêm</button>
+                        <button id="but" type="button" onclick="goToSpbc()">Xem Thêm</button>
                     </div>
                 </form>
                 <script>

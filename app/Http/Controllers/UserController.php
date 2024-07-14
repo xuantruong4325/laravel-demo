@@ -60,7 +60,7 @@ class UserController extends Controller
 
         if (Auth::attempt($credentials)) {
             if (User::where('email', $credentials['email'])->first()->user_type === 'admin') {
-                return redirect()->route(route: 'Admin');
+                return redirect()->route(route: 'homePage');
             } else {
                 return redirect()->route(route: 'home');
             }
@@ -141,26 +141,18 @@ class UserController extends Controller
     }
     public function store(Request $request)
     {
-        // $email = $request->input('email');
-
-        // $existingemail = User::where('email', $email)->first();
-
-        // if ($existingemail) {
-        // dd($request);
-        // $email = $request->input('Email');
-        // $existingEmail = User::where('Email', $email)->first();
-
-        // if ($existingEmail) {
-        //     return redirect()->back()->withErrors(['Emaild' => 'Tên email đã tồn tại']);
-        // }
+        $existingEmail = $request->input('email');
+        if ($existingEmail) {
+            return redirect()->back()->withErrors(['mess' => 'Tên email đã tồn tại']);
+        }
         $user = User::create([
             'name' => $request->name,
             'user_type' => $request->user_type,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-
         return redirect()->route(route: 'Admin');
+        // return redirect()->back()->withErrors(['mess' => 'Tên email đã tồn tại']);
 
         // }
         // return redirect()->back()->withErrors(['Email' => 'Tên email đã tồn tại']);

@@ -25,7 +25,7 @@
         </div>
         <div>
             <form id="form_search" action="{{ route('product') }}" role="get">
-                <input type="text" placeholder="Từ khóa tìm kiếm" name="keyword" value="{{$namKey}}">
+                <input type="text" placeholder="Từ khóa tìm kiếm" name="keyword" value="">
                 <button type="submit">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
@@ -131,7 +131,7 @@
                         </div>
                         <div class="dssp">
                             <div class="conten_sp">
-                                @foreach($products as $product)
+                                @foreach($productsNew as $product)
                                 @if($product->status == 'Publish' || $product->status == 'Draft')
                                 <div class="product sp_product">
                                     @if($product->discount != null)
@@ -183,11 +183,11 @@
                                 @endforeach
                             </div>
                             <!-- <div style="justify-content: center;">
-                            {!! $products->links() !!}
+                          
                         </div> -->
                             <div id="sp_dau">
                                 <div class="sp_dau">
-                                    {!! $products->links() !!}
+                                    {!! $productsNew->links() !!}
                                 </div>
                             </div>
                         </div>

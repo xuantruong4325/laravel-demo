@@ -19,6 +19,7 @@ use App\Models\Endows;
 use App\Models\ImageProduct;
 use App\Models\Introduces;
 use App\Models\NdTechnique;
+use App\Models\news;
 use App\Models\product_carts;
 use App\Models\Promotions;
 use App\Models\Technique;
@@ -70,11 +71,37 @@ class ProductsController extends Controller
         return view('product/Khuyenmai2', compact('promotions', 'editfooters'));
     }
 
+    public function Tintuc()
+    {
+        $news = news::all();
+        $editfooters = Editfooter::all();
+        return view('product/Tintuc', compact('news', 'editfooters'));
+    }
+
+    public function Tintuc2($id)
+    {
+        $news = news::find($id);
+        $editfooters = Editfooter::all();
+        return view('product/Tintuc2', compact('news', 'editfooters'));
+    }
+
     public function Gioithieu()
     {
         $introduces = Introduces::all();
         $editfooters = Editfooter::all();
         return view('product/Gioithieu', compact('introduces', 'editfooters'));
+    }
+
+    public function Baohanh()
+    {
+        $editfooters = Editfooter::all();
+        return view('product/Csbaohanh', compact('editfooters'));
+    }
+
+    public function Giaohang()
+    {
+        $editfooters = Editfooter::all();
+        return view('product/Csgiaohang', compact('editfooters'));
     }
 
     public function Tttk(Request $request)
@@ -97,7 +124,6 @@ class ProductsController extends Controller
     public function saveDmk(Request $request)
     {
         $test = User::find(Auth()->User()->id);
-
         if (!Hash::check($request->pass, $request->user()->password)) {
             return redirect()->back()->withErrors(['passs' => 'Mật khẩu không chính xác']);
         }
@@ -349,5 +375,17 @@ class ProductsController extends Controller
         $cart = checkoutCart::find($id);
         $cartProducts = product_carts::where('checkout_cart_id', $cart->id)->get();
         return view('product/OrderProduct', compact('editfooters','cart','cartProducts'));
+    }
+
+    public function Spbc(){
+        $productsSold = Content::whereBetween('sold', [2,100000])->paginate(24);
+        $editfooters = Editfooter::all();
+        return view('product/spbc', compact('editfooters','productsSold'));
+    }
+
+    public function Spm(){
+        $productsNew = Content::orderBy('created_at', 'desc')->paginate(24);
+        $editfooters = Editfooter::all();
+        return view('product.spNew', compact('editfooters','productsNew'));
     }
 }

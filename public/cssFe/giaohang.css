@@ -1,0 +1,76 @@
+.form-baohanh {
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 50px;
+}
+.form-baohanh .giaohang {
+    position: relative;
+}
+.form-baohanh .giaohang img {
+    width: 100%;
+}
+.free-ship {
+    z-index: 100;
+    position: absolute;
+    top: 120px;
+    left: 120px;
+    font-size: 1.1rem;
+    color: #ED1B24;
+}
+.giaohang-giamgia {
+    z-index: 100;
+    position: absolute;
+    top: 120px;
+    right:90px;
+    text-align: center;
+    font-size: 1.1rem;
+    color: #ED1B24;
+}
+.center-space {
+    width: 90%;
+    display: flex;
+    font-style: italic;
+    font-size: 1.1rem;    
+}
+
+.text-baohanh {
+    position: absolute;
+    top: 80px;
+    left: 10px;
+    width: 50%;
+    font-size: 1.1rem;
+    color: #012489;
+}
+.text-baohanh span {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.text-thanhtoan {
+    position: absolute;
+    top: 80px;
+    right: -10px;
+    width: 50%;
+    font-size: 1.1rem;
+    color: #012489;
+}
+.text-thanhtoan span {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.form-baohanh ul {
+    margin-bottom: 30px;
+    width: 95%;
+    list-style: disc;
+}
+.form-baohanh ul li {
+    line-height: 30px;
+    margin-bottom: 5px;
+}
+.form-baohanh ul li span {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
