@@ -349,6 +349,7 @@ class ProductsController extends Controller
                 $product->save();
             }
         }
+        $items= Content::where('category_id', $product->category_id)->limit(10)->get();
         $techineques = NdTechnique::where('content_id', $id)->get();
         $endowPros = endow_product::where('content_id', $id)->get();
         $datas = [];
@@ -370,7 +371,7 @@ class ProductsController extends Controller
         $imageProducts = ImageProduct::where('content_id', $id)->get();
         $company = Company::find($product->company_id);
         $editfooters = Editfooter::all();
-        return view('product/Ttsp', compact('product', 'editfooters', 'imageProducts', 'datas', 'company', 'endows'));
+        return view('product/Ttsp', compact('product', 'editfooters', 'imageProducts', 'datas', 'company', 'endows', 'items'));
     }
 
     public function orderAll(){
