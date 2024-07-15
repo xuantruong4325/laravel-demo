@@ -13,11 +13,6 @@ class Category extends Model
         'name_category',
     ];
 
-    public function contents()
-    {
-        return $this->hasMany(Content::class);
-    }
-
     protected $table = 'category';
     
 }

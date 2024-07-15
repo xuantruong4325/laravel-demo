@@ -53,7 +53,7 @@
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
                                             <a class="dropdown-item" href="{{ route('editTechnique', ['id' => $technique->id]) }}"><i class="dw dw-edit2"></i> Sửa</a>
-                                            <a class="dropdown-item" href="{{ route('deleteTechnique', ['id' => $technique->id]) }}"><i class="dw dw-delete-3"></i> Xóa</a>
+                                            <a class="dropdown-item" href="{{ route('deleteTechnique', ['id' => $technique->id]) }}" onclick="deleteUser()"><i class="dw dw-delete-3"></i> Xóa</a>
                                         </div>
                                     </div>
                                 </td>
@@ -70,4 +70,9 @@
         </div>
     </div>
 </div>
+<script>
+	function deleteUser() {
+        Swal.fire('Xóa thông số sản phẩm thành công', '', 'success')
+    }
+</script>
 @endsection

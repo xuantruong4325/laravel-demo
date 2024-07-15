@@ -22,13 +22,10 @@ return new class extends Migration
             $table->integer('price_after_discount')->nullable();
             $table->text("product_specifications")->nullable();
             $table->text("product_reviews")->nullable();
-            $table->unsignedBigInteger("category_id");
-            $table->unsignedBigInteger("company_id");
+            $table->integer("category_id");
+            $table->integer("company_id");
             $table->string('status',20);
             $table->timestamps();
-
-            $table->foreign('category_id')->references('id')->on('category')->onDelete('no action');
-            $table->foreign('company_id')->references('id')->on('company')->onDelete('no action');
         });
     }
 

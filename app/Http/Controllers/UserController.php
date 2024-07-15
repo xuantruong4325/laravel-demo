@@ -104,7 +104,7 @@ class UserController extends Controller
         $existingEmail = User::where('Email', $email)->where('id', '!=', $id)->first();
 
         if ($existingEmail) {
-            return redirect()->back()->withErrors(['Email' => 'Tên email đã tồn tại']);
+            return redirect()->back()->with('error', true);
         }
 
         $user = User::find($id);
@@ -112,7 +112,7 @@ class UserController extends Controller
         $user->Email = $request->input('Email');
         $user->Password = bcrypt($request->input('Password'));
         $user->save();
-        return redirect()->route(route: 'Admin');
+        return redirect()->back()->with('redirect_to_admin', true);
     }
     public function Admin()
     {
@@ -120,8 +120,6 @@ class UserController extends Controller
         if (Auth::User()->user_type === 'admin') {
             $users = $users->where('user_type', '=', 'admin');
         }
-        // $users = $users->get();
-        // $users = User::query();
         return view('admin', ['users' => $users]);
     }
     // hien thi tk user
@@ -141,9 +139,12 @@ class UserController extends Controller
     }
     public function store(Request $request)
     {
-        $existingEmail = $request->input('email');
-        if ($existingEmail) {
-            return redirect()->back()->withErrors(['mess' => 'Tên email đã tồn tại']);
+        $email = $request->input('email');
+
+        $existingemail = User::where('email', $email)->first();
+
+        if ($existingemail) {
+            return redirect()->back()->withErrors(['Email' => 'Tên email đã tồn tại'])->with('error', true);
         }
         $user = User::create([
             'name' => $request->name,
@@ -151,7 +152,7 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-        return redirect()->route(route: 'Admin');
+        return redirect()->back()->withErrors(['Email' => 'Tên email đã tồn tại'])->with('redirect_to_admin', true);
         // return redirect()->back()->withErrors(['mess' => 'Tên email đã tồn tại']);
 
         // }

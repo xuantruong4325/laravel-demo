@@ -14,33 +14,36 @@
 
 					<div class="form-group">
 						<h6 class="mb-3">Nhập tiêu đề</h6>
-						<input type="text" name="title" class="form-control form-control-lg" />
+						<input type="text" name="title" class="form-control form-control-lg" required/>
 					</div>
 					<div class="form-group">
 						<h6 class="mb-3">Nội dung tiêu đề</h6>
-						<input type="text" name="content_title" class="form-control form-control-lg" />
+						<input type="text" name="content_title" class="form-control form-control-lg" required/>
 					</div>
 					<div class="row">
 						<div class="col-md-12">
 							<div class="form-group mb-4">
 								<h6 class="mb-3">Chọn ảnh tin tức</h6>
-								<input name="avatar" type="file" class="form-control-file">
+								<input name="avatar" type="file" class="form-control-file" required>
 							</div>
 						</div>
 					</div>
 					<div class="form-group">
 						<h6 class="mb-3">Nhập nội dung tin tức</h6>
-						<textarea type="text" class="textarea_editor1 form-control border-radius-1" style="height: 500px;" name="content"></textarea>
+						<textarea type="text" class="textarea_editor1 form-control border-radius-1" style="height: 500px;" name="content" required></textarea>
 					</div>
-					<button type="submit" class="btn btn-primary btn-lg btn-block" onclick="addConten()">Xác nhận</button>
+					<button type="submit" class="btn btn-primary btn-lg btn-block">Xác nhận</button>
 				</form>
 			</div>
 		</div>
 	</div>
 </div>
+@if(session('redirect'))
 <script>
-	function addConten() {
-		Swal.fire('Thêm tin tức mới thành công', '', 'success')
-	}
+	Swal.fire('Thêm mới tin tức thành công', '', 'success')
+	setTimeout(function() {
+		window.location.href = "{{ route('listNews') }}";
+	}, 500); // Chờ 2 giây trước khi chuyển hướng
 </script>
+@endif
 @endsection

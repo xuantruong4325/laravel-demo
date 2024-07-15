@@ -7,22 +7,22 @@
         @csrf
         <div class="form-box">
             <label for="name">Họ tên</label>
-            <input id="name" name="name" type="text" placeholder="Họ và tên" value="{{Auth::user()->name}}">
+            <input id="name" name="name" type="text" placeholder="Họ và tên" value="{{Auth::user()->name}}" required>
         </div>
 
         <div class="form-box">
             <label for="sdt">Số điện thoại</label>
-            <input id="sdt" name="phone" type="text" placeholder="Nhập số điện thoại" value="{{Auth::user()->phone}}">
+            <input id="sdt" name="phone" type="text" placeholder="Nhập số điện thoại" value="{{Auth::user()->phone}}" maxlength="10" minlength="10" require>
         </div>
 
         <div class="form-box">
             <label for="email">Email</label>
-            <input id="email" name="email" type="text" placeholder="Nhập Email" value="{{Auth::user()->email}}">
+            <input id="email" name="email" type="email" placeholder="Nhập Email" value="{{Auth::user()->email}}" required>
         </div>
 
         <div class="form-box">
             <label for="tinh">Tỉnh/Thành Phố</label>
-            <select id="tinh" name="idTinh">
+            <select id="tinh" name="idTinh" required>
                 <option value="">Tỉnh/Thành phố</option>
                 @foreach($conscious as $consciou)
                 <option value="{{ $consciou->code_consciouse }}" {{ $consciou->code_consciouse === Auth::user()->conscious ? 'selected' : '' }}>{{ $consciou->consciouse }}</option>
@@ -32,7 +32,7 @@
 
         <div class="form-box">
             <label for="huyen">Quận/huyện</label>
-            <select id="huyen" name="idHuyen">
+            <select id="huyen" name="idHuyen" required>
                 @if($districts != null)
                 @foreach($districts as $district)
                 <option value="{{ $district->code_district }}" {{ $district->code_district === Auth::user()->district ? 'selected' : '' }}>{{ $district->district }}</option>
@@ -45,7 +45,7 @@
 
         <div class="form-box">
             <label for="xa">Phường/xã</label>
-            <select id="xa" name="idXa">
+            <select id="xa" name="idXa" required>
                 @if($districts != null)
                 @foreach($communes as $commune)
                 <option value="{{ $commune->code_commune }}" {{ $commune->code_commune === Auth::user()->commune ? 'selected' : '' }}>{{ $commune->commune }}</option>
@@ -58,7 +58,7 @@
 
         <div class="form-box">
             <label for="diachi">Địa chỉ</label>
-            <input id="diachi" type="text" placeholder="Số nhà, tên đường" name="address" value="{{Auth::user()->address}}">
+            <input id="diachi" type="text" placeholder="Số nhà, tên đường" name="address" value="{{Auth::user()->address}}" required >
         </div>
 
         @if($errors->has('Email'))

@@ -31,7 +31,7 @@ class NewsController extends Controller
             'created_at' =>now()->toDateTimeString(),
             'updated_at' => now()->toDateTimeString(),
         ]);
-        return redirect()->route(route: 'listNews');
+        return redirect()->back()->with('redirect', true);
     }
     public function newsEdit($id){
         $news = news::find($id);
@@ -58,7 +58,7 @@ class NewsController extends Controller
         $news -> updated_at = now()->toDateTimeString();
         $news -> save();
 
-        return redirect()->route(route: 'listNews');
+        return redirect()->back()->with('redirect', true);
     }
     public function newsDelete($id){
         $news = news::find($id);

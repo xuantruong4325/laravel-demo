@@ -16,10 +16,6 @@ class endow_product extends Model
     {
         return $this->belongsTo(Content::class);
     }
-    public function endow()
-    {
-        return $this->belongsTo(Endows::class);
-    }
 
     protected $table = 'endow_products';
 }

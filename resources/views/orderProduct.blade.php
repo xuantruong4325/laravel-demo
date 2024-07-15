@@ -30,24 +30,18 @@
                             @csrf
                                 <div class="form-group">
                                     <label>Tạng thái đơn hàng:</label>
-                                    @if($cart->order_status == 3)
-                                    <select class="custom-select col-10" name="order_status" id="statusCart">
-                                        <option value="3" {{ $cart->order_status === '3' ? 'selected' : '' }}>Đã hủy</option>
-                                    </select>
-                                    @else
                                     <select class="custom-select col-10" name="order_status" id="statusCart">
                                         <option value="0" {{ $cart->order_status === '0' ? 'selected' : '' }}>Chờ xác nhận</option>
                                         <option value="1" {{ $cart->order_status === '1' ? 'selected' : '' }}>Đang giao</option>
                                         <option value="2" {{ $cart->order_status === '2' ? 'selected' : '' }}>Đã giao</option>
                                         <option value="3" {{ $cart->order_status === '3' ? 'selected' : '' }}>Đã hủy</option>
                                     </select>
-                                    @endif
                                 </div>
                             </form>
                         </div>
                     </div>
                     <div class="pb-20">
-                        <table class="data-table table stripe hover nowrap">
+                        <table class="table stripe hover nowrap">
                             <thead>
                                 <tr>
                                     <td>#</td>

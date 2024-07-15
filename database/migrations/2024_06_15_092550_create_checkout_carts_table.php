@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('totalPrice')->nullable();
             $table->integer('address')->nullable();
             $table->string('order_status',30)->nullable();
+            $table->string('code_order',10);
             $table->timestamps();
         });
     }

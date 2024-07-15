@@ -44,26 +44,27 @@
 
                         <div class="flex-content">
                             <div class="tt-box-2">
+                                <input name="code_order" value="{{$code_order}}" style="max-width: 0px; max-height: 0px; border: 0px; padding: 0;">
                                 <h2>Địa chỉ giao hàng</h2>
 
                                 <div class="form-box">
                                     <label for="name">Họ tên</label>
-                                    <input id="name" name="nameUser" type="text" value="{{Auth::user()->name}}">
+                                    <input id="name" name="nameUser" type="text" value="{{Auth::user()->name}}" required>
                                 </div>
 
                                 <div class="form-box">
                                     <label for="sdt">Số điện thoại</label>
-                                    <input id="sdt" name="phoneUser" type="text" value="{{Auth::user()->phone}}">
+                                    <input id="sdt" name="phoneUser" type="text" value="{{Auth::user()->phone}}" minlength="10" maxlength="10" required>
                                 </div>
 
                                 <div class="form-box">
                                     <label for="email">Email</label>
-                                    <input id="email" type="text" value="{{Auth::user()->email}}">
+                                    <input id="email" type="email" value="{{Auth::user()->email}}" required>
                                 </div>
 
                                 <div class="form-box">
                                     <label for="tinh">Tỉnh/Thành Phố</label>
-                                    <select id="tinh" name="idTinh">
+                                    <select id="tinh" name="idTinh" required>
                                         <option value="">Tỉnh/Thành phố</option>
                                         @foreach($conscious as $consciou)
                                         <option value="{{ $consciou->code_consciouse }}" {{ $consciou->code_consciouse === Auth::user()->conscious ? 'selected' : '' }}>{{ $consciou->consciouse }}</option>
@@ -73,7 +74,7 @@
 
                                 <div class="form-box">
                                     <label for="huyen">Quận/huyện</label>
-                                    <select id="huyen" name="idHuyen">
+                                    <select id="huyen" name="idHuyen" required>
                                         @if($districts != null)
                                         @foreach($districts as $district)
                                         <option value="{{ $district->code_district }}" {{ $district->code_district === Auth::user()->district ? 'selected' : '' }}>{{ $district->district }}</option>
@@ -86,7 +87,7 @@
 
                                 <div class="form-box">
                                     <label for="xa">Phường/xã</label>
-                                    <select id="xa" name="idXa">
+                                    <select id="xa" name="idXa" required>
                                         @if($districts != null)
                                         @foreach($communes as $commune)
                                         <option value="{{ $commune->code_commune }}" {{ $commune->code_commune === Auth::user()->commune ? 'selected' : '' }}>{{ $commune->commune }}</option>
@@ -99,7 +100,7 @@
 
                                 <div class="form-box">
                                     <label for="diachi">Địa chỉ</label>
-                                    <input id="diachi" name="address" type="text" value="{{Auth::user()->address}}">
+                                    <input id="diachi" name="address" type="text" value="{{Auth::user()->address}}" required>
                                 </div>
 
                             </div>
@@ -131,8 +132,17 @@
                                         <label for="xa">Số tài khoản</label>
                                         <label class="ttck_nh"> {{ $bank->account_number }}</label>
                                     </div>
+                                    <div class="form-box">
+                                        <label for="xa">Nội dung chuyển khoản</label>
+                                        <label class="ttck_nh">TT-{{ $code_order }}</label>
+                                    </div>
                                 </div>
                                 <div class="focus-qr">
+                                    <div class="form-box">
+                                        <label for="xa">Nội dung chuyển khoản</label>
+                                        <label class="ttck_nh">TT-{{ $code_order }}</label>
+                                    </div>
+                                    <br>
                                     <img src="/code_qr/{{ $bank->code_qr }}" alt="" class="qr">
                                     <!-- <div class="qr"> </div> -->
                                 </div>
@@ -153,7 +163,6 @@
             <a href="">
                 <img src="/FileImage/Layout/{{ $editfooter->file_footer_right }}">
             </a>
-
         </div>
 
     </div>

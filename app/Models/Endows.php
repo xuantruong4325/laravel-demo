@@ -14,8 +14,4 @@ class Endows extends Model
 
     protected $table = 'endows';
 
-    public function endowProduct()
-    {
-        return $this->hasMany(endow_product::class);
-    }
 }

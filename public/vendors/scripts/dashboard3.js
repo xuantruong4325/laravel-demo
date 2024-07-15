@@ -288,7 +288,7 @@ $('document').ready(function(){
 		"lengthMenu": [[5, 25, 50, -1], [5, 25, 50, "All"]],
 		"language": {
 			"info": "_START_-_END_ of _TOTAL_ entries",
-			searchPlaceholder: "Search",
+			searchPlaceholder: "Tìm kiếm",
 			paginate: {
 				next: '<i class="ion-chevron-right"></i>',
 				previous: '<i class="ion-chevron-left"></i>'

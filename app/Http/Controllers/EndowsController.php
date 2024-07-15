@@ -18,11 +18,18 @@ class EndowsController extends Controller
         return view('Categorise/Endow/endow-add');
     }
     public function endowsAddSave(Request $request){
+        $ckeck = $request->input('endow');
+        $existingEmail = Endows::where('nameEndow', $ckeck)->first();
+
+        if ($existingEmail) {
+            return redirect()->back()->with('error', true);
+        }
+
         $endow = Endows::create([
             'nameEndow' => $request->endow, 
             'created_at' =>now()->toDateTimeString()
         ]);
-        return redirect()->route(route:'listEndow');
+        return redirect()->back()->with('redirect', true);
     }
     public function endowsEdit($id){
         $endow = Endows::find($id);
@@ -30,10 +37,18 @@ class EndowsController extends Controller
     }
     public function endowsEditSave(Request $request, $id){
         $endow = Endows::find($id);
+
+        $ckeck = $request->input('endow');
+        $existingEmail = Endows::where('nameEndow', $ckeck)->where('id', '!=', $id)->first();
+
+        if ($existingEmail) {
+            return redirect()->back()->with('error', true);
+        }
+
         $endow->nameEndow = $request->input('endow');
         $endow->updated_at = now()->toDateTimeString();
         $endow->save();
-        return redirect()->route(route:'listEndow');
+        return redirect()->back()->with('redirect', true);
     }
     public function endowsDelete($id){
         $endow = Endows::find($id);

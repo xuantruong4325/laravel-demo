@@ -11,9 +11,10 @@
                 </div>
                 <form action="{{ route('ndstore') }}" method="POST" role="form" enctype="multipart/form-data">
                     @csrf
+                    
                     <div class="form-group">
                         <label for="productType">Chọn hãng sản phẩm</label>
-                        <select class="custom-select2 form-control form-control-lg" name="companyId" style="width: 100%; height: 38px">
+                        <select class="custom-select2 form-control form-control-lg" name="companyId" style="width: 100%; height: 38px" required>
                             @foreach ($company as $company)
                             <option value="{{$company->id}}">{{$company->name_company}}</option>
                             @endforeach
@@ -21,7 +22,7 @@
                     </div>
                     <div class="form-group">
                         <label for="productType">Chọn loại sản phẩm</label>
-                        <select class="custom-select2 form-control form-control-lg" name="categoryId" style="width: 100%; height: 38px">
+                        <select class="custom-select2 form-control form-control-lg" name="categoryId" style="width: 100%; height: 38px" required>
                             @foreach ($category as $categor)
                             <option value="{{$categor->id}}">{{$categor->name_category}}</option>
                             @endforeach
@@ -34,19 +35,19 @@
                     </div>
                     <div class="form-group">
                         <label for="productType">Chọn avatar sản phẩm</label>
-                        <input type="file" class="form-control-file form-control height-auto" name="file" />
+                        <input type="file" class="form-control-file form-control height-auto" name="file" required/>
                     </div>
                     <div class="form-group">
                         <label for="productType">Nhập tên sản phẩm</label>
-                        <input type="type" class="form-control form-control-lg" name="content" />
+                        <input type="type" class="form-control form-control-lg" name="content" required/>
                     </div>
                     <div class="form-group">
                         <label for="productType">Nhập số lượng hàng</label>
-                        <input type="number" class="form-control form-control-lg" name="quantity" />
+                        <input type="number" class="form-control form-control-lg" name="quantity" required/>
                     </div>
                     <div class="form-group">
                         <label for="productType">Nhập giá sản sản phẩm</label>
-                        <input type="number" name="old_price" class="form-control form-control-lg" oninput="new_price()" id="old_price" />
+                        <input type="number" name="old_price" class="form-control form-control-lg" oninput="new_price()" id="old_price" required/>
                     </div>
                     <div class="form-group">
                         <label for="productType">Giá sau khi giảm</label>
@@ -64,7 +65,7 @@
 
                     <div class="form-group">
                         <label for="productType">Trạng thái sản phẩm</label>
-                        <select name="status" class="form-control form-control-lg">
+                        <select name="status" class="form-control form-control-lg" required>
                             <option value="Publish">Còn hàng</option>
                             <option value="Draft">Hết hàng</option>
                             <option value="Browsing">Chờ</option>
@@ -160,12 +161,20 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-primary btn-lg btn-block" onclick="addConten()">Xác nhận</button>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Xác nhận</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
+@if(session('redirect'))
+<script>
+	Swal.fire('Thêm mới sản phẩm thành công', '', 'success')
+	setTimeout(function() {
+		window.location.href = "{{ route('ndindex') }}";
+	}, 500); // Chờ 2 giây trước khi chuyển hướng
+</script>
+@endif
 <script src="{{ asset('https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js') }}"></script>
 <script>
     var test = {!! $techniques !!};
@@ -230,9 +239,9 @@
 
     }
 
-    function addConten() {
-        Swal.fire('Thêm nội dung mới thành công', '', 'success')
-    }
+    // function addConten() {
+    //     Swal.fire('Thêm nội dung mới thành công', '', 'success')
+    // }
 
     function roundUpToNearest(value, factor) {
         return Math.ceil(value / factor) * factor;

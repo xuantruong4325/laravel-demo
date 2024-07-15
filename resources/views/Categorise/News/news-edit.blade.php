@@ -14,11 +14,11 @@
 
 					<div class="form-group">
 						<h6 class="mb-3">Tiêu đề</h6>
-						<input type="text" name="title" class="form-control form-control-lg" value="{{ $news->title }}" />
+						<input type="text" name="title" class="form-control form-control-lg" value="{{ $news->title }}" required/>
 					</div>
 					<div class="form-group">
 						<h6 class="mb-3">Nội dung tiêu đề</h6>
-						<input type="text" name="content_title" class="form-control form-control-lg" value="{{ $news->content_title }}" />
+						<input type="text" name="content_title" class="form-control form-control-lg" value="{{ $news->content_title }}" required/>
 					</div>
 					<div class="row">
 						<div class="col-md-12">
@@ -30,17 +30,20 @@
 					</div>
 					<div class="form-group">
 						<h6 class="mb-3">Nhập nội dung tin tức</h6>
-						<textarea type="text" class="textarea_editor1 form-control border-radius-1" style="height: 500px;" name="content">{{ $news->content }}</textarea>
+						<textarea type="text" class="textarea_editor1 form-control border-radius-1" style="height: 500px;" name="content" required>{{ $news->content }}</textarea>
 					</div>
-					<button type="submit" class="btn btn-primary btn-lg btn-block" onclick="addConten()">Xác nhận</button>
+					<button type="submit" class="btn btn-primary btn-lg btn-block">Xác nhận</button>
 				</form>
 			</div>
 		</div>
 	</div>
 </div>
+@if(session('redirect'))
 <script>
-	function addConten() {
-		Swal.fire('Sửa tinn tức thành công', '', 'success')
-	}
+	Swal.fire('Sửa tin tức thành công', '', 'success')
+	setTimeout(function() {
+		window.location.href = "{{ route('listNews') }}";
+	}, 500); // Chờ 2 giây trước khi chuyển hướng
 </script>
+@endif
 @endsection

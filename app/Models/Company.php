@@ -13,10 +13,6 @@ class Company extends Model
         'name_company',
     ];
 
-    public function contents()
-    {
-        return $this->hasMany(Content::class);
-    }
 
     protected $table = 'company';
 }

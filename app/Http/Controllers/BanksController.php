@@ -58,7 +58,7 @@ class BanksController extends Controller
         $bank->code_qr = $name_qrCode;
         $bank->updated_at = now()->toDateTimeString();
         $bank->save();
-        return redirect()->route(route:'listBank');
+        return redirect()->back()->with('redirect', true);
     }
     public function bankDelete($id){
         $bank = Banks::find($id);

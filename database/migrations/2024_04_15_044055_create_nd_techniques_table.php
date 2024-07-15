@@ -15,11 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('nameTechnique',300)->nullable();
             $table->unsignedBigInteger("content_id");
-            $table->unsignedBigInteger("technique_id");
+            $table->integer("technique_id");
             $table->timestamps();
 
             $table->foreign('content_id')->references('id')->on('contents')->onDelete('cascade');
-            $table->foreign('technique_id')->references('id')->on('technique')->onDelete('no action');
         });
     }
 

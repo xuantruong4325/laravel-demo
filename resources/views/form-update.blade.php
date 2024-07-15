@@ -13,7 +13,10 @@
                     @csrf
                     <div class="form-group">
                         <label for="productType">Hãng sản phẩm</label>
-                        <select class="custom-select2 form-control form-control-lg" name="companyId" style="width: 100%; height: 38px">
+                        <select class="custom-select2 form-control form-control-lg" name="companyId" style="width: 100%; height: 38px" required>
+                            @if($ckeckCompa == '1')
+                            <option>Hãng sản phẩm đã bị xóa</option>
+                            @endif
                             @foreach ($company as $company)
                             <option value="{{$company->id}}" {{ $company->id === $content->company_id ? 'selected' : '' }}>{{$company->name_company}}</option>
                             @endforeach
@@ -21,7 +24,10 @@
                     </div>
                     <div class="form-group">
                         <label for="productType">Loại sản phẩm</label>
-                        <select class="custom-select2 form-control form-control-lg" name="categoryId" style="width: 100%; height: 38px">
+                        <select class="custom-select2 form-control form-control-lg" name="categoryId" style="width: 100%; height: 38px" required>
+                            <!-- @if($ckeckCate == '1')
+                            <option>Loại sản phẩm đã bị xóa</option>
+                            @endif -->
                             @foreach ($category as $categor)
                             <option value="{{$categor->id}}" {{ $categor->id === $content->company_id ? 'selected' : '' }}>{{$categor->name_category}}</option>
                             @endforeach
@@ -33,19 +39,19 @@
                     </div>
                     <div class="form-group">
                         <label for="productType">Avatar sản phẩm</label>
-                        <input class="form-control-file form-control height-auto" name="file" type="file" />
+                        <input class="form-control-file form-control height-auto" name="file" type="file"/>
                     </div>
                     <div class="form-group">
                         <label for="productType">Tên sản phẩm</label>
-                        <input type="type" class="form-control form-control-lg" name="content" value="{{$content->content}}" />
+                        <input type="type" class="form-control form-control-lg" name="content" value="{{$content->content}}" required/>
                     </div>
                     <div class="form-group">
                         <label for="productType">Số lượng hàng</label>
-                        <input type="number" class="form-control form-control-lg" name="quantity" value="{{$content->quantity}}" />
+                        <input type="number" class="form-control form-control-lg" name="quantity" value="{{$content->quantity}}" required/>
                     </div>
                     <div class="form-group">
                         <label for="productType">Giá sản sản phẩm</label>
-                        <input type="text" name="old_price" class="form-control form-control-lg" value="{{$content->old_price}}" oninput="new_price()" id="old_price" />
+                        <input type="text" name="old_price" class="form-control form-control-lg" value="{{$content->old_price}}" oninput="new_price()" id="old_price" required/>
                     </div>
                     <div class="form-group">
                         <label for="productType">Sau khi giảm</label>
@@ -126,6 +132,9 @@
                                                 <div class="form-group">
                                                     <label for="productType">Chọn thông số</label>
                                                     <select class="custom-select2 form-control form-control-lg" name="techniques[]" style="width: 100%; height: 38px">
+                                                        @if($ckeckTechni == '1')
+                                                            <option>Thông số đã bị xóa đã bị xóa</option>
+                                                        @endif
                                                         @foreach ($techniques as $technique)
                                                             <option value="{{$technique->id}}" {{ $ndTechnique->technique_id === $technique->id ? 'selected' : '' }}>{{$technique->technique}}</option>
                                                         @endforeach
@@ -168,6 +177,9 @@
                                                 <div class="form-group">
                                                     <label for="productType">Chọn ưu đãi</label>
                                                     <select class="custom-select2 form-control form-control-lg" name="endows[]" style="width: 100%; height: 38px">
+                                                        @if($ckeckEndow == '1')
+                                                            <option>Ưu đãi sản phẩm đã bị xóa</option>
+                                                        @endif
                                                         @foreach ($endows as $endow)
                                                             <option value="{{$endow->id}}" {{ $endowProduct->endow_id == $endow->id ? 'selected' : '' }}>{{$endow->nameEndow}}</option>
                                                         @endforeach
@@ -182,13 +194,21 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-lg btn-block" onclick="addConten()">Xác nhận</button>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Xác nhận</button>
                     <a href="{{  route('ndindex')  }} " class="btn btn-primary btn-lg btn-block">Hủy</a>
                 </form>
             </div>
         </div>
     </div>
 </div>
+@if(session('redirect'))
+<script>
+	Swal.fire('Sửa sản phẩm thành công', '', 'success')
+	setTimeout(function() {
+		window.location.href = "{{ route('ndindex') }}";
+	}, 500); // Chờ 2 giây trước khi chuyển hướng
+</script>
+@endif
 <script src="{{ asset('https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js') }}"></script>
 <script>
     var test = {!! $techniques !!};
@@ -249,11 +269,6 @@
     function delete_cell_other_attribute(em) {
         $(em).closest('#remove_item').remove();
 
-    }
-
-
-    function addConten() {
-        Swal.fire('Sửa nội dung mới thành công', '', 'success')
     }
 
     function roundUpToNearest(value, factor) {

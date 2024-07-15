@@ -25,6 +25,7 @@ use App\Models\Promotions;
 use App\Models\Technique;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class ProductsController extends Controller
 {
@@ -237,6 +238,7 @@ class ProductsController extends Controller
 
     public function cartCheckout()
     {
+        $items = checkoutCart::all();
         $priceCart = 0;
         $test = User::find(Auth()->User()->id);
         $bank = Banks::first();
@@ -244,6 +246,12 @@ class ProductsController extends Controller
         $conscious = Conscious::all();
         $districts = Districts::where('consciouse_code', $test->conscious)->get();
         $communes = Communes::where('district_code', $test->district)->get();
+        $code_order = rand(10000, 99999);
+        foreach($items as $item){
+            if($item->code_order == $code_order){
+                $code_order = rand(10000, 99999);
+            }
+        }
         $carts = cart::where('user_id', $test1)->get();
         foreach ($carts as $cart) {
             if ($cart->new_price != 0) {
@@ -253,7 +261,7 @@ class ProductsController extends Controller
             }
         }
         $editfooters = Editfooter::all();
-        return view('product/Ttck', compact('editfooters', 'carts', 'priceCart', 'conscious', 'districts', 'communes', 'bank'));
+        return view('product/Ttck', compact('editfooters', 'carts', 'priceCart', 'conscious', 'districts', 'communes', 'bank', 'code_order'));
     }
 
     public function pay(Request $request)
@@ -294,6 +302,7 @@ class ProductsController extends Controller
             'totalPrice' => $priceCart,
             'address' => $request->address. ',' .$commune->commune. ',' .$district->district. ','  .$conscious->consciouse,
             'order_status' => 0,
+            'code_order' => $request->code_order,
         ]);
         $id = $cart->id;
         foreach ($carts as $item) {
@@ -324,7 +333,7 @@ class ProductsController extends Controller
             $query->where('content','like','%' .$tk. '%');
             $namKey = $tk;
         }
-        $products = $query->paginate(3);
+        $products = $query->paginate(1);
         $editfooters = Editfooter::all();
         return view('product/Sp', compact('products', 'editfooters', 'namKey'));
     }

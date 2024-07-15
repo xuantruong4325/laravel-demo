@@ -44,14 +44,4 @@ class Content extends Model
         return $this->hasMany(endow_product::class);
     }
 
-    public function category()
-    {
-        return $this->belongsTo(Category::class);
-    }
-
-    public function company()
-    {
-        return $this->belongsTo(Company::class);
-    }
-
 }

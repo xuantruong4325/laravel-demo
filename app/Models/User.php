@@ -27,7 +27,6 @@ class User extends Authenticatable
         'district',
         'commune',
         'address',
-
     ];
 
     public function comments()

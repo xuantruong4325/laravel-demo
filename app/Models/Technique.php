@@ -14,8 +14,4 @@ class Technique extends Model
 
     protected $table = 'technique';
 
-    public function ndTechnique()
-    {
-        return $this->hasMany(NdTechnique::class);
-    }
 }

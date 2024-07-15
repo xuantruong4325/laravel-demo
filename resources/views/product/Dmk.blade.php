@@ -7,7 +7,7 @@
         @csrf
         <div class="form-box">
             <label for="name">Mật khẩu hiện tại</label>
-            <input id="name" type="password" placeholder="Nhập mật khẩu hiện tại" name="pass" minlength="3" required>
+            <input id="name" type="password" placeholder="Nhập mật khẩu hiện tại" name="pass" minlength="6" required>
         </div>
 
         <div class="form-box">

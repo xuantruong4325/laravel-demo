@@ -46,8 +46,7 @@ class NdController extends Controller
             $test = 1 - ($giam / 100);
             $gia = round($request->old_price * $test);
 
-            $gia = $this->roundDownToNearest($gia,1000);
-
+            $gia = $this->roundDownToNearest($gia, 1000);
         }
 
 
@@ -99,7 +98,7 @@ class NdController extends Controller
             }
         }
 
-        return redirect()->route(route: 'ndindex');
+        return redirect()->back()->with('redirect', true);
     }
 
 
@@ -108,35 +107,35 @@ class NdController extends Controller
         $query = Content::query();
         $category = Category::all();
         $company = Company::all();
-        $namKey=null;
-        $namCom=null;
-        $namCate=null;
-        $namSta=null;
+        $namKey = null;
+        $namCom = null;
+        $namCate = null;
+        $namSta = null;
 
-        
-        if($request->searchStatus != 0){
+
+        if ($request->searchStatus != 0) {
             $seachStatus = $request->input('searchStatus');
-            $query->where('status','like','%' .$seachStatus. '%');   
+            $query->where('status', 'like', '%' . $seachStatus . '%');
             $namSta = $seachStatus;
         }
-        if($request->proCom !=0){
+        if ($request->proCom != 0) {
             $proCom = $request->input('proCom');
-            $query->where('company_id',$proCom);  
+            $query->where('company_id', $proCom);
             $namCom = $proCom;
         }
-        if($request->proCate !=0){
+        if ($request->proCate != 0) {
             $proCate = $request->input('proCate');
-            $query->where('category_id',$proCate);  
+            $query->where('category_id', $proCate);
             $namCate = $proCate;
         }
-        if($request->has('keyword')){
+        if ($request->has('keyword')) {
             $tk = $request->input('keyword');
-            $query->where('content','like','%' .$tk. '%');
+            $query->where('content', 'like', '%' . $tk . '%');
             $namKey = $tk;
         }
         $contents = $query->paginate(3);
         // dd($contents);
-        return view('nd', compact('contents','namKey','category','company','namCom','namCate','namSta'));
+        return view('nd', compact('contents', 'namKey', 'category', 'company', 'namCom', 'namCate', 'namSta'));
     }
 
 
@@ -163,6 +162,10 @@ class NdController extends Controller
 
     public function ndUpdate($id)
     {
+        $ckeckCate = 0;
+        $ckeckCompa = 0;
+        $ckeckTechni = 0;
+        $ckeckEndow = 0;
         $content = Content::find($id);
         $category = Category::all();
         $company = Company::all();
@@ -170,7 +173,31 @@ class NdController extends Controller
         $techniques = Technique::all();
         $endows = Endows::all();
         $endowProducts = endow_product::where('content_id', $id)->get();
-        return view('form-update', compact('content', 'category', 'company', 'ndTechniques', 'techniques' , 'endows', 'endowProducts'));
+        foreach ($category as $item) {
+            if ($item->id != $content->category_id) {
+                $ckeckCate = 1;
+            }
+        }
+        foreach ($company as $item) {
+            if ($item->id != $content->company_id) {
+                $ckeckCompa = 1;
+            }
+        }
+        foreach ($techniques as $item) {
+            foreach ($ndTechniques as $item2) {
+                if ($item->id != $item2->technique_id) {
+                    $ckeckTechni = 1;
+                }
+            }
+        }
+        foreach ($endows as $item) {
+            foreach ($endowProducts as $item2) {
+                if ($item->id != $item2->endow_id) {
+                    $ckeckEndow = 1;
+                }
+            }
+        }
+        return view('form-update', compact('ckeckEndow', 'ckeckTechni','ckeckCate', 'ckeckCompa', 'content', 'category', 'company', 'ndTechniques', 'techniques', 'endows', 'endowProducts'));
     }
     public function ndfromUpdate(Request $request, $id)
     {
@@ -178,7 +205,7 @@ class NdController extends Controller
         $contents = null;
 
         $test2s = NdTechnique::where('content_id', $id)->get();
-        foreach($test2s as $test2){
+        foreach ($test2s as $test2) {
             $test2->delete();
         }
         $aa = 0;
@@ -194,7 +221,7 @@ class NdController extends Controller
         }
 
         $endowProducts = endow_product::where('content_id', $id)->get();
-        foreach($endowProducts as $endowProduct){
+        foreach ($endowProducts as $endowProduct) {
             $endowProduct->delete();
         }
 
@@ -228,7 +255,7 @@ class NdController extends Controller
             $test = 1 - ($giam / 100);
             $gia = round($request->old_price * $test);
 
-            $gia = $this->roundDownToNearest($gia,1000);
+            $gia = $this->roundDownToNearest($gia, 1000);
         }
 
         $content->discount = $giam;
@@ -255,7 +282,7 @@ class NdController extends Controller
             }
         }
 
-        return redirect()->route(route: 'ndindex');
+        return redirect()->back()->with('redirect', true);
     }
     public function ndSee($id)
     {
@@ -287,30 +314,31 @@ class NdController extends Controller
     //     ]);
     // }
 
-    private function roundDownToNearest($number, $nearest) {
+    private function roundDownToNearest($number, $nearest)
+    {
         return ceil($number / $nearest) * $nearest;
     }
 
-    public function homePage(){
+    public function homePage()
+    {
         $cart = 0;
         $cartCancel = 0;
         $price = 0;
         $product = Content::all()->count();
         $user = User::where('user_type', 'user')->get()->count();
-        $inventory = Content::where('sold', '<=',1)->get()->count();
+        $inventory = Content::where('sold', '<=', 1)->get()->count();
         $carts = checkoutCart::all();
-        foreach($carts as $item){
-            if($item->order_status != 3){
+        foreach ($carts as $item) {
+            if ($item->order_status != 3) {
                 $cart += 1;
                 $price += $item->totalPrice;
-            }else{
+            } else {
                 $cartCancel += 1;
             }
         }
-        $products = Content::where('sold','>',1)->orderBy('sold', 'desc')->limit(10)->get();
+        $products = Content::where('sold', '>', 1)->orderBy('sold', 'desc')->limit(10)->get();
 
         // dd($user);
-        return view('index', compact('cart','cartCancel','product','user','inventory','price','products'));
+        return view('index', compact('cart', 'cartCancel', 'product', 'user', 'inventory', 'price', 'products'));
     }
-
 }

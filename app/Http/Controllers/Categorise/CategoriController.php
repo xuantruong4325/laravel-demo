@@ -22,12 +22,19 @@ class CategoriController extends Controller
 
     public function AddCategorySave(Request $request){
         
+        $ckeck = $request->input('categoryName');
+        $existingEmail = Category::where('name_category', $ckeck)->first();
+
+        if ($existingEmail) {
+            return redirect()->back()->with('error', true);
+        }
+        
         $category = Category::create([
             'name_category' =>$request->categoryName,
             'created_at' =>now()->toDateTimeString()
         ]);
 
-        return redirect()->route(route:'listCategory');
+        return redirect()->back()->with('redirect', true);
     }
 
     public function EditCategory($id)
@@ -39,11 +46,19 @@ class CategoriController extends Controller
     public function EditCategorySave(Request $request, $id){
         $category = Category::find($id);
 
+        $ckeck = $request->input('categoryName');
+        $existingEmail = Category::where('name_category', $ckeck)->where('id', '!=', $id)->first();
+
+        if ($existingEmail) {
+            return redirect()->back()->with('error', true);
+        }
+
+
         $category->name_category = $request->input('categoryName');
         $category->updated_at = now()->toDateTimeString();
         $category->save();
 
-        return redirect()->route(route:'listCategory');
+        return redirect()->back()->with('redirect', true);
     }
 
     public function DeleteCategory(Request $request, $id){

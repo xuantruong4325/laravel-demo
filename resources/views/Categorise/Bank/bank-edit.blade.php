@@ -14,15 +14,15 @@
 
 					<div class="form-group">
 						<h6 class="mb-3">Nhập tên ngân hàng</h6>
-						<input type="text" name="nameBank" class="form-control form-control-lg" value="{{ $bank->nameBank }}"/>
+						<input type="text" name="nameBank" class="form-control form-control-lg" value="{{ $bank->nameBank }}" required/>
 					</div>
 					<div class="form-group">
 						<h6 class="mb-3">Nhập tên chủ số tài khoản</h6>
-						<input type="text" name="name" class="form-control form-control-lg" value="{{ $bank->name }}"/>
+						<input type="text" name="name" class="form-control form-control-lg" value="{{ $bank->name }}" required/>
 					</div>
 					<div class="form-group">
 						<h6 class="mb-3">Nhập số tài khoản</h6>
-						<input type="text" name="account_number" class="form-control form-control-lg" value="{{ $bank->account_number }}"/>
+						<input type="text" name="account_number" class="form-control form-control-lg" value="{{ $bank->account_number }}" required/>
 					</div>
 					<div class="row">
 						<div class="col-md-12">
@@ -37,9 +37,12 @@
 		</div>
 	</div>
 </div>
+@if(session('redirect'))
 <script>
-	function addConten() {
-		Swal.fire('Sửa ngân hàng thành công', '', 'success')
-	}
+	Swal.fire('Sửa ngân hàng thành công', '', 'success')
+	setTimeout(function() {
+		window.location.href = "{{ route('listBank') }}";
+	}, 500); // Chờ 2 giây trước khi chuyển hướng
 </script>
+@endif
 @endsection

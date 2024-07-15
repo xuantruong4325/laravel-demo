@@ -14,11 +14,10 @@ return new class extends Migration
         Schema::create('endow_products', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger("content_id");
-            $table->unsignedBigInteger("endow_id");
+            $table->integer("endow_id");
             $table->timestamps();
 
             $table->foreign('content_id')->references('id')->on('contents')->onDelete('cascade');
-            $table->foreign('endow_id')->references('id')->on('endows')->onDelete('no action');
         });
     }
 

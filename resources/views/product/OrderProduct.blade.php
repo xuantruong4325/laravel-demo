@@ -2,7 +2,7 @@
 @section('userLayout')
 <div class="tkct-right">
     <div class="form-chitiet">
-        <h2 class="title-chitiet">Mã đơn hàng: <span>012345-999999</span></h2>
+        <h2 class="title-chitiet">Mã đơn hàng: <span>{{$cart->code_order}}</span></h2>
         <div class="box-chitiet-sx">
             <h3>Sắp xếp theo thứ tự</h3>
             <hr>

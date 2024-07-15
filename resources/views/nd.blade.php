@@ -13,7 +13,7 @@
                                 <div class="col-md-4 col-sm-12 mb-30">
                                     <div class="">
                                         <a href="{{ route('from') }}" class="btn btn-primary" type="button" style=" margin:20px -330px 0 0;">
-                                            Thêm nội dung
+                                            Thêm sản phẩm
                                         </a>
                                     </div>
                                 </div>
@@ -24,7 +24,7 @@
             </div>
             <div class="card-box mb-30">
                 <div class="pd-20">
-                    <h4 class="text-blue h4">Nội dung</h4>
+                    <h4 class="text-blue h4">Sản phẩm</h4>
 
                     <form action="" role="form">
                         <div class="row">
@@ -122,8 +122,7 @@
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
                                             <a class="dropdown-item" href="{{ route('ndUpdate', ['id' => $conten->id]) }}" onclick="take_url_edit_key('{{$conten->id}}')"><i class="dw dw-edit2"></i> Sửa</a>
-                                            <a class="dropdown-item" href="{{ route('nddelete', ['id' => $conten->id]) }}"><i class="dw dw-delete-3"></i> Xóa</a>
-                                            <a class="dropdown-item" href="{{ route('ndSee', ['id' => $conten->id]) }}"><i class="icon-copy fa fa-eye" aria-hidden="true"></i> Xem</a>
+                                            <a class="dropdown-item" href="{{ route('nddelete', ['id' => $conten->id]) }}"onclick="deleteUser()"><i class="dw dw-delete-3"></i> Xóa</a>
                                         </div>
                                     </div>
                                 </td>
@@ -145,6 +144,11 @@
         </div>
     </div>
 </div>
+<script>
+	function deleteUser() {
+        Swal.fire('Xóa sản phẩm thành công', '', 'success')
+    }
+</script>
 @endsection
 
 <!-- ->appends($request->all()) -->

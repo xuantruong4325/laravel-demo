@@ -16,11 +16,18 @@ class CompanyController extends Controller
         return view('Categorise/Company/company-add');
     }
     public function CompanyAddSave(Request $request){
+
+        $ckeck = $request->input('companyName');
+        $existingEmail = Company::where('name_company', $ckeck)->first();
+
+        if ($existingEmail) {
+            return redirect()->back()->with('error', true);
+        }
         $company = Company::create([
             'name_company' => $request->companyName,
             'created_at' =>now()->toDateTimeString()
         ]);
-        return redirect()->route(route:'listCompany');
+        return redirect()->back()->with('redirect', true);
     }
 
     public function CompanyEdit($id){
@@ -30,10 +37,16 @@ class CompanyController extends Controller
 
     public function CompanyEditSave(Request $request , $id){
         $company = Company::find($id);
+        $ckeck = $request->input('companyName');
+        $existingEmail = Company::where('name_company', $ckeck)->where('id', '!=', $id)->first();
+
+        if ($existingEmail) {
+            return redirect()->back()->with('error', true);
+        }
         $company->name_company = $request->input('companyName');
         $company->updated_at = now()->toDateTimeString();
         $company->save();
-        return redirect()->route(route:'listCompany');
+        return redirect()->back()->with('redirect', true);
     }
 
     public function CompanyDelete($id){

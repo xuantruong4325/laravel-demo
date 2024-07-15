@@ -29,7 +29,7 @@
                                                         <form action="{{ route('store') }}" method="POST" id="formDkUser">
                                                             @csrf
                                                             <div class="input-group custom d-block">
-                                                                <input type="text" name="name" class="form-control form-control-lg" placeholder="Username" required />
+                                                                <input type="text" name="name" class="form-control form-control-lg" placeholder="Tên người dùng" required />
                                                                 <div class="input-group-append custom">
                                                                     <span class="input-group-text"><i class="icon-copy dw dw-user1"></i></span>
                                                                 </div>
@@ -46,6 +46,7 @@
                                                                 <div class="input-group-append custom">
                                                                     <span class="input-group-text"><i class="icon-copy dw dw-email1"></i></span>
                                                                 </div>
+                                                                
                                                             </div>
                                                             <div class="input-group custom">
                                                                 <input type="password" name="password" class="form-control form-control-lg" minlength="6" placeholder="**********" required />
@@ -133,8 +134,8 @@
                                             <i class="dw dw-more"></i>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                            <a class="dropdown-item" href="{{ route('Update', ['id' => $user->id]) }}"><i class="dw dw-edit2"></i> Sửa</a>
-                                            <a class="dropdown-item" href="{{ route('delete', ['id' => $user->id]) }}"><i class="dw dw-delete-3"></i> Xóa</a>
+                                            <a class="dropdown-item" href="{{ route('Update', ['id' => $user->id]) }}"><i class="dw dw-edit2"></i>Sửa</a>
+                                            <a class="dropdown-item" href="{{ route('delete', ['id' => $user->id]) }}" onclick="deleteUser()"><i class="dw dw-delete-3"></i> Xóa</a>
                                         </div>
                                     </div>
                                 </td>
@@ -148,32 +149,28 @@
         </div>
     </div>
 </div>
+@if(session('redirect_to_admin'))
 <script>
-    // $(document).ready(function() {
-    //     $('#formDkUser').submit(function(event) {
-    //         $.ajax({
-    //             headers: {
-    //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //             },
-    //             url: "{{ route('store') }}",
-    //             type: 'POST',
-    //             success: function(mess) {
-    //                 if(data == 1){
-    //                     Swal.fire('Email đã tồn tại', '', 'error')
-    //                 }else{
-    //                     Swal.fire('Thêm mới tài khoản thành công', '', 'success')
-    //                 }
-    //             },
-    //         });
-    //     });
-    // });
-    function addConten() {
-        Swal.fire('Thêm mới tài khoản thành công', '', 'success')
+    Swal.fire('Thêm mới tài khoản thành công', '', 'success')
+    setTimeout(function() {
+        window.location.href = "{{ route('Admin') }}";
+    }, 2000); // Chờ 2 giây trước khi chuyển hướng
+</script>
+@endif
+@if(session('error'))
+<script>
+    Swal.fire('Email đã tồn tại', '', 'error')
+    setTimeout(function() {
+        window.location.href = "{{ route('Admin') }}";
+    }, 2000); // Chờ 2 giây trước khi chuyển hướng
+</script>
+@endif
+<script>
+
+    function deleteUser() {
+        Swal.fire('Xóa tài khoản thành công', '', 'success')
 
     }
-    // function addeConten() {
-    //     Swal.fire('Thêm mới tài khoản thành công', '', 'success')
-
     // }
     // $(document).ready(function() {
     //     $("form").validate({

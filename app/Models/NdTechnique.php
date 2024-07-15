@@ -17,10 +17,6 @@ class NdTechnique extends Model
     {
         return $this->belongsTo(Content::class);
     }
-    public function technique()
-    {
-        return $this->belongsTo(Technique::class);
-    }
 
     protected $table = 'nd_techniques';
 }

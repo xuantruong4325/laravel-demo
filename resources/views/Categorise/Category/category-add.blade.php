@@ -18,6 +18,7 @@
                                     type="text"
                                     name="categoryName"
                                     class="form-control form-control-lg"
+									required
                                 />
                             </div>
                             <button type="submit" class="btn btn-primary btn-lg btn-block" onclick="addConten()">Xác nhận</button>
@@ -27,9 +28,19 @@
 			</div>
 		</div>
         <script>
-        function addConten(){
-                Swal.fire('Thêm loại sản phẩm mới thành công', '', 'success')
-        }
         
     </script>
+@if(session('redirect'))
+<script>
+    Swal.fire('Thêm mới loại sản phẩm thành công', '', 'success')
+    setTimeout(function() {
+        window.location.href = "{{ route('listCategory') }}";
+    }, 500); // Chờ 2 giây trước khi chuyển hướng
+</script>
+@endif
+@if(session('error'))
+<script>
+	Swal.fire('Loại sản phẩm đã tồn tại', '', 'error')
+</script>
+@endif
 @endsection
