@@ -392,7 +392,8 @@ h1{
 
 
 .gfgfgf{
-    display: flex;
+    display:flex;
+    flex-wrap: wrap;
     width: 100%;
     position: relative;
     box-sizing: border-box;
@@ -403,7 +404,6 @@ h1{
     margin: 0px 10px;
     box-sizing: border-box;
     position: relative;
-    overflow: hidden;
 }
 .product .discount{
     position: absolute;

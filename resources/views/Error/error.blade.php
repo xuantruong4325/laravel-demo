@@ -10,7 +10,7 @@
 </head>
 <body>
     <div>
-        <img src="/image/error.jpg" alt="" style="width: 100%; height: 100%;">
+        
     </div>
 </body>
 </html>

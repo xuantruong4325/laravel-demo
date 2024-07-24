@@ -185,6 +185,27 @@
             });
         }
 
+        addToCart2 = function(_productId, _quantity, _name) {
+
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "{{ route('cartAdd') }}",
+                type: "POST",
+                data: {
+                    'productId': _productId,
+                    'quantity': _quantity,
+                },
+                success: function(response) {
+                    // Xử lý sau khi sản phẩm được thêm thành công vào giỏ hàng
+                    // location.reload(); // Tải lại trang
+                    window.location.href = "{{ route('cart-checkout') }}";
+                },
+            });
+        }
+
         deleteCart = function(_productDeleteId, _quantity, _name) {
 
             alert("Xóa sản phẩm " + _name + " Thành công ");

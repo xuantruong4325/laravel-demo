@@ -45,12 +45,14 @@
                                     </div>
                                     <div class="scroll-kt">
                                         <table style="width: 100%;">
+                                            @if($company != null)
                                             <tr>
                                                 <td class="test">
                                                     <p>Hãng sản xuất </p>
                                                 </td>
                                                 <td class="test1">{{ $company->name_company }}</td>
                                             </tr>
+                                            @endif
                                             @foreach($datas as $data)
                                             <tr>
                                                 <td class="test">
@@ -72,7 +74,9 @@
                             <div class="noidung-uudai">
                                 <div class="box-text">
                                     @foreach($endows as $keg => $item)
+                                    @if($item != null)
                                     <a href="#"><span class="soluongdeal">{{ $keg+1 }}</span>{{ $item['nameEndow'] }}</a>
+                                    @endif
                                     @endforeach
                                 </div>
                             </div>
@@ -124,10 +128,10 @@
                             <div class="purchase">
                                 @if(auth()->user() != null)
                                 <button type="button" onclick="addToCart('{{ $product->id }}',1,'{{ $product->content }}')"><i class="fa-solid fa-cart-plus"></i>Thêm vào giỏ hàng</button>
-                                <button type="button">Mua ngay</button>
+                                <button type="button" onclick="addToCart2('{{ $product->id }}',1,'{{ $product->content }}')">Mua ngay</button>
                                 @else
                                 <button type="button" onclick="alert('Xin vui lòng đăng nhập')" href="{{route('Login')}}"><i class="fa-solid fa-cart-plus"></i>Thêm vào giỏ hàng</button>
-                                <button type="button">Mua ngay</button>
+                                <button type="button" onclick="alert('Xin vui lòng đăng nhập')" href="{{route('Login')}}">Mua ngay</button>
                                 @endif
                             </div>
                         </div>

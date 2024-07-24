@@ -33,6 +33,27 @@ class NdController extends Controller
     {
         $file_name = null;
         // dd($request->techniques, $request->nameTechniques);
+        if ($request->has('techniques')) {
+            $seenTechniques = [];
+            foreach ($request->techniques as $item) {
+                if (in_array($item, $seenTechniques)) {
+                    return redirect()->back()->with('error', true);
+                } else {
+                    $seenTechniques[] = $item;
+                }
+            }
+        }
+
+        if ($request->has('endows')) {
+            $seenTechniques = [];
+            foreach ($request->endows as $item) {
+                if (in_array($item, $seenTechniques)) {
+                    return redirect()->back()->with('error2', true);
+                } else {
+                    $seenTechniques[] = $item;
+                }
+            }
+        }
         if ($request->has('file')) {
             $file = $request->file;
             $file_name = $file->getClientOriginalName();
@@ -133,7 +154,7 @@ class NdController extends Controller
             $query->where('content', 'like', '%' . $tk . '%');
             $namKey = $tk;
         }
-        $contents = $query->paginate(3);
+        $contents = $query->paginate(10);
         // dd($contents);
         return view('nd', compact('contents', 'namKey', 'category', 'company', 'namCom', 'namCate', 'namSta'));
     }
@@ -203,6 +224,27 @@ class NdController extends Controller
     {
         $content = Content::find($id);
         $contents = null;
+        if ($request->has('techniques')) {
+            $seenTechniques = [];
+            foreach ($request->techniques as $item) {
+                if (in_array($item, $seenTechniques)) {
+                    return redirect()->back()->with('error', true);
+                } else {
+                    $seenTechniques[] = $item;
+                }
+            }
+        }
+
+        if ($request->has('endows')) {
+            $seenTechniques = [];
+            foreach ($request->endows as $item) {
+                if (in_array($item, $seenTechniques)) {
+                    return redirect()->back()->with('error2', true);
+                } else {
+                    $seenTechniques[] = $item;
+                }
+            }
+        }
 
         $test2s = NdTechnique::where('content_id', $id)->get();
         foreach ($test2s as $test2) {

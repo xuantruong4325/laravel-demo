@@ -15,8 +15,18 @@ class Authenticate extends Middleware
         // if($request->expectsJson() != null){
         //     return route('Login');
         // }else{
-        //     return routs('error');
+        //     return route('error');
         // }
-        return $request->expectsJson() ? null : route('error');
+        return route('Login');
+        // if ($request->expectsJson()) {
+        //     return response()->json(['message' => 'Bạn vui lòng đăng nhập.'], 401);
+        // } else {
+        //     // Thêm thông báo trước khi chuyển hướng
+        //     session()->flash('message', 'Bạn vui lòng đăng nhập.');
+    
+        //     // Chuyển hướng đến route Login hoặc error
+        //     return $request->has('some_condition') ? redirect()->route('Login') : redirect()->route('error');
+        // }
+        // return $request->expectsJson() ? null : route('error');
     }
 }

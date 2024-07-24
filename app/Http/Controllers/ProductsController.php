@@ -207,11 +207,19 @@ class ProductsController extends Controller
 
     public function cart()
     {
+        
         $priceCart = 0;
         $test = Auth()->User()->id;
         $carts = cart::where('user_id', $test)->get();
         $editfooters = Editfooter::all();
         $check = null;
+        foreach ($carts as $cart) {
+            $product = Content::where('id', $cart->id_product)->first();
+            if ($product) {
+            }else{
+                $cart->delete();
+            }
+        }
         foreach ($carts as $cart) {
             if ($cart->new_price != 0) {
                 $priceCart += $cart->quantity * $cart->new_price;
@@ -247,8 +255,8 @@ class ProductsController extends Controller
         $districts = Districts::where('consciouse_code', $test->conscious)->get();
         $communes = Communes::where('district_code', $test->district)->get();
         $code_order = rand(10000, 99999);
-        foreach($items as $item){
-            if($item->code_order == $code_order){
+        foreach ($items as $item) {
+            if ($item->code_order == $code_order) {
                 $code_order = rand(10000, 99999);
             }
         }
@@ -300,14 +308,14 @@ class ProductsController extends Controller
             'payments' => $request->giaohang,
             'totalProduct' => $total,
             'totalPrice' => $priceCart,
-            'address' => $request->address. ',' .$commune->commune. ',' .$district->district. ','  .$conscious->consciouse,
+            'address' => $request->address . ',' . $commune->commune . ',' . $district->district . ','  . $conscious->consciouse,
             'order_status' => 0,
             'code_order' => $request->code_order,
         ]);
         $id = $cart->id;
         foreach ($carts as $item) {
             $price = $item->new_price;
-            if($price == 0){
+            if ($price == 0) {
                 $price = $item->price;
             }
             $productCart = product_carts::create([
@@ -323,22 +331,24 @@ class ProductsController extends Controller
         return redirect()->route(route: 'home');
     }
 
-    public function sp(Request $request){
-        $namKey=null;
+    public function sp(Request $request)
+    {
+        $namKey = null;
         $query = Content::query();
         // $products = $this->kt($contents);
         // $products= $products->paginate(20);
-        if($request->has('keyword')){
+        if ($request->has('keyword')) {
             $tk = $request->input('keyword');
-            $query->where('content','like','%' .$tk. '%');
+            $query->where('content', 'like', '%' . $tk . '%');
             $namKey = $tk;
         }
-        $products = $query->paginate(1);
+        $products = $query->paginate(20);
         $editfooters = Editfooter::all();
         return view('product/Sp', compact('products', 'editfooters', 'namKey'));
     }
 
-    public function Ttsp($id){
+    public function Ttsp($id)
+    {
         $product = Content::find($id);
         if ($product->status == 'Publish' || $product->status == 'Draft') {
             if ($product->quantity < 1) {
@@ -349,23 +359,27 @@ class ProductsController extends Controller
                 $product->save();
             }
         }
-        $items= Content::where('category_id', $product->category_id)->limit(10)->get();
+        $items = Content::where('category_id', $product->category_id)->limit(10)->get();
         $techineques = NdTechnique::where('content_id', $id)->get();
         $endowPros = endow_product::where('content_id', $id)->get();
         $datas = [];
         $endows = [];
-        foreach($techineques as $techineque){
+        foreach ($techineques as $techineque) {
             $nameTechi = Technique::find($techineque->technique_id);
-            $datas[] = [
-                'contentTechni' => $techineque->nameTechnique,
-                'nameTechni' => $nameTechi->technique,
-            ];
+            if ($nameTechi != null) {
+                $datas[] = [
+                    'contentTechni' => $techineque->nameTechnique,
+                    'nameTechni' => $nameTechi->technique,
+                ];
+            }
         }
-        foreach($endowPros as $item){
-            $data = Endows::find($item->endow_id );
-            $endows[] = [
-                'nameEndow' => $data->nameEndow,
-            ];
+        foreach ($endowPros as $item) {
+            $data = Endows::find($item->endow_id);
+            if ($data != null) {
+                $endows[] = [
+                    'nameEndow' => $data->nameEndow,
+                ];
+            }
         }
         // dd($datas[1]['contentTechni']);
         $imageProducts = ImageProduct::where('content_id', $id)->get();
@@ -374,28 +388,32 @@ class ProductsController extends Controller
         return view('product/Ttsp', compact('product', 'editfooters', 'imageProducts', 'datas', 'company', 'endows', 'items'));
     }
 
-    public function orderAll(){
+    public function orderAll()
+    {
         $editfooters = Editfooter::all();
         $carts = checkoutCart::where('idUser', Auth()->User()->id)->get();
-        return view('product/OrderAll', compact('editfooters','carts'));
+        return view('product/OrderAll', compact('editfooters', 'carts'));
     }
 
-    public function orderProduct($id){
+    public function orderProduct($id)
+    {
         $editfooters = Editfooter::all();
         $cart = checkoutCart::find($id);
         $cartProducts = product_carts::where('checkout_cart_id', $cart->id)->get();
-        return view('product/OrderProduct', compact('editfooters','cart','cartProducts'));
+        return view('product/OrderProduct', compact('editfooters', 'cart', 'cartProducts'));
     }
 
-    public function Spbc(){
-        $productsSold = Content::whereBetween('sold', [2,100000])->paginate(24);
+    public function Spbc()
+    {
+        $productsSold = Content::whereBetween('sold', [2, 100000])->paginate(24);
         $editfooters = Editfooter::all();
-        return view('product/spbc', compact('editfooters','productsSold'));
+        return view('product/spbc', compact('editfooters', 'productsSold'));
     }
 
-    public function Spm(){
+    public function Spm()
+    {
         $productsNew = Content::orderBy('created_at', 'desc')->paginate(24);
         $editfooters = Editfooter::all();
-        return view('product.spNew', compact('editfooters','productsNew'));
+        return view('product.spNew', compact('editfooters', 'productsNew'));
     }
 }

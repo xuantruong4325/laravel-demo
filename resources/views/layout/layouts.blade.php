@@ -121,7 +121,7 @@
                     </li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" href="#">
-                            <span class="mtext">Tài khoản</span>
+                            <span class="mtext">Quản lý tài khoản</span>
                         </a>
                         <ul class="submenu">
                             <li><a href="{{  route('Admin')  }}">admin</a></li>
@@ -130,7 +130,7 @@
                     </li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" href="#">
-                            <span class="mtext">Nội dung</span>
+                            <span class="mtext">Quản lý sản phẩm</span>
                         </a>
                         <ul class="submenu">
                             <li><a href="{{  route('listCategory')  }}">Loại sản phẩm</a></li>
@@ -139,12 +139,12 @@
                             <li><a href="{{  route('listTechnique')  }}">Thông số kỹ thuật</a></li>
                             <li><a href="{{  route('ndbanner')  }}">Footer và Banner</a></li>
                             <li><a href="{{  route('listEndow')  }}">Ưu đãi</a></li>
-                            <li><a href="{{  route('dkntbList')  }}">Đanh sách khách hàng nhận thông báo</a></li>
+                            <li><a href="{{  route('dkntbList')  }}">Danh sách khách hàng nhận thông báo</a></li>
                         </ul>
                     </li>
                     <li>
                         <a class="dropdown-toggle no-arrow" href="{{  route('listPromotion')  }}">
-                            <span class="mtext">Khuyễn mãi</span>
+                            <span class="mtext">Quản lý khuyễn mãi</span>
                         </a>
                     </li>
                     <li>
@@ -159,7 +159,7 @@
                     </li>
                     <li>
                         <a class="dropdown-toggle no-arrow" href="{{  route('listNews')  }}">
-                            <span class="mtext">Tin tức</span>
+                            <span class="mtext">Quản lý tin tức</span>
                         </a>
                     </li>
                     <!-- <li>

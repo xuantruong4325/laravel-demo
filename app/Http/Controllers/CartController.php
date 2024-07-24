@@ -103,4 +103,17 @@ class CartController extends Controller
         $cart->save();
         return;
     }
+    // public function cartQuantity(Request $request){
+    //     $cart = cart::find($request->idCart);
+    //     $product = Content::find($cart->id_product);
+    //     if($product->quantity < $request->code){
+    //         return redirect()->back()->with('error', true);
+    //     }
+    //     $product->quantity = $product->quantity - $request->code;
+    //     $product->sold = $product->sold + $request->code;
+    //     $product->save();
+    //     $cart->quantity = $cart->quantity + $request->code;
+    //     $cart->save();
+    //     return redirect()->back()->with('error2', true);
+    // }
 }

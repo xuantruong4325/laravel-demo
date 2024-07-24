@@ -20,7 +20,7 @@ class EditfooterController extends Controller
             return $file_name;
         }else{
             $path = public_path('public/FileImage/Layout/'.$test);
-            unlink($path);
+            // unlink($path);
             $file_name = time()."_".$file-> getClientOriginalName();
             $file -> move(base_path('public/FileImage/Layout'),$file_name);
             $request['file']=$file_name;

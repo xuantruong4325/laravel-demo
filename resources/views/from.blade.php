@@ -17,12 +17,12 @@
 
             <div class="middle">
                 <div class="tk">
-                    <input type="text" onkeyup="keyup()" class="form-control" name="Name" placeholder="Usename">
+                    <input type="text" onkeyup="keyup()" class="form-control" name="Name" placeholder="Usename" required>
                 </div>
                 <span class="error" id="error_fullname"></span>
                 <div class="tk mk">
                     <input type="email" onkeyup="keyup()" class="form-control" name="Email"
-                        placeholder="Email">
+                        placeholder="Email" required>
                 </div>
                         @if($errors->has('Email'))
                         <span class="error">{{ $errors->first('Email') }}</span>
@@ -30,7 +30,7 @@
                 <span class="error" id="error_email"></span>
                 <div class="tk mk">
                     <input type="password" onkeyup="keyup()" class="form-control" name="Password"
-                        placeholder="Password">
+                        placeholder="Password" required>
                 </div>
                 <span class="error" id="error_password"></span>
             </div>

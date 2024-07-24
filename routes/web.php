@@ -120,13 +120,13 @@ Route::group(['prefix' => 'Admin', 'middleware' => ['auth', 'is_admin']], functi
      Route::post('Endows-edit-save/{id}', [EndowsController::class, 'endowsEditSave'])->name('editEndowSave');
      Route::get('Endows-delete/{id}', [EndowsController::class, 'endowsDelete'])->name('deleteEndow');
 
+     //dkdn
     // Route::get('index', [UserController::class, 'index'])->name(name:'index');
     Route::get('Update/{id}', [UserController::class, 'Update'])->name('up');
     Route::post('Update/{id}', [UserController::class, 'fromUpdate'])->name('Update');
     Route::get('/', [UserController::class, 'Admin'])->name(name: 'Admin');
     Route::get('deleteuser/{id}', [UserController::class, 'delete'])->name(name: 'delete');
     Route::post('store', [UserController::class, 'store'])->name(name: 'store');
-
     Route::get('/user', [UserController::class, 'User'])->name(name: 'User');
 
     Route::get('from', [NdController::class, 'form_basic'])->name(name: 'from');
@@ -176,6 +176,7 @@ Route::post('/cart-delete-all', [CartController::class, 'cartDeleteAll'])->name(
 Route::get('/Order', [ProductsController::class, 'orderAll'])->name('orderAll');
 Route::get('/OrderProduct/{id}', [ProductsController::class, 'orderProduct'])->name('orderProduct');
 Route::post('/ajax/cancel', [CartController::class, 'cartCancel'])->name('cartCancel');
+// Route::post('/ajax/quantity', [CartController::class, 'cartQuantity'])->name('cartQuantity');
 
 
 Route::group(['middleware' => ['auth', 'is_user']], function () {

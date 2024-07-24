@@ -175,6 +175,16 @@
 	}, 500); // Chờ 2 giây trước khi chuyển hướng
 </script>
 @endif
+@if(session('error'))
+<script>
+	Swal.fire('Thông số kỹ thuật đã có', '', 'error')
+</script>
+@endif
+@if(session('error2'))
+<script>
+	Swal.fire('Ưu đãi đã có', '', 'error')
+</script>
+@endif
 <script src="{{ asset('https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js') }}"></script>
 <script>
     var test = {!! $techniques !!};

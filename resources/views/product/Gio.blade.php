@@ -36,6 +36,7 @@
                             Tên sản phẩm
                         </th>
                         <th class="gio_sl" style="border: 1px solid #bdbdbd88;">
+
                             Số lượng
                         </th>
                         <th class="gio_gt" style="border: 1px solid #bdbdbd88;">
@@ -57,7 +58,9 @@
                             <a href="{{ route('ttsp', ['id' => $cart->id_product]) }}">{{ $cart->name }} </a>
                         </td>
                         <td class="gio_sl" style="border: 1px solid #bdbdbd88;">
-                            <div class="input_sl">{{ $cart->quantity }}</div>
+                            <!-- <div class="input_sl">{{ $cart->quantity }}</div> -->
+                            <input type="text" value="{{ $cart->quantity }}" id="input1" data-price="290000" class="input_sl">
+                            <input style="margin: 0; width: 0px; height: 0px; border: 0px;" value="{{ $cart->id }}" id="cartId">
                         </td>
                         @if($cart->new_price != 0)
                         <td class="gio_gt" style="border: 1px solid #bdbdbd88;">
@@ -104,6 +107,35 @@
         </div>
 
     </div>
+    @if(session('error'))
+    <script>
+        alert("Số lượng mua quá lớn");
+    </script>
+    @endif
+    @if(session('error2'))
+    <script>
+        alert("Sửa số lượng thành công");
+    </script>
+    @endif
     @endforeach
 </main>
+<!-- <script type="text/javascript">
+    $('#input1').on('change', function() {
+        var id = $("#input1").val();
+        var id2 = $("#cartId").val();
+        if (id) {
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "",
+                type: "POST",
+                data: {
+                    'code': id,
+                    'idCart': id2
+                },
+            });
+        }
+    });
+</script> -->
 @endsection
